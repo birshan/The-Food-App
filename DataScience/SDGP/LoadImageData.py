@@ -48,6 +48,8 @@ for features, label in training_data:
     x.append(features)
     y.append(label)
 
+# print(len(x), " ", y[:10])
+
 x = np.array(x).reshape(-1, IMG_SIZE,IMG_SIZE,3)
 #-1 is a catch-all for all number of features
 # 3 in the end is because the net uses coloured images with RGB values
