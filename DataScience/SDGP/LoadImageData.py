@@ -10,7 +10,7 @@ import pickle
 #keep each food category in a different folder inside a folder like 'Food'
 
 # DATADIR = "D:\SDGP\DataSets\Food" #paste url path to images
-DATADIR = "D:\Desktop\SDGP\The-Food-App\DataScience\SDGP\Datasets"
+DATADIR = "D:\Desktop\Datasets"
 
 # CATEGORIES = ["Chicken", "Dhal", "Kothu", "Rice"] #fill with names of all food image folders
 CATEGORIES = ["Hamburger","Hot_Dog","Pizza"];
