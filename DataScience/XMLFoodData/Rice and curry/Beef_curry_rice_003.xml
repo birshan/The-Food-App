@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rice and curry</folder>
+	<filename>Beef_curry_rice_003.jpg</filename>
+	<path>C:\Users\avish\Downloads\Extreme Picture Finder\rice and curry\rice and curry\Beef_curry_rice_003.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4288</width>
+		<height>2848</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rice and curry</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>833</xmin>
+			<ymin>306</ymin>
+			<xmax>3402</xmax>
+			<ymax>2493</ymax>
+		</bndbox>
+	</object>
+</annotation>

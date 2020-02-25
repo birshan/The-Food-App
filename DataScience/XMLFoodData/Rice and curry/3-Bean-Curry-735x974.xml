@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rice and curry</folder>
+	<filename>3-Bean-Curry-735x974.jpg</filename>
+	<path>C:\Users\avish\Downloads\Extreme Picture Finder\rice and curry\rice and curry\3-Bean-Curry-735x974.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>735</width>
+		<height>974</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rice and curry</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>41</xmin>
+			<ymin>265</ymin>
+			<xmax>702</xmax>
+			<ymax>868</ymax>
+		</bndbox>
+	</object>
+</annotation>

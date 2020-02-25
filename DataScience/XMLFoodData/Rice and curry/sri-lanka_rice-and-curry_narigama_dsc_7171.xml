@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rice and curry</folder>
+	<filename>sri-lanka_rice-and-curry_narigama_dsc_7171.jpg</filename>
+	<path>C:\Users\avish\Downloads\Extreme Picture Finder\rice and curry\rice and curry\sri-lanka_rice-and-curry_narigama_dsc_7171.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>850</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rice and curry</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>382</xmin>
+			<ymin>122</ymin>
+			<xmax>1060</xmax>
+			<ymax>572</ymax>
+		</bndbox>
+	</object>
+</annotation>

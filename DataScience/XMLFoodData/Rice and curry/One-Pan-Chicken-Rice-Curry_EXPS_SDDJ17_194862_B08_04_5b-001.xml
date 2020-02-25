@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rice and curry</folder>
+	<filename>One-Pan-Chicken-Rice-Curry_EXPS_SDDJ17_194862_B08_04_5b-001.jpg</filename>
+	<path>C:\Users\avish\Downloads\Extreme Picture Finder\rice and curry\rice and curry\One-Pan-Chicken-Rice-Curry_EXPS_SDDJ17_194862_B08_04_5b-001.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1200</width>
+		<height>900</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rice and curry</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>182</xmin>
+			<ymin>34</ymin>
+			<xmax>981</xmax>
+			<ymax>723</ymax>
+		</bndbox>
+	</object>
+</annotation>

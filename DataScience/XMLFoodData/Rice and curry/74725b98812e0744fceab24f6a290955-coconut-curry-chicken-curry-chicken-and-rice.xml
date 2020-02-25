@@ -1,0 +1,26 @@
+<annotation>
+	<folder>rice and curry</folder>
+	<filename>74725b98812e0744fceab24f6a290955-coconut-curry-chicken-curry-chicken-and-rice.jpg</filename>
+	<path>C:\Users\avish\Downloads\Extreme Picture Finder\rice and curry\rice and curry\74725b98812e0744fceab24f6a290955-coconut-curry-chicken-curry-chicken-and-rice.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>736</width>
+		<height>1107</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rice and curry</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2</xmin>
+			<ymin>112</ymin>
+			<xmax>736</xmax>
+			<ymax>1090</ymax>
+		</bndbox>
+	</object>
+</annotation>
