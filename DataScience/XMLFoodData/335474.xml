@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Pizza train 200</folder>
+	<filename>335474.jpg</filename>
+	<path>D:\SDGP\DataSets\Pizza\Pizza train 200\335474.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>384</width>
+		<height>512</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pizza</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3</xmin>
+			<ymin>114</ymin>
+			<xmax>384</xmax>
+			<ymax>510</ymax>
+		</bndbox>
+	</object>
+</annotation>
