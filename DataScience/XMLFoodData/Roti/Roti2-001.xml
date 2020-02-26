@@ -1,0 +1,38 @@
+<annotation>
+	<folder>roti sri lankan</folder>
+	<filename>Roti2-001.jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\roti sri lankan\Roti2-001.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1600</width>
+		<height>1066</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>7</xmin>
+			<ymin>264</ymin>
+			<xmax>394</xmax>
+			<ymax>604</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>50</xmin>
+			<ymin>199</ymin>
+			<xmax>1279</xmax>
+			<ymax>1066</ymax>
+		</bndbox>
+	</object>
+</annotation>

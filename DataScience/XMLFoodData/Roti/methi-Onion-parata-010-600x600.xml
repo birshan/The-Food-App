@@ -1,0 +1,26 @@
+<annotation>
+	<folder>parata</folder>
+	<filename>methi-Onion-parata-010-600x600.jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\parata\methi-Onion-parata-010-600x600.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>600</width>
+		<height>600</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>7</xmin>
+			<ymin>2</ymin>
+			<xmax>600</xmax>
+			<ymax>581</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,38 @@
+<annotation>
+	<folder>roti sri lankan</folder>
+	<filename>hqdefault-159.jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\roti sri lankan\hqdefault-159.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>480</width>
+		<height>360</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3</xmin>
+			<ymin>32</ymin>
+			<xmax>291</xmax>
+			<ymax>91</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2</xmin>
+			<ymin>85</ymin>
+			<xmax>228</xmax>
+			<ymax>199</ymax>
+		</bndbox>
+	</object>
+</annotation>

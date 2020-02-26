@@ -1,0 +1,38 @@
+<annotation>
+	<folder>parata</folder>
+	<filename>1200px-Alooparatha.jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\parata\1200px-Alooparatha.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1200</width>
+		<height>900</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>59</xmin>
+			<ymin>44</ymin>
+			<xmax>1200</xmax>
+			<ymax>665</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>35</xmin>
+			<ymin>62</ymin>
+			<xmax>1200</xmax>
+			<ymax>896</ymax>
+		</bndbox>
+	</object>
+</annotation>

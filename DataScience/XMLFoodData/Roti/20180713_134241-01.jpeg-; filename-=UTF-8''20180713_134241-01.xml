@@ -1,0 +1,26 @@
+<annotation>
+	<folder>roti sri lankan</folder>
+	<filename>20180713_134241-01.jpeg-; filename-=UTF-8''20180713_134241-01.jpeg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\roti sri lankan\20180713_134241-01.jpeg-; filename-=UTF-8''20180713_134241-01.jpeg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>954</width>
+		<height>999</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>114</xmin>
+			<ymin>134</ymin>
+			<xmax>884</xmax>
+			<ymax>904</ymax>
+		</bndbox>
+	</object>
+</annotation>

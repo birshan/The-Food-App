@@ -1,0 +1,26 @@
+<annotation>
+	<folder>parata</folder>
+	<filename>12029893-roti-parata-with-lentil-curry.jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\parata\12029893-roti-parata-with-lentil-curry.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>870</width>
+		<height>1300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>7</xmin>
+			<ymin>686</ymin>
+			<xmax>859</xmax>
+			<ymax>1300</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,38 @@
+<annotation>
+	<folder>parata</folder>
+	<filename>atta-parata-malay-restaurant.png</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\parata\atta-parata-malay-restaurant.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>987</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>4</xmin>
+			<ymin>37</ymin>
+			<xmax>299</xmax>
+			<ymax>300</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>6</xmin>
+			<ymin>8</ymin>
+			<xmax>459</xmax>
+			<ymax>300</ymax>
+		</bndbox>
+	</object>
+</annotation>
