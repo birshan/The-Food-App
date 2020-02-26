@@ -1,0 +1,26 @@
+<annotation>
+	<folder>roti sri lankan</folder>
+	<filename>20181012_231532_0001.png</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\roti sri lankan\20181012_231532_0001.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>525</width>
+		<height>525</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>51</xmin>
+			<ymin>75</ymin>
+			<xmax>500</xmax>
+			<ymax>523</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,38 @@
+<annotation>
+	<folder>roti sri lankan</folder>
+	<filename>Coconut Roti Landscape.webp.webp</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\roti sri lankan\Coconut Roti Landscape.webp.webp</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>312</width>
+		<height>432</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>70</xmin>
+			<ymin>55</ymin>
+			<xmax>312</xmax>
+			<ymax>223</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>58</xmin>
+			<ymin>196</ymin>
+			<xmax>312</xmax>
+			<ymax>396</ymax>
+		</bndbox>
+	</object>
+</annotation>

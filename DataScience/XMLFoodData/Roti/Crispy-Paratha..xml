@@ -1,0 +1,26 @@
+<annotation>
+	<folder>parata</folder>
+	<filename>Crispy-Paratha..jpg</filename>
+	<path>D:\IIT Y\L5\SDGP\Dataset\parata\Crispy-Paratha..jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4000</width>
+		<height>2664</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>roti</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>162</xmin>
+			<ymin>43</ymin>
+			<xmax>3784</xmax>
+			<ymax>2618</ymax>
+		</bndbox>
+	</object>
+</annotation>
