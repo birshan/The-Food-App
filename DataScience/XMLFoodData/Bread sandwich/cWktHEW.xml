@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>cWktHEW.jpg</filename>
+	<path>/Study/Bread sandwich/cWktHEW.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2592</width>
+		<height>4608</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>858</xmin>
+			<ymin>1732</ymin>
+			<xmax>2592</xmax>
+			<ymax>3709</ymax>
+		</bndbox>
+	</object>
+</annotation>

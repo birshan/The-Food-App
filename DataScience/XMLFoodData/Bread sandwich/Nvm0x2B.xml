@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>Nvm0x2B.jpg</filename>
+	<path>/Study/Bread sandwich/Nvm0x2B.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2448</width>
+		<height>3264</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>123</xmin>
+			<ymin>42</ymin>
+			<xmax>2436</xmax>
+			<ymax>2981</ymax>
+		</bndbox>
+	</object>
+</annotation>

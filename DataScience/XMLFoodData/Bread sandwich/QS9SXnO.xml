@@ -1,0 +1,38 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>QS9SXnO.jpg</filename>
+	<path>/Study/Bread sandwich/QS9SXnO.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>5312</width>
+		<height>2988</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>308</xmin>
+			<ymin>527</ymin>
+			<xmax>2829</xmax>
+			<ymax>2291</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2808</xmin>
+			<ymin>391</ymin>
+			<xmax>5287</xmax>
+			<ymax>2412</ymax>
+		</bndbox>
+	</object>
+</annotation>
