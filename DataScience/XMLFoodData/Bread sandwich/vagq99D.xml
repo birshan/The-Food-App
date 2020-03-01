@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>vagq99D.jpg</filename>
+	<path>/Study/Bread sandwich/vagq99D.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2560</width>
+		<height>1440</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>755</xmin>
+			<ymin>206</ymin>
+			<xmax>2047</xmax>
+			<ymax>1103</ymax>
+		</bndbox>
+	</object>
+</annotation>

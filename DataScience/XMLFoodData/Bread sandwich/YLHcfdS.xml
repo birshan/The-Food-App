@@ -1,0 +1,38 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>YLHcfdS.jpg</filename>
+	<path>/Study/Bread sandwich/YLHcfdS.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4656</width>
+		<height>3492</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2376</xmin>
+			<ymin>581</ymin>
+			<xmax>4656</xmax>
+			<ymax>2447</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1</xmin>
+			<ymin>319</ymin>
+			<xmax>2390</xmax>
+			<ymax>2320</ymax>
+		</bndbox>
+	</object>
+</annotation>

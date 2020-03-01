@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>a4.JPG</filename>
+	<path>/Study/Bread sandwich/a4.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1206</width>
+		<height>828</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>520</xmin>
+			<ymin>175</ymin>
+			<xmax>1168</xmax>
+			<ymax>828</ymax>
+		</bndbox>
+	</object>
+</annotation>
