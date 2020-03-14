@@ -9,11 +9,12 @@ import pickle
 
 #keep each food category in a different folder inside a folder like 'Food'
 
-# DATADIR = "D:\SDGP\DataSets\Food" #paste url path to images
-DATADIR = "D:\Desktop\Datasets"
+DATADIR = "D:\SDGP\DataSets\FOOD101\FOOD101\images" #FOOD101
 
-# CATEGORIES = ["Chicken", "Dhal", "Kothu", "Rice"] #fill with names of all food image folders
-CATEGORIES = ["Hamburger","Hot_Dog","Pizza"];
+CATEGORIES = [ "chicken_wings", "pizza", "hot_dog"] #FOOD101
+# CATEGORIES = ["Hamburger","Hot_Dog","Pizza"];
+DATADIR = "D:\SDGP\DataSets\Food2"#SDGP
+CATEGORIES = ["breadsandwich","kottu","noodles","parata","pizza","ricencurry"]
 
 
 IMG_SIZE = 250
@@ -22,11 +23,11 @@ training_data= []
 
 def create_training_data():
     for category in CATEGORIES:
-        path = os.path.join(DATADIR, category)  # path to image dataset
+        path = os.path.join(DATADIR, category)
         class_num = CATEGORIES.index(category)
         for img in os.listdir(path):
             try:
-                img_array = cv2.cvtColor(cv2.imread(os.path.join(path, img)), cv2.COLOR_BGR2RGB)
+                img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
                 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
                 training_data.append([new_array, class_num])
             except Exception as e:
@@ -50,7 +51,8 @@ for features, label in training_data:
 
 # print(len(x), " ", y[:10])
 
-x = np.array(x).reshape(-1, IMG_SIZE,IMG_SIZE,3)
+x = np.array(x).reshape(-1, IMG_SIZE,IMG_SIZE,1)
+y = np.array(y)
 #-1 is a catch-all for all number of features
 # 3 in the end is because the net uses coloured images with RGB values
 

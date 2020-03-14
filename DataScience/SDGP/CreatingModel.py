@@ -4,6 +4,8 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
 from tensorflow.keras.models import Sequential
+# from keras.models import Sequential
+# from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
 dense_layers = [0]
 layer_sizes = [64]
@@ -38,16 +40,19 @@ for dense_layer in dense_layers:
                 model.add(Dense(layer_size))
                 model.add(Activation('relu'))
 
-            model.add(Dense(1))
-            model.add(Activation('sigmoid'))
-
-            model.compile(loss='binary_crossentropy',
+            # model.add(Dense(1)) for binary classification you only need one neuron for the last layer which will fire 0 or 1
+            # model.add(Activation('sigmoid'))
+            model.add(tf.keras.layers.Dense(6, activation=tf.nn.softmax))#last layer needs 1 neuron for each category, (last layer gives the answer)
+#  --  why use softmax instead of sigmoid - https://towardsdatascience.com/deep-learning-which-loss-and-activation-functions-should-i-use-ac02f1c56aa8
+            model.compile(loss='sparse_categorical_crossentropy',
                           optimizer='adam',
                           metrics=['accuracy'])
-
-            model.fit(x, y, batch_size=32, epochs=10, validation_split=0.1, callbacks=[
+#  -- changed form binary_crossentropy to categorical crossentropy, its a loss function we can use for more than 2 categories.
+            model.fit(x, y, batch_size=10, epochs=10, validation_split=0.1, callbacks=[
                 tf.keras.callbacks.TensorBoard(log_dir='logs\\{}'.format(NAME),
                                                histogram_freq=1, profile_batch=100000000)])
+#  -- Use lower batch sizes if you have lower amount of data
+
 
 
 model.save('FoodApp_CNN.model') # saves the model to be used from cloud
