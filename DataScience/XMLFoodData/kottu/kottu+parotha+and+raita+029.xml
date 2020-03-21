@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>kottu+parotha+and+raita+029.JPG</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\kottu+parotha+and+raita+029.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>898</width>
+		<height>1600</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>132</xmin>
+			<ymin>325</ymin>
+			<xmax>829</xmax>
+			<ymax>1223</ymax>
+		</bndbox>
+	</object>
+</annotation>

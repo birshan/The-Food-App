@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>A-Popular-Sri-Lankan-Kottu-Roti-recipe-newf.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\A-Popular-Sri-Lankan-Kottu-Roti-recipe-newf.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>685</width>
+		<height>336</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>77</xmin>
+			<ymin>18</ymin>
+			<xmax>544</xmax>
+			<ymax>269</ymax>
+		</bndbox>
+	</object>
+</annotation>

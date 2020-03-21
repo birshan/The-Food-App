@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>16127756681_5b7a8c1c62_z.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\16127756681_5b7a8c1c62_z.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>200</xmin>
+			<ymin>148</ymin>
+			<xmax>458</xmax>
+			<ymax>490</ymax>
+		</bndbox>
+	</object>
+</annotation>

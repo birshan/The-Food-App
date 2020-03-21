@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>adobe_post_20180823_204743.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\adobe_post_20180823_204743.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2560</width>
+		<height>2560</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>402</xmin>
+			<ymin>1166</ymin>
+			<xmax>2065</xmax>
+			<ymax>2406</ymax>
+		</bndbox>
+	</object>
+</annotation>

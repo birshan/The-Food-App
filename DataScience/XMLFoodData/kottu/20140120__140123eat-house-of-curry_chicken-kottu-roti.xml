@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>20140120__140123eat-house-of-curry_chicken-kottu-roti.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\20140120__140123eat-house-of-curry_chicken-kottu-roti.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>620</width>
+		<height>465</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>98</xmin>
+			<ymin>147</ymin>
+			<xmax>560</xmax>
+			<ymax>358</ymax>
+		</bndbox>
+	</object>
+</annotation>

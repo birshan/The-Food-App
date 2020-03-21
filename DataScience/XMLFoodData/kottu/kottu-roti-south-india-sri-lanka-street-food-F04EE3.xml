@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>kottu-roti-south-india-sri-lanka-street-food-F04EE3.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\kottu-roti-south-india-sri-lanka-street-food-F04EE3.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1039</width>
+		<height>1390</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>263</xmin>
+			<ymin>550</ymin>
+			<xmax>808</xmax>
+			<ymax>952</ymax>
+		</bndbox>
+	</object>
+</annotation>

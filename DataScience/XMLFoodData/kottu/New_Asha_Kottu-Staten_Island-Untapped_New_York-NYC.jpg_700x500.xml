@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>New_Asha_Kottu-Staten_Island-Untapped_New_York-NYC.jpg_700x500.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\New_Asha_Kottu-Staten_Island-Untapped_New_York-NYC.jpg_700x500.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>700</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>123</xmin>
+			<ymin>91</ymin>
+			<xmax>374</xmax>
+			<ymax>316</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>Kottu-Roti3-300x203.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\Kottu-Roti3-300x203.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>203</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>39</xmin>
+			<ymin>24</ymin>
+			<xmax>263</xmax>
+			<ymax>201</ymax>
+		</bndbox>
+	</object>
+</annotation>
