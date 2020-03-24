@@ -1,3 +1,5 @@
 /DataScience/SDGP/*.pickle
 /DataScience/SDGP/Datasets/
 /DataScience/SDGP/logs/
+/DataScience/SDGP/*.model/
+/DataScience/SDGP/FlaskApp/images/
