@@ -118,7 +118,7 @@ public class Food {
     private String servingDescription8;
     private double servingWeight9_g;
     private String servingDescription9;
-    private double calorieWeight_g;
+    private double calorieWeight_200g;
 
 
     public Integer getId() {
@@ -1018,10 +1018,10 @@ public class Food {
     }
 
     public double getCalorieWeight_g() {
-        return calorieWeight_g;
+        return calorieWeight_200g;
     }
 
     public void setCalorieWeight_g(double calorieWeight_g) {
-        this.calorieWeight_g = calorieWeight_g;
+        this.calorieWeight_200g = calorieWeight_g;
     }
 }
