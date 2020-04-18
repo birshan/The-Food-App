@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6965501-fb64-4d56-b53a-fa6290f9ef82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SDGP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SDGP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskApp-edited/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskApp-edited/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
