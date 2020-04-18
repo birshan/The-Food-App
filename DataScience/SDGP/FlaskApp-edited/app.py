@@ -36,9 +36,9 @@ def upload_image():
             filename = secure_filename(file.filename)
 
             obj = Prediction(filename, file)
-            prediction = obj.make_pred()
+            # prediction = obj.make_pred()
             # if rice is predicted:
-            # prediction = 'rice'
+            prediction = 'rice'
 
             return render_template('index.html', filename=filename, file=file, prediction=prediction)
 
