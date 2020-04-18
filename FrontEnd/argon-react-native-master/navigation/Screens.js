@@ -3,7 +3,7 @@ import { Easing, Animated } from "react-native";
 import {
   createStackNavigator,
   createDrawerNavigator,
-  createAppContainer
+  createAppContainer,
 } from "react-navigation";
 
 import { Block } from "galio-framework";
@@ -24,29 +24,30 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
+import { screensEnabled } from "react-native-screens";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
     duration: 400,
     easing: Easing.out(Easing.poly(4)),
-    timing: Animated.timing
+    timing: Animated.timing,
   },
-  screenInterpolator: sceneProps => {
+  screenInterpolator: (sceneProps) => {
     const { layout, position, scene } = sceneProps;
     const thisSceneIndex = scene.index;
     const width = layout.initWidth;
 
     const scale = position.interpolate({
       inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [4, 1, 1]
+      outputRange: [4, 1, 1],
     });
     const opacity = position.interpolate({
       inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [0, 1, 1]
+      outputRange: [0, 1, 1],
     });
     const translateX = position.interpolate({
       inputRange: [thisSceneIndex - 1, thisSceneIndex],
-      outputRange: [width, 0]
+      outputRange: [width, 0],
     });
 
     const scaleWithOpacity = { opacity };
@@ -60,36 +61,42 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
       return scaleWithOpacity;
     }
     return { transform: [{ translateX }] };
-  }
+  },
 });
 
-const ElementsStack = createStackNavigator({
-  Elements: {
-    screen: Elements,
-    navigationOptions: ({ navigation }) => ({
-      header: <Header title="Elements" navigation={navigation} />
-    })
-  }
-},{
-  cardStyle: {
-    backgroundColor: "#F8F9FE"
+const ElementsStack = createStackNavigator(
+  {
+    Elements: {
+      screen: Elements,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Elements" navigation={navigation} />,
+      }),
+    },
   },
-  transitionConfig
-});
+  {
+    cardStyle: {
+      backgroundColor: "#F8F9FE",
+    },
+    transitionConfig,
+  }
+);
 
-const ArticlesStack = createStackNavigator({
-  Articles: {
-    screen: Articles,
-    navigationOptions: ({ navigation }) => ({
-      header: <Header title="Articles" navigation={navigation} />
-    })
-  }
-},{
-  cardStyle: {
-    backgroundColor: "#F8F9FE"
+const ArticlesStack = createStackNavigator(
+  {
+    Articles: {
+      screen: Articles,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Articles" navigation={navigation} />,
+      }),
+    },
   },
-  transitionConfig
-});
+  {
+    cardStyle: {
+      backgroundColor: "#F8F9FE",
+    },
+    transitionConfig,
+  }
+);
 
 const ProfileStack = createStackNavigator(
   {
@@ -97,15 +104,21 @@ const ProfileStack = createStackNavigator(
       screen: Profile,
       navigationOptions: ({ navigation }) => ({
         header: (
-          <Header white transparent title="Profile" iconColor={'#FFF'} navigation={navigation} />
+          <Header
+            white
+            transparent
+            title="Profile"
+            iconColor={"#FFF"}
+            navigation={navigation}
+          />
         ),
-        headerTransparent: true
-      })
-    }
+        headerTransparent: true,
+      }),
+    },
   },
   {
     cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig
+    transitionConfig,
   }
 );
 
@@ -114,8 +127,8 @@ const HomeStack = createStackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        header: <Header search options title="Home" navigation={navigation} />
-      })
+        header: <Header search options title="Home" navigation={navigation} />,
+      }),
     },
     // Pro: {
     //   screen: Pro,
@@ -129,25 +142,29 @@ const HomeStack = createStackNavigator(
   },
   {
     cardStyle: {
-      backgroundColor: "#F8F9FE"
+      backgroundColor: "#F8F9FE",
     },
-    transitionConfig
+    transitionConfig,
   }
 );
 
-const LogFoodSearchStack = createStackNavigator(
-  {
-    Scanimg: {
-      screen: LogFoodSearch,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header white transparent title="LogFoodSearch" iconColor={'#FFF'} navigation={navigation} />
-        ),
-        headerTransparent: true
-      })
-    }
+const LogFoodSearchStack = createStackNavigator({
+  Scanimg: {
+    screen: LogFoodSearch,
+    navigationOptions: ({ navigation }) => ({
+      header: (
+        <Header
+          white
+          transparent
+          title="LogFoodSearch"
+          iconColor={"#FFF"}
+          navigation={navigation}
+        />
+      ),
+      headerTransparent: true,
+    }),
   },
-);
+});
 
 const ScanimgStack = createStackNavigator(
   {
@@ -155,15 +172,21 @@ const ScanimgStack = createStackNavigator(
       screen: Scanimg,
       navigationOptions: ({ navigation }) => ({
         header: (
-          <Header white transparent title="Scanimg" iconColor={'#FFF'} navigation={navigation} />
+          <Header
+            white
+            transparent
+            title="Scanimg"
+            iconColor={"#FFF"}
+            navigation={navigation}
+          />
         ),
-        headerTransparent: true
-      })
-    }
+        headerTransparent: true,
+      }),
+    },
   },
   {
     cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig
+    transitionConfig,
   }
 );
 
@@ -173,65 +196,69 @@ const AppStack = createDrawerNavigator(
     Onboarding: {
       screen: Onboarding,
       navigationOptions: {
-        drawerLabel: () => {}
-      }
+        drawerLabel: () => {},
+      },
     },
     Home: {
       screen: HomeStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} title="Home" />
-        )
-      })
+        ),
+      }),
     },
     Profile: {
       screen: ProfileStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        )
-      })
+        ),
+      }),
     },
     Account: {
       screen: Register,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Register" title="Account" />
-        )
-      })
+        ),
+      }),
     },
     Elements: {
       screen: ElementsStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Elements" title="Elements" />
-        )
-      })
+        ),
+      }),
     },
     LogFoodSearch: {
       screen: LogFoodSearchStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="LogFoodSearch" title="Search Food Log" />
-        )
-      })
+          <DrawerItem
+            focused={focused}
+            screen="LogFoodSearch"
+            title="Search Food Log"
+          />
+        ),
+      }),
     },
     Scanimg: {
       screen: ScanimgStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Scanimg" title="Scan Image" />
-        )
-      })
+        ),
+      }),
     },
     Articles: {
       screen: ArticlesStack,
-      navigationOptions: navOpt => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Articles" title="Articles" />
-        )
-      })
-    }
+        ),
+      }),
+    },
   },
   Menu
 );

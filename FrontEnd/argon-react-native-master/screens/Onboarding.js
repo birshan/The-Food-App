@@ -4,14 +4,14 @@ import {
   Image,
   StyleSheet,
   StatusBar,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
-
-const { height, width } = Dimensions.get("screen");
-
+import { Input, Icon } from "../components/";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
+
+const { height, width } = Dimensions.get("screen");
 
 class Onboarding extends React.Component {
   render() {
@@ -21,32 +21,53 @@ class Onboarding extends React.Component {
       <Block flex style={styles.container}>
         <StatusBar hidden />
         <Block flex center>
-        <ImageBackground
+          <ImageBackground
             source={Images.Onboarding}
             style={{ height, width, zIndex: 1 }}
           />
         </Block>
-        <Block center>
-          <Image source={Images.LogoOnboarding} style={styles.logo} />
+        <Block center style={styles.heading}>
+          <Text
+            h1
+            style={{ marginBottom: theme.SIZES.BASE / 2 }}
+            color={argonTheme.COLORS.WHITE}
+          >
+            The Food-App
+          </Text>
         </Block>
         <Block flex space="between" style={styles.padded}>
-            <Block flex space="around" style={{ zIndex: 2 }}>
-              <Block style={styles.title}>
-                <Block>
-                  <Text color="yellow" size={60}>
-                    Food
-                  </Text>
-                </Block>
-                <Block>
-                  <Text color="yellow" size={60}>
-                    App
-                  </Text>
-                </Block>
-                <Block style={styles.subTitle}>
-                  <Text color="white" size={16}>
-                    App that you'll never regret.
-                  </Text>
-                </Block>
+          <Block flex space="around">
+            <Block>
+              <Block center>
+                <Input
+                  borderless
+                  placeholder="Email"
+                  iconContent={
+                    <Icon
+                      size={16}
+                      color={argonTheme.COLORS.ICON}
+                      name="ic_mail_24px"
+                      family="ArgonExtra"
+                      style={styles.inputIcons}
+                    />
+                  }
+                />
+              </Block>
+              <Block center>
+                <Input
+                  password
+                  borderless
+                  placeholder="Password"
+                  iconContent={
+                    <Icon
+                      size={16}
+                      color={argonTheme.COLORS.ICON}
+                      name="padlock-unlocked"
+                      family="ArgonExtra"
+                      style={styles.inputIcons}
+                    />
+                  }
+                />
               </Block>
               <Block center>
                 <Button
@@ -55,9 +76,20 @@ class Onboarding extends React.Component {
                   onPress={() => navigation.navigate("Home")}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
                 >
-                  Get Started
+                  Login
                 </Button>
               </Block>
+            </Block>
+            <Block center>
+              <Button
+                style={styles.button}
+                color={argonTheme.COLORS.SECONDARY}
+                onPress={() => navigation.navigate("Home")}
+                textStyle={{ color: argonTheme.COLORS.BLACK }}
+              >
+                Sign Up
+              </Button>
+            </Block>
           </Block>
         </Block>
       </Block>
@@ -67,7 +99,7 @@ class Onboarding extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.COLORS.BLACK
+    backgroundColor: theme.COLORS.BLACK,
   },
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
@@ -79,21 +111,29 @@ const styles = StyleSheet.create({
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,
-    shadowOpacity: 0
+    shadowOpacity: 0,
+  },
+  heading: {
+    zIndex: 2,
+    position: "relative",
+    marginTop: "-90%",
   },
   logo: {
     width: 200,
     height: 60,
     zIndex: 2,
-    position: 'relative',
-    marginTop: '-50%'
+    position: "relative",
+    marginTop: "-70%",
   },
   title: {
-    marginTop:'-5%'
+    marginTop: "-5%",
   },
   subTitle: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
+  inputIcons: {
+    marginRight: 12,
+  },
 });
 
 export default Onboarding;
