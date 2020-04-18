@@ -1,11 +1,11 @@
-import React from 'react';
-import { Image } from 'react-native';
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import { Block, GalioProvider } from 'galio-framework';
+import React from "react";
+import { Image } from "react-native";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import { Block, GalioProvider } from "galio-framework";
 
-import Screens from './navigation/Screens';
-import { Images, articles, argonTheme } from './constants';
+import Screens from "./navigation/Screens";
+import { Images, articles, argonTheme } from "./constants";
 
 // cache app images
 const assetImages = [
@@ -15,15 +15,15 @@ const assetImages = [
   Images.Pro,
   Images.ArgonLogo,
   Images.iOSLogo,
-  Images.androidLogo
+  Images.androidLogo,
 ];
 
 // cache product images
-articles.map(article => assetImages.push(article.image));
+articles.map((article) => assetImages.push(article.image));
 
 function cacheImages(images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
+  return images.map((image) => {
+    if (typeof image === "string") {
       return Image.prefetch(image);
     } else {
       return Asset.fromModule(image).downloadAsync();
@@ -34,10 +34,10 @@ function cacheImages(images) {
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-  }
-  
+  };
+
   render() {
-    if(!this.state.isLoadingComplete) {
+    if (!this.state.isLoadingComplete) {
       return (
         <AppLoading
           startAsync={this._loadResourcesAsync}
@@ -48,21 +48,17 @@ export default class App extends React.Component {
     } else {
       return (
         <GalioProvider theme={argonTheme}>
-          <Block flex>
-            <Screens />
-          </Block>
+          <Block flex>{<Screens />}</Block>
         </GalioProvider>
       );
     }
   }
 
   _loadResourcesAsync = async () => {
-    return Promise.all([
-      ...cacheImages(assetImages),
-    ]);
+    return Promise.all([...cacheImages(assetImages)]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);
@@ -71,5 +67,19 @@ export default class App extends React.Component {
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
-
 }
+
+// import ProfilePage from "./screens/Profile";
+
+// export default class App extends React.Component {
+//   render() {
+//     return (
+//       <GalioProvider theme={argonTheme}>
+//         <Block flex>
+//           <Screens />
+//           <ProfilePage />
+//         </Block>
+//       </GalioProvider>
+//     );
+//   }
+// }

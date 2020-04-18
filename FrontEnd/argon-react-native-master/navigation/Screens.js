@@ -16,7 +16,7 @@ import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
-import Scanimg from "../screens/Scanimg";
+import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 // drawer
 import Menu from "./Menu";
@@ -24,7 +24,6 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-import { screensEnabled } from "react-native-screens";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -175,8 +174,8 @@ const ScanimgStack = createStackNavigator(
           <Header
             white
             transparent
-            title="Scanimg"
-            iconColor={"#FFF"}
+            title="Scan Image"
+            iconColor={"#333"}
             navigation={navigation}
           />
         ),
@@ -207,14 +206,14 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    Profile: {
-      screen: ProfileStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        ),
-      }),
-    },
+    // Profile: {
+    //   screen: ProfileStack,
+    //   navigationOptions: (navOpt) => ({
+    //     drawerLabel: ({ focused }) => (
+    //       <DrawerItem focused={focused} screen="Profile" title="Profile" />
+    //     ),
+    //   }),
+    // },
     Account: {
       screen: Register,
       navigationOptions: (navOpt) => ({
@@ -223,14 +222,14 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    Elements: {
-      screen: ElementsStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Elements" title="Elements" />
-        ),
-      }),
-    },
+    // Elements: {
+    //   screen: ElementsStack,
+    //   navigationOptions: (navOpt) => ({
+    //     drawerLabel: ({ focused }) => (
+    //       <DrawerItem focused={focused} screen="Elements" title="Elements" />
+    //     ),
+    //   }),
+    // },
     LogFoodSearch: {
       screen: LogFoodSearchStack,
       navigationOptions: (navOpt) => ({
@@ -251,14 +250,14 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    Articles: {
-      screen: ArticlesStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Articles" title="Articles" />
-        ),
-      }),
-    },
+    // Articles: {
+    //   screen: ArticlesStack,
+    //   navigationOptions: (navOpt) => ({
+    //     drawerLabel: ({ focused }) => (
+    //       <DrawerItem focused={focused} screen="Articles" title="Articles" />
+    //     ),
+    //   }),
+    // },
   },
   Menu
 );
