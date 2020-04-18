@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>yimg_J8Lspd.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\yimg_J8Lspd.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2738</width>
+		<height>1825</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>517</xmin>
+			<ymin>510</ymin>
+			<xmax>1818</xmax>
+			<ymax>1440</ymax>
+		</bndbox>
+	</object>
+</annotation>

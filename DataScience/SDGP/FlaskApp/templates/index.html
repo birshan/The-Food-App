@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food-App</title>
+</head>
+<h4>
+    <h1>The Food App Data Science</h1>
+    <div>
+        <form method="POST" enctype=multipart/form-data action="/upload_image/">
+            <p>Insert Image below</p>
+            <input type="file" name="file"/>
+            <br>
+            <br>
+            <input type="submit" value="Upload"/>
+        </form>
+    </div>
+    {% if filename|length > 0  %}
+    <div>
+        <h4>{{filename}} - File was uploaded</h4>
+    </div>
+    {% endif %}
+</body>
+</html>

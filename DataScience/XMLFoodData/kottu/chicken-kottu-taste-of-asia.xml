@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>chicken-kottu-taste-of-asia.png</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\chicken-kottu-taste-of-asia.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>987</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>70</xmin>
+			<ymin>75</ymin>
+			<xmax>393</xmax>
+			<ymax>291</ymax>
+		</bndbox>
+	</object>
+</annotation>

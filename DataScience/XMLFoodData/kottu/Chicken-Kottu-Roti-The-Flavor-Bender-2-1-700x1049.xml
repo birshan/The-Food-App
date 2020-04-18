@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>Chicken-Kottu-Roti-The-Flavor-Bender-2-1-700x1049.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\Chicken-Kottu-Roti-The-Flavor-Bender-2-1-700x1049.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>700</width>
+		<height>1049</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>156</xmin>
+			<ymin>248</ymin>
+			<xmax>601</xmax>
+			<ymax>880</ymax>
+		</bndbox>
+	</object>
+</annotation>

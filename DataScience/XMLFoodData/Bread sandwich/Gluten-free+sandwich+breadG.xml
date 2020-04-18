@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Bread sandwich</folder>
+	<filename>Gluten-free+sandwich+breadG.jpg</filename>
+	<path>/Study/Bread sandwich/Gluten-free+sandwich+breadG.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1600</width>
+		<height>1067</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>sandwich</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>553</xmin>
+			<ymin>225</ymin>
+			<xmax>1401</xmax>
+			<ymax>922</ymax>
+		</bndbox>
+	</object>
+</annotation>

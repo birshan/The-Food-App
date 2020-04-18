@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>cheese-chicken-kottu.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\cheese-chicken-kottu.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>550</width>
+		<height>367</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>160</xmin>
+			<ymin>110</ymin>
+			<xmax>392</xmax>
+			<ymax>276</ymax>
+		</bndbox>
+	</object>
+</annotation>

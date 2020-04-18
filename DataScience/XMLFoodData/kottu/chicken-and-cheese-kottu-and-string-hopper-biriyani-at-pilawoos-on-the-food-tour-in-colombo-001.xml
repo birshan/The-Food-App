@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>chicken-and-cheese-kottu-and-string-hopper-biriyani-at-pilawoos-on-the-food-tour-in-colombo-001.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\chicken-and-cheese-kottu-and-string-hopper-biriyani-at-pilawoos-on-the-food-tour-in-colombo-001.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1632</width>
+		<height>918</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>286</xmin>
+			<ymin>500</ymin>
+			<xmax>732</xmax>
+			<ymax>876</ymax>
+		</bndbox>
+	</object>
+</annotation>

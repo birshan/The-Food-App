@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>12-sri lanka kottu-flickr.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\12-sri lanka kottu-flickr.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>840</width>
+		<height>565</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>237</xmin>
+			<ymin>114</ymin>
+			<xmax>625</xmax>
+			<ymax>383</ymax>
+		</bndbox>
+	</object>
+</annotation>

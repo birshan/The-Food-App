@@ -1,0 +1,26 @@
+<annotation>
+	<folder>kottu</folder>
+	<filename>sri-lankan-kottu-roti-vegetables-260nw-1462760312.jpg</filename>
+	<path>D:\IIT\Group Project\SDGP data\kottu\sri-lankan-kottu-roti-vegetables-260nw-1462760312.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>390</width>
+		<height>280</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>kottu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>125</xmin>
+			<ymin>90</ymin>
+			<xmax>279</xmax>
+			<ymax>198</ymax>
+		</bndbox>
+	</object>
+</annotation>
