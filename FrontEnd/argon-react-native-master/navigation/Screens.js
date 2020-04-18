@@ -149,7 +149,7 @@ const HomeStack = createStackNavigator(
 );
 
 const LogFoodSearchStack = createStackNavigator({
-  Scanimg: {
+  LogFoodSearch: {
     screen: LogFoodSearch,
     navigationOptions: ({ navigation }) => ({
       header: (
@@ -165,6 +165,30 @@ const LogFoodSearchStack = createStackNavigator({
     }),
   },
 });
+
+const NutritionSumStack = createStackNavigator(
+  {
+    NutritionSum: {
+      screen: NutritionSum,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            white
+            transparent
+            title="Nutrition Summary"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: true,
+      }),
+    },
+  },
+  {
+    cardStyle: { backgroundColor: "#FFFFFF" },
+    transitionConfig,
+  }
+);
 
 const ScanimgStack = createStackNavigator(
   {
@@ -240,6 +264,14 @@ const AppStack = createDrawerNavigator(
             screen="LogFoodSearch"
             title="Search Food Log"
           />
+        ),
+      }),
+    },
+    NutritionSum: {
+      screen: NutritionSumStack,
+      navigationOptions: (navOpt) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="NutritionSum" title="Nutrition Summary" />
         ),
       }),
     },
