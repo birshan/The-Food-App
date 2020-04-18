@@ -18,6 +18,7 @@ import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
 import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
+import NutritionSum from "../screens/NutritionSum";
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
