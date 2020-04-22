@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface FoodRepository extends CrudRepository<Food, String> {
 
-
 }

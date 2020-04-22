@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/user")
     public @ResponseBody String addNewUser(@RequestParam String firstName,
                                            @RequestParam String email){
         User n = new User();
@@ -22,7 +22,8 @@ public class UserController {
         return "Saved";
     }
 
-    @GetMapping(path="/all")
+
+    @GetMapping(path="/user")
     public @ResponseBody Iterable<User> getAllUsers(){
         return userRepository.findAll();
     }

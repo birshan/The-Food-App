@@ -1,16 +1,14 @@
 package com.foodapp.backend.pojo;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Food {
-
-
-    private Integer Id;
-    @Id
+    @javax.persistence.Id
     private String name;
+    private Integer Id;
     private String foodGroup;
     private double calories;
     private double fat_g;
