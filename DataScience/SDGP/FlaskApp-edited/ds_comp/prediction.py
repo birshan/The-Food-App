@@ -22,12 +22,12 @@ class Prediction:
             "noodles"
         ]
 
-        f = Path("model_structure.json")
+        f = Path("ds_comp/model_structure.json")
         model_structure = f.read_text()
 
         model = model_from_json(model_structure)
 
-        model.load_weights("model_weights.h5")
+        model.load_weights("ds_comp/model_weights.h5")
 
         img = image.load_img(self.file, target_size=(224, 224))
 
