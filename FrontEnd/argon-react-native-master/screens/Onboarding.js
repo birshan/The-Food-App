@@ -5,12 +5,12 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
+  AsyncStorage,
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
 import { Input, Icon } from "../components/";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
-import { na } from "react-navigation";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -42,14 +42,14 @@ class Onboarding extends React.Component {
     }));
   };
 
-  handleLogin = async (authInfo) => {
+  _signInAsync = async (authInfo) => {
     console.log(
       "username: " + authInfo.username + "  password: " + authInfo.password
     );
     this.setState({
       loginProcess: true,
     });
-    let url = "http://192.168.43.81:8080/auth";
+    let url = "http://192.168.1.7:8080/auth";
     const options = {
       method: "POST",
       mode: "cors",
@@ -67,6 +67,8 @@ class Onboarding extends React.Component {
       if (response.ok) {
         let data = await response.json();
         console.log(data.jwt);
+        await AsyncStorage.setItem("userToken", data.jwt);
+        this.props.navigation.navigate("App");
       } else {
         console.log("Auth failed");
       }
@@ -74,6 +76,12 @@ class Onboarding extends React.Component {
       console.log(error);
     }
   };
+
+  _signUp = () => {
+    this.props.navigation.navigate("App");
+  };
+
+  handleLogin = async (authInfo) => {};
 
   render() {
     const { navigation } = this.props;
@@ -138,7 +146,7 @@ class Onboarding extends React.Component {
                 <Button
                   style={styles.button}
                   color={argonTheme.COLORS.SECONDARY}
-                  onPress={() => this.handleLogin(this.state.authInfo)}
+                  onPress={() => this._signInAsync(this.state.authInfo)}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
                 >
                   Login
@@ -150,7 +158,7 @@ class Onboarding extends React.Component {
                 style={styles.button}
                 color={argonTheme.COLORS.SECONDARY}
                 /* change to function that sends api request */
-                onPress={() => navigation.navigate("Home")}
+                onPress={() => this._signUp()}
                 textStyle={{ color: argonTheme.COLORS.BLACK }}
               >
                 Sign Up

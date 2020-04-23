@@ -4,11 +4,13 @@ import {
   createStackNavigator,
   createDrawerNavigator,
   createAppContainer,
+  createSwitchNavigator,
 } from "react-navigation";
 
 import { Block } from "galio-framework";
 
 // screens
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 //import Pro from "../screens/Pro";
@@ -19,6 +21,7 @@ import Articles from "../screens/Articles";
 import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -214,15 +217,10 @@ const ScanimgStack = createStackNavigator(
   }
 );
 
-// divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
+//
 const AppStack = createDrawerNavigator(
+  //creates screens stack order
   {
-    Onboarding: {
-      screen: Onboarding,
-      navigationOptions: {
-        drawerLabel: () => {},
-      },
-    },
     Home: {
       screen: HomeStack,
       navigationOptions: (navOpt) => ({
@@ -271,7 +269,11 @@ const AppStack = createDrawerNavigator(
       screen: NutritionSumStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="NutritionSum" title="Nutrition Summary" />
+          <DrawerItem
+            focused={focused}
+            screen="NutritionSum"
+            title="Nutrition Summary"
+          />
         ),
       }),
     },
@@ -295,5 +297,18 @@ const AppStack = createDrawerNavigator(
   Menu
 );
 
-const AppContainer = createAppContainer(AppStack);
+const AuthStack = createSwitchNavigator({ SignIn: Onboarding });
+
+const AppContainer = createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: AppStack,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: "AuthLoading",
+    }
+  )
+);
 export default AppContainer;
