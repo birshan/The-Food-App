@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
+  AsyncStorage,
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
 import { Input, Icon } from "../components/";
@@ -14,6 +15,74 @@ import Images from "../constants/Images";
 const { height, width } = Dimensions.get("screen");
 
 class Onboarding extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authInfo: {
+        username: "",
+        password: "",
+      },
+      loginProcess: false,
+    };
+  }
+  handleUsername = (text) => {
+    this.setState((prevState) => ({
+      authInfo: {
+        ...prevState.authInfo,
+        username: text,
+      },
+    }));
+  };
+  handlePassword = (text) => {
+    this.setState((prevState) => ({
+      authInfo: {
+        ...prevState.authInfo,
+        password: text,
+      },
+    }));
+  };
+
+  _signInAsync = async (authInfo) => {
+    console.log(
+      "username: " + authInfo.username + "  password: " + authInfo.password
+    );
+    this.setState({
+      loginProcess: true,
+    });
+    let url = "http://192.168.1.7:8080/auth";
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify({
+        username: authInfo.username,
+        password: authInfo.password,
+      }),
+    };
+    console.log("Sending Auth request");
+    try {
+      let response = await fetch(url, options);
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data.jwt);
+        await AsyncStorage.setItem("userToken", data.jwt);
+        this.props.navigation.navigate("App");
+      } else {
+        console.log("Auth failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  _signUp = () => {
+    this.props.navigation.navigate("App");
+  };
+
+  handleLogin = async (authInfo) => {};
+
   render() {
     const { navigation } = this.props;
 
@@ -42,6 +111,8 @@ class Onboarding extends React.Component {
                 <Input
                   borderless
                   placeholder="Email"
+                  value={this.state.authInfo.username}
+                  onChangeText={this.handleUsername}
                   iconContent={
                     <Icon
                       size={16}
@@ -57,7 +128,9 @@ class Onboarding extends React.Component {
                 <Input
                   password
                   borderless
+                  value={this.state.authInfo.password}
                   placeholder="Password"
+                  onChangeText={this.handlePassword}
                   iconContent={
                     <Icon
                       size={16}
@@ -73,7 +146,7 @@ class Onboarding extends React.Component {
                 <Button
                   style={styles.button}
                   color={argonTheme.COLORS.SECONDARY}
-                  onPress={() => navigation.navigate("Home")}
+                  onPress={() => this._signInAsync(this.state.authInfo)}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
                 >
                   Login
@@ -84,7 +157,8 @@ class Onboarding extends React.Component {
               <Button
                 style={styles.button}
                 color={argonTheme.COLORS.SECONDARY}
-                onPress={() => navigation.navigate("Home")}
+                /* change to function that sends api request */
+                onPress={() => this._signUp()}
                 textStyle={{ color: argonTheme.COLORS.BLACK }}
               >
                 Sign Up
