@@ -5,7 +5,8 @@ import {
   ScrollView,
   Image,
   ImageBackground,
-  Platform
+  Platform,
+  AsyncStorage,
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
@@ -18,6 +19,10 @@ const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 
 class Profile extends React.Component {
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("App");
+  };
   render() {
     return (
       <Block flex style={styles.profile}>
@@ -29,7 +34,7 @@ class Profile extends React.Component {
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '25%' }}
+              style={{ width, marginTop: "25%" }}
             >
               <Block flex style={styles.profileCard}>
                 <Block middle style={styles.avatarContainer}>
@@ -117,13 +122,16 @@ class Profile extends React.Component {
                     </Text>
                     <Button
                       color="transparent"
+                      onPress={() => {
+                        this._signOutAsync();
+                      }}
                       textStyle={{
                         color: "#233DD2",
                         fontWeight: "500",
-                        fontSize: 16
+                        fontSize: 16,
                       }}
                     >
-                      Show more
+                      View Profile
                     </Button>
                   </Block>
                   <Block
@@ -288,17 +296,17 @@ const styles = StyleSheet.create({
   profile: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
     // marginBottom: -HeaderHeight * 2,
-    flex: 1
+    flex: 1,
   },
   profileContainer: {
     width: width,
     height: height,
     padding: 0,
-    zIndex: 1
+    zIndex: 1,
   },
   profileBackground: {
     width: width,
-    height: height / 2
+    height: height / 2,
   },
   profileCard: {
     // position: "relative",
@@ -312,36 +320,36 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
   },
   info: {
-    paddingHorizontal: 40
+    paddingHorizontal: 40,
   },
   avatarContainer: {
     position: "relative",
-    marginTop: -80
+    marginTop: -80,
   },
   avatar: {
     width: 124,
     height: 124,
     borderRadius: 62,
-    borderWidth: 0
+    borderWidth: 0,
   },
   nameInfo: {
-    marginTop: 35
+    marginTop: 35,
   },
   divider: {
     width: "90%",
     borderWidth: 1,
-    borderColor: "#E9ECEF"
+    borderColor: "#E9ECEF",
   },
   thumb: {
     borderRadius: 4,
     marginVertical: 4,
     alignSelf: "center",
     width: thumbMeasure,
-    height: thumbMeasure
-  }
+    height: thumbMeasure,
+  },
 });
 
 export default Profile;

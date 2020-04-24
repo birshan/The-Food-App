@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 3780,
-  "expoServerNgrokUrl": "https://gw-9pf.anonymous.argon-react-native-master.exp.direct",
-  "packagerNgrokUrl": "https://packager.gw-9pf.anonymous.argon-react-native-master.exp.direct",
-  "ngrokPid": 13200,
-  "webpackServerPort": null
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "expoServerPort": null,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
 }

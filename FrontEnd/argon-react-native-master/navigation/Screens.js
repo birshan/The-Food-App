@@ -21,6 +21,8 @@ import Articles from "../screens/Articles";
 import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
+import SignOut from "../screens/SignOut";
+import SignUp from "../screens/SignUp";
 
 // drawer
 import Menu from "./Menu";
@@ -28,6 +30,7 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
+0;
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -285,6 +288,14 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
+    SignOut: {
+      screen: SignOut,
+      navigationOptions: (navOpt) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="" title="Sign out" />
+        ),
+      }),
+    },
     // Articles: {
     //   screen: ArticlesStack,
     //   navigationOptions: (navOpt) => ({
@@ -296,8 +307,40 @@ const AppStack = createDrawerNavigator(
   },
   Menu
 );
+const SigninStack = createStackNavigator(
+  {
+    SingIn: {
+      screen: Onboarding,
+      navigationOptions: ({ navigation }) => ({
+        headerTransparent: true,
+      }),
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: ({ navigation }) => ({
+        headerTransparent: false,
+        title: "Sign Up Screen",
+      }),
+    },
+  },
+  {
+    cardStyle: { backgroundColor: "#FFFFFF" },
+    transitionConfig,
+  }
+);
 
-const AuthStack = createSwitchNavigator({ SignIn: Onboarding });
+const AuthStack = createSwitchNavigator(
+  { SigninStack: SigninStack }
+  /* 
+  createStackNavigator({
+    SignIn: {
+      screen: Onboarding,
+    },
+    SignUp: {
+      screen: SignUp,
+    },
+  }) */
+);
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(
