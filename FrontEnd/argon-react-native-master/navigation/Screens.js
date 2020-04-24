@@ -21,8 +21,7 @@ import Articles from "../screens/Articles";
 import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
-import SignOut from "../screens/SignOut";
-import SignUp from "../screens/SignUp";
+import Viewprofile from "../screens/Viewprofile";
 
 // drawer
 import Menu from "./Menu";
@@ -30,7 +29,6 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-0;
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -76,6 +74,22 @@ const ElementsStack = createStackNavigator(
       screen: Elements,
       navigationOptions: ({ navigation }) => ({
         header: <Header title="Elements" navigation={navigation} />,
+      }),
+    },
+  },
+  {
+    cardStyle: {
+      backgroundColor: "#F8F9FE",
+    },
+    transitionConfig,
+  }
+);
+const ViewStack = createStackNavigator(
+  {
+    Viewprofile: {
+      screen: Viewprofile,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Viewprofile" navigation={navigation} />,
       }),
     },
   },
@@ -220,30 +234,6 @@ const ScanimgStack = createStackNavigator(
   }
 );
 
-const SingOutStack = createStackNavigator(
-  {
-    SignOut: {
-      screen: SignOut,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header
-            white
-            transparent
-            title="Sign Out"
-            iconColor={"#333"}
-            navigation={navigation}
-          />
-        ),
-        headerTransparent: true,
-      }),
-    },
-  },
-  {
-    cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig,
-  }
-);
-
 //
 const AppStack = createDrawerNavigator(
   //creates screens stack order
@@ -264,6 +254,14 @@ const AppStack = createDrawerNavigator(
     //     ),
     //   }),
     // },
+    Viewprofile: {
+      screen: Viewprofile,
+      navigationOptions: (navOpt) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="Viewprofile" title="Viewprofile" />
+        ),
+      }),
+    },
     Account: {
       screen: Register,
       navigationOptions: (navOpt) => ({
@@ -294,7 +292,7 @@ const AppStack = createDrawerNavigator(
     },
     NutritionSum: {
       screen: NutritionSumStack,
-      navigationOptions: (navigation) => ({
+      navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem
             focused={focused}
@@ -312,14 +310,6 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    SignOut: {
-      screen: SingOutStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="SignOut" title="Sign Out" />
-        ),
-      }),
-    },
     // Articles: {
     //   screen: ArticlesStack,
     //   navigationOptions: (navOpt) => ({
@@ -331,40 +321,8 @@ const AppStack = createDrawerNavigator(
   },
   Menu
 );
-const SigninStack = createStackNavigator(
-  {
-    SingIn: {
-      screen: Onboarding,
-      navigationOptions: ({ navigation }) => ({
-        headerTransparent: true,
-      }),
-    },
-    SignUp: {
-      screen: SignUp,
-      navigationOptions: ({ navigation }) => ({
-        headerTransparent: false,
-        title: "Sign Up Screen",
-      }),
-    },
-  },
-  {
-    cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig,
-  }
-);
 
-const AuthStack = createSwitchNavigator(
-  { SigninStack: SigninStack }
-  /* 
-  createStackNavigator({
-    SignIn: {
-      screen: Onboarding,
-    },
-    SignUp: {
-      screen: SignUp,
-    },
-  }) */
-);
+const AuthStack = createSwitchNavigator({ SignIn: Onboarding });
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(

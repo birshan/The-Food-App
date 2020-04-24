@@ -78,7 +78,7 @@ class Onboarding extends React.Component {
   };
 
   _signUp = () => {
-    this.props.navigation.navigate("SignUp");
+    this.props.navigation.navigate("App");
   };
 
   handleLogin = async (authInfo) => {};
