@@ -1,17 +1,21 @@
 import React from "react";
 import { Button } from "../components";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, AsyncStorage } from "react-native";
 
-export default function SignOut() {
-  _signout = () => {
+export default class SignOut extends React.Component {
+  _signout = async () => {
     console.log("signout pressed");
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Auth");
   };
-  return (
-    <View style={styles.container}>
-      <Text style={styles.confirmText}>Confirm SignOut</Text>
-      <Button>Confirm</Button>
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.confirmText}>Confirm SignOut</Text>
+        <Button onPress={this._signout}>Confirm</Button>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

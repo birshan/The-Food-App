@@ -220,6 +220,30 @@ const ScanimgStack = createStackNavigator(
   }
 );
 
+const SingOutStack = createStackNavigator(
+  {
+    SignOut: {
+      screen: SignOut,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            white
+            transparent
+            title="Sign Out"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: true,
+      }),
+    },
+  },
+  {
+    cardStyle: { backgroundColor: "#FFFFFF" },
+    transitionConfig,
+  }
+);
+
 //
 const AppStack = createDrawerNavigator(
   //creates screens stack order
@@ -270,7 +294,7 @@ const AppStack = createDrawerNavigator(
     },
     NutritionSum: {
       screen: NutritionSumStack,
-      navigationOptions: (navOpt) => ({
+      navigationOptions: (navigation) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem
             focused={focused}
@@ -289,10 +313,10 @@ const AppStack = createDrawerNavigator(
       }),
     },
     SignOut: {
-      screen: SignOut,
+      screen: SingOutStack,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="" title="Sign out" />
+          <DrawerItem focused={focused} screen="SignOut" title="Sign Out" />
         ),
       }),
     },
