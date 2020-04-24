@@ -18,7 +18,7 @@ public class UserService {
     }
     public boolean doesUserAlreadyExist(User user) {
         //TODO
-        return false;
+        return true;
     }
     public Iterable<User> getAllUser(){
         return userRepository.findAll();

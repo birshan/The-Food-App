@@ -1,10 +1,11 @@
 import React from "react";
-import { Button } from "../components";
-import { Text, View, StyleSheet } from "react-native";
-import { Block, theme } from "galio-framework";
+import { Button, Select } from "../components";
+import { View, StyleSheet } from "react-native";
+import { Block, theme, Text } from "galio-framework";
 import { argonTheme } from "../constants";
 import { Input, Icon } from "../components/";
 import styles from "../components/styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -13,12 +14,28 @@ export default class SignUp extends React.Component {
       email: "",
       password: "",
       cnfrmPass: "",
-      userType: "",
       firstName: "",
       lastName: "",
+      role: "ROLE_USER",
+      user: true,
       loading: false,
     };
   }
+  toggleUser = () => {
+    if (this.state.user) {
+      this.setState((prevState) => ({
+        ...prevState,
+        role: "ROLE_PROFESSIONAL",
+        user: false,
+      }));
+    } else {
+      this.setState((prevState) => ({
+        ...prevState,
+        role: "ROLE_USER",
+        user: true,
+      }));
+    }
+  };
 
   handleEmail = (text) => {
     this.setState((prevState) => ({
@@ -51,8 +68,59 @@ export default class SignUp extends React.Component {
     }));
   };
 
-  handleSignUp = () => {
-    this.props.navigation.navigate("App");
+  handleSignUp = async () => {
+    //validation
+    let pass = this.state.password;
+    let cnfrmPass = this.state.cnfrmPass;
+
+    if (pass != cnfrmPass) {
+      alert("Error: Passwords do not match!");
+      this.setState((prevState) => ({
+        ...prevState,
+        password: "",
+        cnfrmPass: "",
+      }));
+      return;
+    }
+
+    //API request
+    let url = "http://192.168.43.81:8080/user";
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        roles: this.state.role,
+        password: this.state.password,
+      }),
+    };
+    console.log("Attempting to create new user");
+    try {
+      let response = await fetch(url, options);
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        alert("User Created");
+        this.props.navigation.goBack();
+      } else {
+        //if there was an error
+        console.log("TODO: change to handle other error types");
+        let data = await response.json();
+        alert("Error " + response.status + ": " + data.message);
+        console.log(data);
+        this.setState((prevState) => ({
+          ...prevState,
+          email: "",
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -78,6 +146,7 @@ export default class SignUp extends React.Component {
           <Block center>
             <Input
               placeholder="First Name"
+              iconContent={<Block />}
               value={this.state.firstName}
               onChangeText={this.handleFName}
             />
@@ -85,6 +154,7 @@ export default class SignUp extends React.Component {
           <Block center>
             <Input
               placeholder="Last Name"
+              iconContent={<Block />}
               value={this.state.lastName}
               onChangeText={this.handleLName}
             />
@@ -123,6 +193,20 @@ export default class SignUp extends React.Component {
               }
             />
           </Block>
+          <Block style={localStyles.selectContainer}>
+            <Block style={localStyles.selectTextArea}>
+              <Text style={localStyles.selectBtnText}>User Type: </Text>
+              <Text style={localStyles.selectText}>
+                {this.state.user ? "Normal User" : "Professional"}
+              </Text>
+            </Block>
+            <TouchableOpacity
+              style={localStyles.selectBtn}
+              onPress={this.toggleUser}
+            >
+              <Text style={localStyles.selectBtnText}>Change</Text>
+            </TouchableOpacity>
+          </Block>
         </Block>
         <Block style={localStyles.footer}>
           <Button
@@ -158,5 +242,29 @@ const localStyles = StyleSheet.create({
   },
   inputIcons: {
     marginRight: 12,
+  },
+  selectContainer: {
+    padding: "3%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  selectBtn: {
+    backgroundColor: argonTheme.COLORS.SECONDARY,
+    color: argonTheme.COLORS.PRIMARY,
+    padding: "3%",
+    marginLeft: "1.5%",
+    alignItems: "center",
+  },
+  selectBtnText: {
+    fontWeight: "600",
+    fontSize: 18,
+  },
+  selectTextArea: {
+    flexDirection: "row",
+  },
+  selectText: {
+    fontWeight: "900",
+    color: "white",
+    fontSize: 18,
   },
 });

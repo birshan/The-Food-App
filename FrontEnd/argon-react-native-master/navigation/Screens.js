@@ -353,18 +353,7 @@ const SigninStack = createStackNavigator(
   }
 );
 
-const AuthStack = createSwitchNavigator(
-  { SigninStack: SigninStack }
-  /* 
-  createStackNavigator({
-    SignIn: {
-      screen: Onboarding,
-    },
-    SignUp: {
-      screen: SignUp,
-    },
-  }) */
-);
+const AuthStack = createSwitchNavigator({ SigninStack: SigninStack });
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(

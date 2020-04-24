@@ -49,7 +49,7 @@ class Onboarding extends React.Component {
     this.setState({
       loginProcess: true,
     });
-    let url = "http://192.168.1.7:8080/auth";
+    let url = "http://192.168.43.81:8080/auth";
     const options = {
       method: "POST",
       mode: "cors",
@@ -66,7 +66,7 @@ class Onboarding extends React.Component {
       let response = await fetch(url, options);
       if (response.ok) {
         let data = await response.json();
-        console.log(data.jwt);
+        console.log(data);
         await AsyncStorage.setItem("userToken", data.jwt);
         this.props.navigation.navigate("App");
       } else {
@@ -78,7 +78,10 @@ class Onboarding extends React.Component {
   };
 
   _signUp = () => {
-    this.props.navigation.navigate("SignUp");
+    console.log("TODO removed comment and restore navigation");
+    //commented for easier development
+    //this.props.navigation.navigate("SignUp");
+    this.props.navigation.navigate("App");
   };
 
   handleLogin = async (authInfo) => {};

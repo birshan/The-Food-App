@@ -1,7 +1,5 @@
 package com.foodapp.backend.pojo;
 
-import com.foodapp.backend.security.MyUserDetails;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;

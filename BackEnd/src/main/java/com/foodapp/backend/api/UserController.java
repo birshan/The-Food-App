@@ -1,5 +1,7 @@
 package com.foodapp.backend.api;
 
+import com.foodapp.backend.DTO.ErrorResponse;
+import com.foodapp.backend.DTO.UserDTO;
 import com.foodapp.backend.pojo.User;
 import com.foodapp.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +28,25 @@ public class UserController {
 */
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestParam String email,
-                                             @RequestParam String firstName,
-                                             @RequestParam String lastName,
-                                             @RequestParam String roles,
-                                             @RequestParam String password) throws Exception {
+    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws Exception {
 
-        System.out.println("requested");
+        //creates new user object with the data from request
         User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setFirstName(userDTO.getFirstName());
+        newUser.setLastName(userDTO.getLastName());
         newUser.setActive(true);
-        newUser.setRoles(roles);
-        newUser.setPassword(password);
+        newUser.setRoles(userDTO.getRoles());
+        newUser.setPassword(userDTO.getPassword());
+
+        System.out.println(newUser);
+
 
         if (!userService.doesUserAlreadyExist(newUser)) {
             userService.saveUser(newUser);
             return ResponseEntity.ok("User Created");
         } else {
-            return ResponseEntity.status(409).body("User already registered under email");
+            return ResponseEntity.status(409).body(new ErrorResponse("User already registered under email"));
         }
 
     }
