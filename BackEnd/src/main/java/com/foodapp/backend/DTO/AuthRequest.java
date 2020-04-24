@@ -1,4 +1,4 @@
-package com.foodapp.backend.pojo;
+package com.foodapp.backend.DTO;
 
 public class AuthRequest {
     private String username;

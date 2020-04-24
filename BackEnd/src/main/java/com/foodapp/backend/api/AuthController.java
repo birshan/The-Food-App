@@ -1,6 +1,6 @@
 package com.foodapp.backend.api;
 
-import com.foodapp.backend.pojo.AuthRequest;
+import com.foodapp.backend.DTO.AuthRequest;
 import com.foodapp.backend.pojo.AuthResponse;
 import com.foodapp.backend.security.MyUserDetails;
 import com.foodapp.backend.services.MyUserDetailsService;
@@ -36,15 +36,10 @@ public class AuthController {
         }
         final MyUserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthResponse(jwt));
+        return ResponseEntity.ok(new AuthResponse(jwt, userDetails.getAuthorities()));
 
     }
 
-
-    @GetMapping("/user")
-    public String user(){
-        return ("<h1>Welcome User</h1>");
-    }
 
     @GetMapping("/admin")
     public String admin(){
