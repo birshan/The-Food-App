@@ -23,6 +23,7 @@ import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
 import SignOut from "../screens/SignOut";
 import SignUp from "../screens/SignUp";
+import Viewprofile from "../screens/Viewprofile";
 
 // drawer
 import Menu from "./Menu";
@@ -93,6 +94,23 @@ const ArticlesStack = createStackNavigator(
       screen: Articles,
       navigationOptions: ({ navigation }) => ({
         header: <Header title="Articles" navigation={navigation} />,
+      }),
+    },
+  },
+  {
+    cardStyle: {
+      backgroundColor: "#F8F9FE",
+    },
+    transitionConfig,
+  }
+);
+
+const ViewprofileStack = createStackNavigator(
+  {
+    Articles: {
+      screen: Viewprofile,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="ViewProfile" navigation={navigation} />,
       }),
     },
   },
@@ -269,6 +287,14 @@ const AppStack = createDrawerNavigator(
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Register" title="Account" />
+        ),
+      }),
+    },
+    Viewprofile: {
+      screen: Viewprofile,
+      navigationOptions: (navOpt) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="Viewprofile" title="Viewprofile" />
         ),
       }),
     },
