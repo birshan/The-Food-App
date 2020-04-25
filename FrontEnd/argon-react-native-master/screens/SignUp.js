@@ -6,6 +6,7 @@ import { argonTheme } from "../constants";
 import { Input, Icon } from "../components/";
 import styles from "../components/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { UserRequest } from "../functions/API/UserRequest";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -83,7 +84,33 @@ export default class SignUp extends React.Component {
       return;
     }
 
-    //API request
+    let body = {
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      roles: this.state.role,
+      password: this.state.password,
+    };
+    let request = new UserRequest("POST", "/user", body);
+
+    let response = await request.createUser();
+    let data = await response.json();
+
+    if (!response.ok) {
+      if (response.status == 409) {
+        alert("Input Error: " + data.message);
+        this.setState((prevState) => ({
+          ...prevState,
+          email: "",
+        }));
+      } else if (response.status(500)) {
+        alert("Network Error: Try again later");
+      }
+    } else {
+      alert("User created successfully, Proceed to Sign In");
+      this.props.navigation.goBack();
+    }
+    /*     //API request
     let url = "http://192.168.43.81:8080/user";
     const options = {
       method: "POST",
@@ -113,14 +140,12 @@ export default class SignUp extends React.Component {
         let data = await response.json();
         alert("Error " + response.status + ": " + data.message);
         console.log(data);
-        this.setState((prevState) => ({
-          ...prevState,
-          email: "",
-        }));
+
       }
     } catch (error) {
       console.log(error);
     }
+ */
   };
 
   render() {
