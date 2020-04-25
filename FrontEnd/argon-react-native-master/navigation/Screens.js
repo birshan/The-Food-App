@@ -15,7 +15,7 @@ import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
 //import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
-import Register from "../screens/Register";
+// import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
 import Scanimg from "../screens/Camera";
@@ -282,7 +282,7 @@ const AppStack = createDrawerNavigator(
     //     ),
     //   }),
     // },
-    Account: {
+    /*     Account: {
       screen: Register,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
@@ -290,11 +290,16 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
+ */
     Viewprofile: {
       screen: Viewprofile,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Viewprofile" title="Viewprofile" />
+          <DrawerItem
+            focused={focused}
+            screen="Viewprofile"
+            title="Viewprofile"
+          />
         ),
       }),
     },

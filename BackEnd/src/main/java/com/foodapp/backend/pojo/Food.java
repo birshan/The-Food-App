@@ -1026,4 +1026,30 @@ public class Food {
     public void setCalorieWeight_g(double calorieWeight_g) {
         this.calorieWeight_200g = calorieWeight_g;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "calories=" + calories +
+                ", fat_g=" + fat_g +
+                ", protein_g=" + protein_g +
+                ", carbohydrate_g=" + carbohydrate_g +
+                ", sugars_g=" + sugars_g +
+                ", cholestorol_mg=" + cholestorol_mg +
+                ", saturatedFats_g=" + saturatedFats_g +
+                ", vitaminA_IU=" + vitaminA_IU +
+                ", vitaminA_RAE_mcg=" + vitaminA_RAE_mcg +
+                ", vitaminC_mg=" + vitaminC_mg +
+                ", vitaminB12_mcg=" + vitaminB12_mcg +
+                ", vitaminD_mcg=" + vitaminD_mcg +
+                ", vitaminE_AlphaTocopherol_mg=" + vitaminE_AlphaTocopherol_mg +
+                ", addedSugar_g=" + addedSugar_g +
+                ", vitaminB6_mg=" + vitaminB6_mg +
+                ", vitaminD2_ergocalciferol_mcg=" + vitaminD2_ergocalciferol_mcg +
+                ", vitaminD3_cholecalciferol_mcg=" + vitaminD3_cholecalciferol_mcg +
+                ", vitaminD_IU=" + vitaminD_IU +
+                ", vitaminK_mcg=" + vitaminK_mcg +
+                ", servingWeight1_g=" + servingWeight1_g +
+                '}';
+    }
 }
