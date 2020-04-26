@@ -3,13 +3,9 @@ from werkzeug.utils import secure_filename
 from ds_comp.prediction import *
 from flask import jsonify
 
-
-UPLOAD_FOLDER = '/home/avishka/PycharmProjects/ImageRecog/Recognition between mltiple categories/pics'
 ALLOWED_EXTENTIONS = {'jpeg', 'jpg', 'png'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-directory = '/home/avishka/PycharmProjects/ImageRecog/Recognition between mltiple categories/pics'
 
 
 def allowed_file(filename):
