@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 17557,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPid": 21675,
+  "expoServerNgrokUrl": "https://3i-g95.anonymous.argon-react-native-master.exp.direct",
+  "packagerNgrokUrl": "https://packager.3i-g95.anonymous.argon-react-native-master.exp.direct",
+  "ngrokPid": 21725,
   "expoServerPort": 19000,
   "webpackServerPort": null,
   "devToolsPort": 19002
