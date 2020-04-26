@@ -1,11 +1,12 @@
 import React from "react";
 import { Camera } from "expo-camera";
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import * as Permissions from "expo-permissions";
 
 import styles from "./styles";
 import Toolbar from "./toolbar.component";
 import Gallery from "./gallery.component";
+import { resetWarningCache } from "prop-types";
 
 export default class CameraPage extends React.Component {
   camera = null;
@@ -27,13 +28,65 @@ export default class CameraPage extends React.Component {
   };
 
   handleShortCapture = async () => {
-    const photoData = await this.camera.takePictureAsync();
+    // const photoData = await this.camera.takePictureAsync();
+    // console.log(photoData);
+    // let response = this.serverUpload(photoData);
+    // console.log(response);
+    console.log("Camera pressed");
+    if (this.camera) {
+      this.camera
+        .takePictureAsync({
+          skipProcessing: true,
+        })
+        .then((data) => {
+          this.serverUpload(data);
+        });
+    } else {
+      console.log("Camera unavailable");
+    }
     this.setState({
       capturing: false,
-      captures: [photoData, ...this.state.captures],
+      // captures: [photoData, ...this.state.captures],
     });
   };
 
+  serverUpload = async (photo) => {
+    let url = "http://192.168.1.6:5000/upload_image/";
+    let options = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      method: "POST",
+      mode: "cors",
+      body: this.createFormData(photo),
+    };
+    console.log(options);
+
+    await fetch(url, options)
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          alert("Image Uploaded");
+        } else {
+          console.log("error occured");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    return;
+  };
+
+  createFormData = (photo) => {
+    const data = new FormData();
+    data.append("file", {
+      type: "image/jpg",
+      uri: photo.uri,
+      name: "image",
+    });
+    return data;
+  };
   //   handleLongCapture = async () => {
   //     const videoData = await this.camera.recordAsync();
   //     this.setState({

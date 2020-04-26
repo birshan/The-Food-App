@@ -219,15 +219,6 @@ const ScanimgStack = createStackNavigator(
     Scanimg: {
       screen: Scanimg,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header
-            white
-            transparent
-            title="Scan Image"
-            iconColor={"#333"}
-            navigation={navigation}
-          />
-        ),
         headerTransparent: true,
       }),
     },
@@ -294,7 +285,11 @@ const AppStack = createDrawerNavigator(
       screen: Viewprofile,
       navigationOptions: (navOpt) => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Viewprofile" title="Viewprofile" />
+          <DrawerItem
+            focused={focused}
+            screen="Viewprofile"
+            title="Viewprofile"
+          />
         ),
       }),
     },
