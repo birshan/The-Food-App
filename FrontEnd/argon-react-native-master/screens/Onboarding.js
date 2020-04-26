@@ -11,8 +11,6 @@ import { Block, Button, Text, theme } from "galio-framework";
 import { Input, Icon } from "../components/";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
-import { UserRequest } from "../functions/API/UserRequest";
-import { resetWarningCache, checkPropTypes } from "prop-types";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -24,7 +22,7 @@ class Onboarding extends React.Component {
         username: "",
         password: "",
       },
-      loading: false,
+      loginProcess: false,
     };
   }
   handleUsername = (text) => {
@@ -49,37 +47,30 @@ class Onboarding extends React.Component {
       "username: " + authInfo.username + "  password: " + authInfo.password
     );
     this.setState({
-      loading: true,
+      loginProcess: true,
     });
-    let body = {
-      username: authInfo.username,
-      password: authInfo.password,
+    let url = "http://192.168.43.81:8080/auth";
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify({
+        username: authInfo.username,
+        password: authInfo.password,
+      }),
     };
-
-    let request = new UserRequest("POST", "auth", body);
+    console.log("Sending Auth request");
     try {
-      let response = await request.userLogin();
-      let data = await response.json();
-
-      if (!response.ok) {
-        if (response.status == 403) {
-          alert("Error: Incorrect Username or Password! ");
-        } else {
-          alert("Error: " + response.status + " " + response.message);
-          console.log(response);
-        }
-        console.log(data);
-        this.setState({
-          loading: true,
-          authInfo: {
-            username: "",
-            password: "",
-          },
-        });
-      } else {
+      let response = await fetch(url, options);
+      if (response.ok) {
+        let data = await response.json();
         console.log(data);
         await AsyncStorage.setItem("userToken", data.jwt);
         this.props.navigation.navigate("App");
+      } else {
+        console.log("Auth failed");
       }
     } catch (error) {
       console.log(error);
@@ -89,7 +80,7 @@ class Onboarding extends React.Component {
   _signUp = () => {
     console.log("TODO removed comment and restore navigation");
     //commented for easier development
-    // this.props.navigation.navigate("SignUp");
+    //this.props.navigation.navigate("SignUp");
     this.props.navigation.navigate("App");
   };
 
@@ -113,7 +104,7 @@ class Onboarding extends React.Component {
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.WHITE}
           >
-            The Food-App
+            Dieter
           </Text>
         </Block>
         <Block flex space="between" style={styles.padded}>
