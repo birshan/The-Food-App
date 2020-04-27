@@ -48,11 +48,11 @@ class NutritionSum extends React.Component {
         );
     }
     renderItem = (data) =>
-    
-        <TouchableOpacity style={styles.list}>
-            <Text style={styles.lightText, { fontSize: 30}}>{data.item.name}</Text>
-            <Text style={styles.lightText, { color: 'blue', textAlign:'right'}}>{data.item.email}</Text>
-        </TouchableOpacity>
+
+        <View style={styles.list}>
+            <Text style={styles.lightText, { fontSize: 30 }}>{data.item.name}</Text>
+            <Text style={styles.lightText, { color: 'blue', textAlign: 'right' }}>{data.item.email}</Text>
+        </View>
     render() {
         if (this.state.loading) {
             return (
