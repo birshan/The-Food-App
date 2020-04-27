@@ -1,22 +1,9 @@
 {
-  "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 12948,
-  "expoServerNgrokUrl": "https://z2-c27.anonymous.argon-react-native-master.exp.direct",
-  "packagerNgrokUrl": "https://packager.z2-c27.anonymous.argon-react-native-master.exp.direct",
-  "ngrokPid": 3092,
-||||||| merged common ancestors
-  "packagerPid": 16600,
-  "expoServerNgrokUrl": "https://z2-c27.anonymous.argon-react-native-master.exp.direct",
-  "packagerNgrokUrl": "https://packager.z2-c27.anonymous.argon-react-native-master.exp.direct",
-  "ngrokPid": 7428,
-=======
-  "packagerPid": 21675,
-  "expoServerNgrokUrl": "https://3i-g95.anonymous.argon-react-native-master.exp.direct",
-  "packagerNgrokUrl": "https://packager.3i-g95.anonymous.argon-react-native-master.exp.direct",
-  "ngrokPid": 21725,
->>>>>>> master
+  "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "webpackServerPort": null,
-  "devToolsPort": 19002
+  "packagerPort": 19001,
+  "packagerPid": 20440,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
