@@ -51,7 +51,7 @@ export default class CameraPage extends React.Component {
   };
 
   serverUpload = async (photo) => {
-    let url = "http://192.168.1.6:5000/upload_image/";
+    let url = "http://192.168.1.10:8080/upload_image";
     let options = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -81,9 +81,9 @@ export default class CameraPage extends React.Component {
   createFormData = (photo) => {
     const data = new FormData();
     data.append("file", {
-      type: "image/jpg",
+      type: "image/jpeg",
       uri: photo.uri,
-      name: "image",
+      name: "image1.jpg",
     });
     return data;
   };
