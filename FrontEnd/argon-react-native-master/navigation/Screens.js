@@ -219,15 +219,6 @@ const ScanimgStack = createStackNavigator(
     Scanimg: {
       screen: Scanimg,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header
-            white
-            transparent
-            title="Scan Image"
-            iconColor={"#333"}
-            navigation={navigation}
-          />
-        ),
         headerTransparent: true,
       }),
     },

@@ -1,3 +1,5 @@
+import serverURL from "../../constants/utils";
+
 export class UserRequest {
   constructor(method, path, body) {
     this.options.method = method;
@@ -6,7 +8,7 @@ export class UserRequest {
       this.options.body = JSON.stringify(body);
       console.log(body);
     }
-    this.url = "http://192.168.43.81:8080/" + path;
+    this.url = serverURL + path;
   }
   options = {
     method: "",

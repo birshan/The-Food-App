@@ -1,4 +1,5 @@
 import React from "react";
+//import { createStackNavigator, createAppContainer, StackNavigator, } from 'react-navigation';
 import {
   StyleSheet,
   Dimensions,
@@ -6,26 +7,73 @@ import {
   Image,
   ImageBackground,
   Platform,
-  AsyncStorage,
+  Button,
+  View,
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { Button } from "../components";
+//import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
+//import { NutritionSum } from "../screens/NutritionSum";
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
 class Profile extends React.Component {
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate("App");
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      dataSource: [],
+    };
+  }
+  componentDidMount(text) {
+    //this.setState({ text });
+    const url = "https://jsonplaceholder.typicode.com/users";
+    fetch(url)
+      .then(response => response.json())
+      .then((responseJson) => {
+        this.setState({
+          loading: false,
+          dataSource: responseJson
+        })
+      })
+      .catch(error => console.log(error)) //to catch the errors if any
+  }
+  FlatListItemSeparator = () => {
+    return (
+      <View style={{
+        height: .5,
+        width: "100%",
+        backgroundColor: "rgba(0,0,0,0.5)",
+      }}
+      />
+    );
+  }
+  renderItem = (data) =>
+
+    <View style={styles.list}>
+      <Text bold size={18} color="#32325D">{data.item.name}</Text>
+      <Text>{data.item.email}</Text>
+    </View>
+
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color="#0c9" />
+        </View>
+      )
+    }
     return (
       <Block flex style={styles.profile}>
+
         <Block flex>
           <ImageBackground
             source={Images.ProfileBackground}
@@ -34,10 +82,11 @@ class Profile extends React.Component {
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: "25%" }}
+              style={{ width, marginTop: '25%' }}
             >
+
               <Block flex style={styles.profileCard}>
-                <Block middle style={styles.avatarContainer}>
+                {/* <Block middle style={styles.avatarContainer}>
                   <Image
                     source={{ uri: Images.ProfilePicture }}
                     style={styles.avatar}
@@ -98,7 +147,7 @@ class Profile extends React.Component {
                       <Text size={12}>Comments</Text>
                     </Block>
                   </Block>
-                </Block>
+                </Block> */}
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
@@ -107,8 +156,21 @@ class Profile extends React.Component {
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                       San Francisco, USA
                     </Text>
+                    <View style={styles.container}>
+                      <FlatList
+                        data={this.state.dataSource}
+                        ItemSeparatorComponent={this.FlatListItemSeparator}
+                        renderItem={item => this.renderItem(item)}
+                        keyExtractor={item => item.id.toString()}
+                      />
+                    </View>
                   </Block>
-                  <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
+
+                  {/* <Block>
+                    <Button title="Go to Nutrition Summary" onPress={() => navigate('Profile')}/>
+                  </Block> */}
+
+                  {/* <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                     <Block style={styles.divider} />
                   </Block>
                   <Block middle>
@@ -122,16 +184,13 @@ class Profile extends React.Component {
                     </Text>
                     <Button
                       color="transparent"
-                      onPress={() => {
-                        this._signOutAsync();
-                      }}
                       textStyle={{
                         color: "#233DD2",
                         fontWeight: "500",
-                        fontSize: 16,
+                        fontSize: 16
                       }}
                     >
-                      View Profile
+                      Show more
                     </Button>
                   </Block>
                   <Block
@@ -165,7 +224,7 @@ class Profile extends React.Component {
                         />
                       ))}
                     </Block>
-                  </Block>
+                  </Block> */}
                 </Block>
               </Block>
             </ScrollView>
@@ -293,20 +352,24 @@ class Profile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  smallButton: {
+    width: 55,
+    height: 28
+  },
   profile: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
     // marginBottom: -HeaderHeight * 2,
-    flex: 1,
+    flex: 1
   },
   profileContainer: {
     width: width,
     height: height,
     padding: 0,
-    zIndex: 1,
+    zIndex: 1
   },
   profileBackground: {
     width: width,
-    height: height / 2,
+    height: height / 2
   },
   profileCard: {
     // position: "relative",
@@ -320,36 +383,44 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2,
+    zIndex: 2
   },
   info: {
-    paddingHorizontal: 40,
+    paddingHorizontal: 40
   },
   avatarContainer: {
     position: "relative",
-    marginTop: -80,
+    marginTop: -80
   },
   avatar: {
     width: 124,
     height: 124,
     borderRadius: 62,
-    borderWidth: 0,
+    borderWidth: 0
   },
   nameInfo: {
-    marginTop: 35,
+    marginTop: 35
   },
   divider: {
     width: "90%",
     borderWidth: 1,
-    borderColor: "#E9ECEF",
+    borderColor: "#E9ECEF"
   },
   thumb: {
     borderRadius: 4,
     marginVertical: 4,
     alignSelf: "center",
     width: thumbMeasure,
-    height: thumbMeasure,
+    height: thumbMeasure
   },
+  container: {
+    flex: 1
+  },
+  list: {
+    paddingVertical: 4,
+    margin: 5,
+    backgroundColor: "#fff"
+  }
 });
 
 export default Profile;
