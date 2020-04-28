@@ -12,11 +12,11 @@ import javax.persistence.EntityNotFoundException;
 public class FoodService{
 
     @Autowired
-    private FoodRepository toDoRepository;
+    private FoodRepository foodRepository;
 
 
     public Food findById(String  name){
-        return toDoRepository.findById(name).orElseThrow(EntityNotFoundException::new);
+        return foodRepository.findById(name).orElseThrow(EntityNotFoundException::new);
     }
 
 

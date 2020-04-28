@@ -3,10 +3,10 @@ package com.foodapp.backend.api;
 import com.foodapp.backend.pojo.MealLog;
 import com.foodapp.backend.services.MealLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("api/meal")
 @RestController
@@ -16,5 +16,9 @@ public class MealLogController {
     @Autowired
     private MealLogService mealLogService;
 
+    @GetMapping("/{userID}")
+    public List<MealLog> findMealsById(@PathVariable Integer userID){
+        return mealLogService.findMealsById(userID);
+    }
 
 }
