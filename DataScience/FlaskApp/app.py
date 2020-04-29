@@ -23,6 +23,15 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/test')
+def test():
+    print(request)
+    value = {
+        "connection": True
+    }
+    return value
+
+
 @app.route('/upload_image/', methods=['POST', 'GET'])
 def upload_image():
     if request.method == 'POST':

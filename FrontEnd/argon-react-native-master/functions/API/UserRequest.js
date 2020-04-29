@@ -1,4 +1,4 @@
-import serverURL from "../../constants/utils";
+import serverURL from "../../constants/api";
 
 export class UserRequest {
   constructor(method, path, body) {

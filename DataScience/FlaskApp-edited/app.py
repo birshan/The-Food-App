@@ -13,6 +13,15 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTIONS
 
 
+@app.route('/test')
+def test():
+    print(request)
+    value = {
+        "connection": True
+    }
+    return value
+
+
 # @app.route('/')
 # def index():
 #     return render_template('index.html')
@@ -50,4 +59,4 @@ def upload_image():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
