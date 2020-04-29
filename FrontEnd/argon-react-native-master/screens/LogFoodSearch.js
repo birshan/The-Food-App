@@ -5,9 +5,14 @@ import {
   ScrollView,
   FlatList,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions,
+  ImageBackground
 } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
+import { Block, Text, theme } from "galio-framework";
+import { Images, argonTheme } from "../constants";
+const { width, height } = Dimensions.get("screen");
 import _ from "lodash";
 
 class LogFoodSearch extends React.Component {
@@ -76,14 +81,14 @@ class LogFoodSearch extends React.Component {
     );
   };
 
-  onPress = async (id) => {
+  onPress = async (id,email) => {
     const url = "http://192.168.1.6:5000/upload_image/";
     const options = {
       headers: {
         "Content-Type": "form-data",
       },
       method: "POST",
-      body: id.toString(),
+      body: url + id + "/" + email,
     };
     console.log(options);
 
@@ -113,26 +118,37 @@ class LogFoodSearch extends React.Component {
     }
     else {
       return (
-        <ScrollView>
-          <View style={styles.container}>
-            <FlatList
-              keyExtractor={item => item.id.toString()}
-              data={this.state.filteredData}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => this.onPress(item.id)}>
-                  <ListItem
-                    title={item.name}
-                    subtitle={item.email}
-                  />
-                </TouchableOpacity>
-                //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
-              )}
-              extraData={this.state}
-              ItemSeparatorComponent={this.renderSeparator}
-              ListHeaderComponent={this.renderHeader}
-            />
-          </View>
-        </ScrollView>
+         <Block flex>
+          <ImageBackground
+            source={Images.ProfileBackground}
+            style={styles.bgContainer}
+            imageStyle={styles.Background}
+          >
+          <ScrollView>
+          <Block flex>
+            <View style={styles.container}>
+              <FlatList
+                keyExtractor={item => item.id.toString()}
+                data={this.state.filteredData}
+                renderItem={({ item }) => (
+                  <TouchableOpacity onPress={() => this.onPress(item.id.toString() , item.email.toString())}>
+                    <ListItem
+                      title={item.name}
+                      subtitle={item.email}
+                    />
+                  </TouchableOpacity>
+                  //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
+                )}
+                extraData={this.state}
+                ItemSeparatorComponent={this.renderSeparator}
+                ListHeaderComponent={this.renderHeader}
+              />
+              
+            </View>
+          </Block>
+          </ScrollView>
+          </ImageBackground>
+        </Block>
       );
     }
   }
@@ -141,8 +157,17 @@ class LogFoodSearch extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1'
+    
+  },
+  bgContainer: {
+    width: width,
+    height: height,
+    padding: 0,
+    zIndex: 1
+  },
+  Background: {
+    width: width,
+    height: height / 2
   }
 });
 export default LogFoodSearch;
