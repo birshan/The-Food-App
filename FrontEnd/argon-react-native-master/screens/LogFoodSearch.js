@@ -4,84 +4,13 @@ import {
   View,
   ScrollView,
   FlatList,
-  Item,
-  Input,
-  Left,
-  Body,
-  Right,
-  Button,
-  Icon,
-  Title,
   ActivityIndicator,
+  TouchableOpacity
 } from "react-native";
-import { List, ListItem, SearchBar } from "react-native-elements";
+import { ListItem, SearchBar } from "react-native-elements";
 import _ from "lodash";
-//galio
-import { Block, Text, theme } from "galio-framework";
 
 class LogFoodSearch extends React.Component {
-  // constructor(props) {
-  //     super(props);
-  //     this.state = { text: '' };
-  //     this.state = {
-  //     dataSource: []
-  //     }
-  // }
-  // renderItem = ({ item }) => {
-
-  //     return (
-
-  //         <Text>{item.title}</Text>
-
-  //     )
-  // }
-
-  // fetchData(text) {
-  //     this.setState({ text });
-  //     const url = 'http://www.api.com/?s=';
-  //     fetch(url + text)
-  //         .then(response => response.json())
-  //         .then((responseJson) => {
-  //             this.setState({
-  //                 dataSource: responseJson.Search,
-  //             });
-  //         })
-  //         .catch((error) => {
-  //             console.log(error);
-  //         });
-  // }
-
-  // render() {
-  //     return (
-  //         <View style={styles.container}>
-  //             <Text SearchBar rounded >
-  //                 <Item>
-  //                     <Icon name="search" />
-  //                     <Input
-  //                         placeholder="Type here to search"
-  //                         onChangeText={(text) => {
-  //                             this.fetchData(text);
-  //                         }}
-  //                     />
-  //                 </Item>
-  //                 <Button
-  //                     onPress={() => {
-  //                         { console.log(this.state.text) }
-  //                     }
-  //                     }
-  //                 >
-  //                     <Text>Search</Text>
-  //                 </Button>
-  //             </Text>
-  //             <FlatList
-  //                 style={{ flex: 1, width: 300 }}
-  //                 data={this.state.dataSource}
-  //                 keyExtractor={(item, index) => 'key' + index}
-  //                 renderItem={this.renderItem}
-  //             />
-  //         </View>
-  //     );
-  // }
 
   constructor(props) {
     super(props);
@@ -90,140 +19,130 @@ class LogFoodSearch extends React.Component {
       loading: false,
       //foods which are appearing on the search screen temp
       data: [],
+      filteredData: [],
       error: null,
-      query: "",
-      //all the food
-      fullData: [],
+      searchTerm: "",
+      value: ''
     };
-  }
-
-  contains = ({ name }, query) => {
-    if (name.includes(query)) {
-      return true;
-    }
-
-    return false;
-  };
-
-  fetchData(text) {
-    this.setState({ text });
-    const url = "http://www.api.com/?s=";
-    fetch(url + text)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          dataSource: responseJson.Search,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   componentDidMount() {
-    this.makeRemoteRequest();
-  }
-
-  makeRemoteRequest = () => {
-    getFoods = (limit = 5, query = "") => {
-      return new Promise((resolve, reject) => {
-        if (query.length === 0) {
-          resolve(_.take(foods, limit));
-        } else {
-          //const formattedQuery = query.toLowerCase();
-          const results = _.filter(foods, (food) => {
-            return contains(food, formattedQuery);
-          });
-          resolve(_.take(results, limit));
-        }
-      });
-    };
-
-    this.setState({ loading: true });
-
-    getFoods(5, this.state.query)
-      .then((foods) => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then((responseJson) => {
         this.setState({
           loading: false,
-          data: foods,
-          fullData: foods,
-        });
+          data: responseJson,
+          filteredData: responseJson
+        })
       })
-      .catch((error) => {
-        this.setState({ error, loading: false });
-      });
-  };
-
-  handleSearch = (text) => {
-    const formatQuery = text.toLowerCase();
-    const data = _.filter(this.state.fullData, (food) => {
-      return contains(food, formatQuery);
-    });
-    this.setState({ query: formatQuery, data }, () => this.makeRemoteRequest());
-  };
+      .catch(error => console.log(error)) //to catch the errors if any
+  }
 
   renderSeparator = () => {
     return (
       <View
         style={{
           height: 1,
-          width: "86%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "14%",
+          width: '86%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '14%',
         }}
       />
     );
+  };
+
+  searchFilterFunction = text => {
+    const search = text.toLowerCase();
+
+    this.setState({
+      value: search,
+      filteredData: this.state.data.filter(
+        item =>
+          (item.name.toString().toLowerCase().includes(search))
+      )
+    });
   };
 
   renderHeader = () => {
     return (
       <SearchBar
-        placeholder="Type Here..."
         lightTheme
         round
-        onChangeText={this.handleSearch}
+        placeholder="Type..."
+        value={this.state.value}
+        onChangeText={text => this.searchFilterFunction(text)} // function to capture the text
       />
     );
   };
 
-  renderFooter = () => {
-    if (!this.state.loading) return null;
+  onPress = async (id) => {
+    const url = "http://192.168.1.6:5000/upload_image/";
+    const options = {
+      headers: {
+        "Content-Type": "form-data",
+      },
+      method: "POST",
+      body: id.toString(),
+    };
+    console.log(options);
 
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: "#CED0CE",
-        }}
-      >
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  };
+    await fetch(url, options)
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          alert("food to your meal list");
+        } else {
+          console.log("Error occured");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    return;
+  }
 
   render() {
-    return (
-      <ScrollView>
-        <View>
-          <FlatList
-            data={this.state.data}
-            renderItem={({ item }) => (
-              <ListItem
-                title={`${item.name}`}
-                avatar={{ uri: item.picture.thumbnail }}
-                containerStyle={{ borderBottomWidth: 0 }}
-              />
-            )}
-            keyExtractor={(item) => item.id}
-            ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={this.renderHeader}
-            ListFooterComponent={this.renderFooter}
-          />
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator />
         </View>
-      </ScrollView>
-    );
+      );
+    }
+    else {
+      return (
+        <ScrollView>
+          <View style={styles.container}>
+            <FlatList
+              keyExtractor={item => item.id.toString()}
+              data={this.state.filteredData}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => this.onPress(item.id)}>
+                  <ListItem
+                    title={item.name}
+                    subtitle={item.email}
+                  />
+                </TouchableOpacity>
+                //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
+              )}
+              extraData={this.state}
+              ItemSeparatorComponent={this.renderSeparator}
+              ListHeaderComponent={this.renderHeader}
+            />
+          </View>
+        </ScrollView>
+      );
+    }
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1'
+  }
+});
 export default LogFoodSearch;
