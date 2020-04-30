@@ -27,7 +27,13 @@ class ViewProfile extends React.Component {
         };
     }
     componentDidMount() {
-        fetch("https://jsonplaceholder.typicode.com/users")
+        /* Get the param from professional screen */
+        // const { params } = this.props.navigation.state;
+        // const { id } = params ? params.id : null;
+        // const { email } = params ? params.email : null;
+
+        const url = "https://jsonplaceholder.typicode.com/users";
+        fetch(url)
             .then(response => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -64,6 +70,11 @@ class ViewProfile extends React.Component {
             </View>
         </TouchableOpacity>
     render() {
+        /* Get the param from professional screen */
+        const { params } = this.props.navigation.state;
+        const id = params ? params.id : null;
+        const email = params ? params.email : null;
+
         if (this.state.loading) {
             return (
                 <View style={styles.loader}>
@@ -73,6 +84,11 @@ class ViewProfile extends React.Component {
         }
         return (
             <View style={styles.container}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Details Screen</Text>
+                <Text>Id: {JSON.stringify(id)}</Text>
+                <Text>Email: {JSON.stringify(email)}</Text>
+            </View>
                 <FlatList
                     data={this.state.dataSource}
                     ItemSeparatorComponent={this.FlatListItemSeparator}

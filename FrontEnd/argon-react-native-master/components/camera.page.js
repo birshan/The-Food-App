@@ -36,10 +36,9 @@ export default class CameraPage extends React.Component {
     if (this.camera) {
       this.camera
         .takePictureAsync({
-          quality: 0.2,
+          skipProcessing: true,
         })
         .then((data) => {
-          console.log(data);
           this.serverUpload(data);
         });
     } else {
@@ -52,7 +51,7 @@ export default class CameraPage extends React.Component {
   };
 
   serverUpload = async (photo) => {
-    let url = "http://192.168.1.4:8080/upload_image";
+    let url = "http://192.168.1.10:8080/upload_image";
     let options = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -64,11 +63,14 @@ export default class CameraPage extends React.Component {
     console.log(options);
 
     await fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        alert(data.prediction);
-        return data;
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          alert("Image Uploaded");
+        } else {
+          console.log("error occured");
+          console.log(response);
+        }
       })
       .catch((error) => {
         console.log("error", error);

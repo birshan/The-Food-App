@@ -74,7 +74,7 @@ class LogFoodSearch extends React.Component {
       <SearchBar
         lightTheme
         round
-        placeholder="Type..."
+        placeholder="Type to Search Food..."
         value={this.state.value}
         onChangeText={text => this.searchFilterFunction(text)} // function to capture the text
       />

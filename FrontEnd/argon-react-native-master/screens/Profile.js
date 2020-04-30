@@ -11,7 +11,8 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
@@ -27,15 +28,29 @@ const thumbMeasure = (width - 48 - 32) / 3;
 class Profile extends React.Component {
 
   constructor(props) {
+
     super(props);
     this.state = {
       loading: true,
-      dataSource: [],
+      dataSource: []
     };
+    
   }
+
+  // getUserId = async () => {
+  //   let userId = '';
+  //   try {
+  //     userId = await AsyncStorage.getItem('userId') || 'none';
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return userId;
+  // }
+
   componentDidMount(text) {
     //this.setState({ text });
-    const url = "https://jsonplaceholder.typicode.com/users";
+    const url = "https://jsonplaceholder.typicode.com/users/";
     fetch(url)
       .then(response => response.json())
       .then((responseJson) => {
