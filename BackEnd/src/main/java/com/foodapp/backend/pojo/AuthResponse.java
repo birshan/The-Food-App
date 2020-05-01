@@ -2,7 +2,6 @@ package com.foodapp.backend.pojo;
 
 
 import java.util.Collection;
-import java.util.List;
 
 public class AuthResponse {
     private final String jwt;

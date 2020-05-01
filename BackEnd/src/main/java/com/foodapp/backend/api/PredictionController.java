@@ -3,16 +3,12 @@ package com.foodapp.backend.api;
 import com.foodapp.backend.DTO.PredictionDTO;
 import com.foodapp.backend.services.PredictionService;
 import com.foodapp.backend.services.StorageService;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.xml.ws.Response;
 import java.io.IOException;
 
 @RestController
