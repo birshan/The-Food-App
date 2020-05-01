@@ -24,6 +24,7 @@ import NutritionSum from "../screens/NutritionSum";
 import SignOut from "../screens/SignOut";
 import SignUp from "../screens/SignUp";
 import Viewprofile from "../screens/Viewprofile";
+import ProfScreen from "../screens/ProfScreen";
 
 // drawer
 import Menu from "./Menu";
@@ -107,10 +108,18 @@ const ArticlesStack = createStackNavigator(
 
 const ViewprofileStack = createStackNavigator(
   {
-    Articles: {
+    Viewprofile: {
       screen: Viewprofile,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="ViewProfile" navigation={navigation} />,
+        header: (
+          <Header
+            transparent
+            title="View Profile"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: true,
       }),
     },
   },
@@ -172,23 +181,28 @@ const HomeStack = createStackNavigator(
   }
 );
 
-const LogFoodSearchStack = createStackNavigator({
-  LogFoodSearch: {
-    screen: LogFoodSearch,
-    navigationOptions: ({ navigation }) => ({
-      header: (
-        <Header
-          white
-          transparent
-          title="LogFoodSearch"
-          iconColor={"#FFF"}
-          navigation={navigation}
-        />
-      ),
-      headerTransparent: true,
-    }),
+const LogFoodSearchStack = createStackNavigator(
+  {
+    LogFoodSearch: {
+      screen: LogFoodSearch,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            transparent
+            title="Food Search"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: true,
+      }),
+    },
   },
-});
+  {
+    cardStyle: { backgroundColor: "#FFFFFF" },
+    transitionConfig,
+  }
+);
 
 const NutritionSumStack = createStackNavigator(
   {
@@ -197,9 +211,31 @@ const NutritionSumStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         header: (
           <Header
-            white
             transparent
             title="Nutrition Summary"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: true,
+      }),
+    },
+  },
+  {
+    cardStyle: { backgroundColor: "#FFFFFF" },
+    transitionConfig,
+  }
+);
+
+const ProfScreenStack = createStackNavigator(
+  {
+    ProfScreen: {
+      screen: ProfScreen,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            transparent
+            title="Professional Screen"
             iconColor={"#333"}
             navigation={navigation}
           />
@@ -236,7 +272,6 @@ const SingOutStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         header: (
           <Header
-            white
             transparent
             title="Sign Out"
             iconColor={"#333"}
@@ -283,8 +318,8 @@ const AppStack = createDrawerNavigator(
     },
  */
     Viewprofile: {
-      screen: Viewprofile,
-      navigationOptions: (navOpt) => ({
+      screen: ViewprofileStack,
+      navigationOptions: (navigation) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem
             focused={focused}
@@ -304,7 +339,7 @@ const AppStack = createDrawerNavigator(
     // },
     LogFoodSearch: {
       screen: LogFoodSearchStack,
-      navigationOptions: (navOpt) => ({
+      navigationOptions: (navigation) => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem
             focused={focused}
@@ -322,6 +357,18 @@ const AppStack = createDrawerNavigator(
             focused={focused}
             screen="NutritionSum"
             title="Nutrition Summary"
+          />
+        ),
+      }),
+    },
+    ProfScreen: {
+      screen: ProfScreenStack,
+      navigationOptions: (navigation) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem
+            focused={focused}
+            screen="ProfScreen"
+            title="Professional Screen"
           />
         ),
       }),
