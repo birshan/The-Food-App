@@ -2,7 +2,6 @@ package com.foodapp.backend.services;
 
 import com.foodapp.backend.DTO.ConnectionDTO;
 import com.foodapp.backend.DTO.PredictionDTO;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.ws.Response;
 import java.io.IOException;
 
 @Service
