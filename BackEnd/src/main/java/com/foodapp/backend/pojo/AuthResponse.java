@@ -7,10 +7,14 @@ import java.util.List;
 public class AuthResponse {
     private final String jwt;
     private final Collection<?> authorityList;
+    private final String firstName;
+    private final String lastName;
 
-    public AuthResponse(String jwt, Collection<?> authorityList) {
+    public AuthResponse(String jwt, Collection<?> authorityList, String firstName, String lastName) {
         this.jwt = jwt;
         this.authorityList = authorityList;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Collection<?> getAuthorityList() {
@@ -21,5 +25,11 @@ public class AuthResponse {
         return jwt;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
 }

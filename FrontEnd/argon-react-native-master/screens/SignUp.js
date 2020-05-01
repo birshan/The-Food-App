@@ -92,24 +92,28 @@ export default class SignUp extends React.Component {
       password: this.state.password,
     };
     let request = new UserRequest("POST", "/user", body);
-
-    let response = await request.createUser();
-    let data = await response.json();
-
-    if (!response.ok) {
-      if (response.status == 409) {
-        alert("Input Error: " + data.message);
-        this.setState((prevState) => ({
-          ...prevState,
-          email: "",
-        }));
-      } else if (response.status(500)) {
-        alert("Network Error: Try again later");
+    try {
+      let response = await request.createUser();
+      if (!response.ok) {
+        if (response.status == 409) {
+          alert("Input Error: " + data.message);
+          this.setState((prevState) => ({
+            ...prevState,
+            email: "",
+          }));
+        } else if (response.status(500)) {
+          alert("Network Error: Try again later");
+        }
+      } else {
+        console.log(response);
+        alert("User created successfully, Proceed to Sign In");
+        this.props.navigation.goBack();
       }
-    } else {
-      alert("User created successfully, Proceed to Sign In");
-      this.props.navigation.goBack();
+    } catch (error) {
+      alert("Error Occured during signup");
+      console.log(error);
     }
+
     /*     //API request
     let url = "http://192.168.43.81:8080/user";
     const options = {

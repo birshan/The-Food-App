@@ -11,6 +11,7 @@ import { Block, Button, Text, theme } from "galio-framework";
 import { Input, Icon } from "../components/";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
+import { UserRequest } from "../functions/API/UserRequest";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -49,39 +50,41 @@ class Onboarding extends React.Component {
     this.setState({
       loginProcess: true,
     });
-    let url = "http://192.168.43.81:8080/auth";
-    const options = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({
-        username: authInfo.username,
-        password: authInfo.password,
-      }),
+    //for ease of development skips authorization
+    this.props.navigation.navigate("App");
+    /*   
+  let body = {
+      username: authInfo.username,
+      password: authInfo.password,
     };
+    let request = new UserRequest("POST", "/auth", body);
     console.log("Sending Auth request");
     try {
-      let response = await fetch(url, options);
-      if (response.ok) {
+      let response = await request.userLogin();
+      if (!response.ok) {
+        if (response.status == 403) {
+          alert("Error: Username and password did not match");
+        } else if (response.status(500)) {
+          alert("Error: Problem with the network");
+        }
+      } else {
         let data = await response.json();
         console.log(data);
         await AsyncStorage.setItem("userToken", data.jwt);
+        alert("Welcome " + data.firstName);
         this.props.navigation.navigate("App");
-      } else {
-        console.log("Auth failed");
       }
     } catch (error) {
       console.log(error);
     }
+ */
   };
 
   _signUp = () => {
     console.log("TODO removed comment and restore navigation");
     //commented for easier development
-    //this.props.navigation.navigate("SignUp");
-    this.props.navigation.navigate("App");
+    this.props.navigation.navigate("SignUp");
+    // this.props.navigation.navigate("App");
   };
 
   handleLogin = async (authInfo) => {};

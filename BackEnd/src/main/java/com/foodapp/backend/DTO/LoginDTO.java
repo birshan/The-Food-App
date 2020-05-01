@@ -1,13 +1,13 @@
 package com.foodapp.backend.DTO;
 
-public class UserDTO {
+public class LoginDTO {
     private String email;
     private String firstName;
     private String lastName;
     private String roles;
     private String password;
 
-    public UserDTO(String email, String firstName, String lastName, String roles, String password) {
+    public LoginDTO(String email, String firstName, String lastName, String roles, String password) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +55,17 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO() {
+    public LoginDTO() {
+    }
+
+    @Override
+    public String toString() {
+        return "LoginDTO{" +
+                "email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", roles='" + roles + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
