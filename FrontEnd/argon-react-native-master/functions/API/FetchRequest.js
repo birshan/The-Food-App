@@ -1,7 +1,10 @@
 import { serverURL } from "../../constants/api";
 
-export class UserRequest {
-  constructor(method, path, body) {
+export class FetchRequest {
+  constructor(method, path, jwt, body) {
+    this.myHeader.append("Content-type", "application/json");
+    this.myHeader.append("Authorization", "Bearer " + jwt);
+
     this.options.method = method;
 
     if (body != undefined) {
@@ -10,21 +13,15 @@ export class UserRequest {
     }
     this.url = serverURL + path;
   }
+  myHeader = new Headers();
+
   options = {
     method: "",
     mode: "cors",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
+    headers: this.myHeader,
   };
 
-  async createUser() {
-    console.log(this.url, this.options);
-    let response = await fetch(this.url, this.options);
-    return response;
-  }
-
-  async userLogin() {
+  async getUserInfo() {
     console.log(this.url, this.options);
     let response = await fetch(this.url, this.options);
     return response;

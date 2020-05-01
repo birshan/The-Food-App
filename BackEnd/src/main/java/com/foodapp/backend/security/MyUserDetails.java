@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,16 +17,19 @@ public class MyUserDetails implements UserDetails{
     private String userName;
     private String password;
     private boolean active;
-    private List<GrantedAuthority> authorityList;
-
+    private ArrayList<GrantedAuthority> authorityList;
+    private String firstName;
+    private String lastName;
 
     public MyUserDetails(User user){
         this.userName = user.getEmail();
         this.password = user.getPassword();
         this.active = user.isActive();
-        this.authorityList = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        this.authorityList = new ArrayList<>();
+        this.authorityList.add(new SimpleGrantedAuthority(user.getRoles()));
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+
     }
 
     public MyUserDetails() {
@@ -33,7 +37,7 @@ public class MyUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return this.authorityList;
     }
 
     @Override
@@ -64,5 +68,25 @@ public class MyUserDetails implements UserDetails{
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public String getFirstName(){
+        return this.firstName;
+    }
+
+    public String getLatName(){
+        return this.lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "MyUserDetails{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", active=" + active +
+                ", authorityList=" + authorityList +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

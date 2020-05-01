@@ -1,12 +1,15 @@
 package com.foodapp.backend.api;
 
 import com.foodapp.backend.DTO.ErrorResponse;
-import com.foodapp.backend.DTO.UserDTO;
+import com.foodapp.backend.DTO.LoginDTO;
 import com.foodapp.backend.pojo.User;
 import com.foodapp.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -28,7 +31,7 @@ public class UserController {
 */
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) throws Exception {
+    public ResponseEntity<?> createUser(@RequestBody LoginDTO userDTO) throws Exception {
 
         //creates new user object with the data from request
         User newUser = new User();
@@ -42,20 +45,33 @@ public class UserController {
         System.out.println(newUser);
 
 
-        if (!userService.doesUserAlreadyExist(newUser)) {
+        if (!userService.isEmailUsed(userDTO.getEmail())) {
             userService.saveUser(newUser);
-            return ResponseEntity.ok("User Created");
+            return ResponseEntity.status(200).body("User Created");
         } else {
             return ResponseEntity.status(409).body(new ErrorResponse("User already registered under email"));
         }
 
     }
 
-
+//TODO Returns requester's user details
     @GetMapping
-    public @ResponseBody Iterable<User> getAllUsers(){
-        return userService.getAllUser();
+    public @ResponseBody
+    User getUserDetails(Principal principal) {
+        String username = principal.getName();
+        System.out.println(username);
+        Optional<User> optionalUser = userService.findUser(username);
+        return optionalUser.orElse(null);
     }
 
+    /*
+    method for testing
+    @GetMapping
+    public @ResponseBody Iterable<User> getAllUsers(Principal principal){
+        System.out.println(principal.getName());
+
+        return userService.getAllUser();
+    }
+*/
 
 }

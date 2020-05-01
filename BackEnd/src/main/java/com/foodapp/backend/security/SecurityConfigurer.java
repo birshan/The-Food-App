@@ -4,6 +4,7 @@ import com.foodapp.backend.services.JwtRequestFilter;
 import com.foodapp.backend.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.BeanIds;
@@ -38,13 +39,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+//        http.cors().and().csrf().disable();
 
-/*
-        http.csrf().disable().authorizeRequests().antMatchers("/auth").permitAll().anyRequest().authenticated()
-        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable().authorizeRequests().antMatchers("/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/user").permitAll().anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-*/
 
 /*
         http.authorizeRequests()
