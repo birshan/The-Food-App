@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 import { serverURL } from "../../constants/api";
-||||||| merged common ancestors
-import serverURL from "../../constants/api";
-=======
-import serverURL from "../../constants/utils";
->>>>>>> master
 
 export class UserRequest {
   constructor(method, path, body) {

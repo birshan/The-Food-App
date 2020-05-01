@@ -11,15 +11,8 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-<<<<<<< HEAD
   TouchableOpacity,
   AsyncStorage,
-||||||| merged common ancestors
-  TouchableOpacity
-=======
-  TouchableOpacity,
-  AsyncStorage
->>>>>>> master
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
@@ -35,47 +28,31 @@ const thumbMeasure = (width - 48 - 32) / 3;
 
 class Profile extends React.Component {
   constructor(props) {
-
     super(props);
     //jessica jones is placeholder for production
     this.state = {
       loading: true,
-<<<<<<< HEAD
       dataSource: [],
       userData: {
         firstName: "Jessica",
         lastName: "Jones",
         email: "jessica@dieter.com",
       },
-||||||| merged common ancestors
-      dataSource: [],
-=======
-      dataSource: []
->>>>>>> master
     };
-    
   }
-<<<<<<< HEAD
   async componentDidMount(text) {
-||||||| merged common ancestors
-  componentDidMount(text) {
-=======
+    // getUserId = async () => {
+    //   let userId = '';
+    //   try {
+    //     userId = await AsyncStorage.getItem('userId') || 'none';
+    //   } catch (error) {
+    //     // Error retrieving data
+    //     console.log(error.message);
+    //   }
+    //   return userId;
+    // }
 
-  // getUserId = async () => {
-  //   let userId = '';
-  //   try {
-  //     userId = await AsyncStorage.getItem('userId') || 'none';
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(error.message);
-  //   }
-  //   return userId;
-  // }
-
-  componentDidMount(text) {
->>>>>>> master
     //this.setState({ text });
-<<<<<<< HEAD
     try {
       let token = await AsyncStorage.getItem("userToken");
       console.log(token);
@@ -102,11 +79,6 @@ class Profile extends React.Component {
     }
  */
     const url = "https://jsonplaceholder.typicode.com/users";
-||||||| merged common ancestors
-    const url = "https://jsonplaceholder.typicode.com/users";
-=======
-    const url = "https://jsonplaceholder.typicode.com/users/";
->>>>>>> master
     fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
