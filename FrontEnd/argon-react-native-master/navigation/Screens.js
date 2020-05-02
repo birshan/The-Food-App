@@ -288,6 +288,18 @@ const SingOutStack = createStackNavigator(
   }
 );
 
+class Hidden extends React.Component {
+  render() {
+    return null;
+  }
+}
+
+class ProfScreenMaintain extends React.Component {
+  render() {
+    return null;
+  }
+}
+
 //
 const AppStack = createDrawerNavigator(
   //creates screens stack order
@@ -319,15 +331,11 @@ const AppStack = createDrawerNavigator(
  */
     Viewprofile: {
       screen: ViewprofileStack,
-      navigationOptions: (navigation) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem
-            focused={focused}
-            screen="Viewprofile"
-            title="Viewprofile"
-          />
-        ),
-      }),
+      navigationOptions: {
+        //Return Custom label with null in return.
+        //It will hide the label from Navigation Drawer
+        drawerLabel: <Hidden />,
+      },
     },
     // Elements: {
     //   screen: ElementsStack,
