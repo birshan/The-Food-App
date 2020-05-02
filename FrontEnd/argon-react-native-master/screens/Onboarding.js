@@ -125,8 +125,7 @@ class Onboarding extends React.Component {
           >
             by Team Apex
           </Text>
-        </Block>
-
+    </Block>
         <Block flex space="between" style={styles.padded}>
           <Block flex space="around">
             <Block>
