@@ -1,6 +1,6 @@
 package com.foodapp.backend.DTO;
 
-public class AuthRequest {
+public class    AuthRequest {
     private String username;
     private String password;
 
