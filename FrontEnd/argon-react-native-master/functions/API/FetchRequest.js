@@ -21,7 +21,15 @@ export class FetchRequest {
     headers: this.myHeader,
   };
 
+  //returns the current users information: firstName, lastName and email
   async getUserInfo() {
+    console.log(this.url, this.options);
+    let response = await fetch(this.url, this.options);
+    return response;
+  }
+
+  //returns an array with all the meals that the user logged
+  async getAllMeals() {
     console.log(this.url, this.options);
     let response = await fetch(this.url, this.options);
     return response;

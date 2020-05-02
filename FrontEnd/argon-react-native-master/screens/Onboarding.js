@@ -52,8 +52,8 @@ class Onboarding extends React.Component {
     });
     //for ease of development skips authorization
     this.props.navigation.navigate("App");
-    /*   
-  let body = {
+
+    /*     let body = {
       username: authInfo.username,
       password: authInfo.password,
     };
@@ -75,6 +75,7 @@ class Onboarding extends React.Component {
         this.props.navigation.navigate("App");
       }
     } catch (error) {
+      alert("Error: Problem connecting the network");
       console.log(error);
     }
  */
@@ -107,24 +108,24 @@ class Onboarding extends React.Component {
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.WHITE}
           >
-            Welcome To  
+            Welcome To
           </Text>
           <Text
             h2
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
             color={argonTheme.COLORS.WHITE}
           >
-            Dieter  
+            Dieter
           </Text>
           <Text
             h4
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            style={{fontSize:15}}
+            style={{ fontSize: 15 }}
             color={argonTheme.COLORS.WHITE}
           >
-           by Team Apex
+            by Team Apex
           </Text>
-        </Block>
+    </Block>
         <Block flex space="between" style={styles.padded}>
           <Block flex space="around">
             <Block>

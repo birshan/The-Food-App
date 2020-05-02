@@ -38,6 +38,7 @@ class Profile extends React.Component {
         lastName: "Jones",
         email: "jessica@dieter.com",
       },
+      mealData: [],
     };
   }
   async componentDidMount(text) {
@@ -53,15 +54,14 @@ class Profile extends React.Component {
     // }
 
     //this.setState({ text });
-    try {
+
+    /* 
+    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT 
+
+       try {
       let token = await AsyncStorage.getItem("userToken");
       console.log(token);
-    } catch (error) {
-      console.log(error);
-    }
-    /*
-     let request = new FetchRequest("GET", "/user", token);
-    try {
+      let request = new FetchRequest("GET", "/user", token);
       let response = await request.getUserInfo();
       if (!response.ok) {
         //handle errors
@@ -74,10 +74,20 @@ class Profile extends React.Component {
           userData: data,
         });
       }
+      let mealRequest = new FetchRequest("GET", "/api/meal", token);
+      let mealResponse = await mealRequest.getAllMeals();
+      if (mealResponse.ok) {
+        let data = await mealResponse.json();
+        console.log(data);
+        this.setState({
+          mealData: data,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
  */
+    console.log(this.state.mealData);
     const url = "https://jsonplaceholder.typicode.com/users";
     fetch(url)
       .then((response) => response.json())

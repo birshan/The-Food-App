@@ -15,6 +15,8 @@ public class UserService {
     public void saveUser(User user){
         userRepository.save(user);
     }
+
+    //checks database if the user email is already existing
     public boolean isEmailUsed(String email) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         return optionalUser.isPresent();
@@ -22,6 +24,7 @@ public class UserService {
     public Iterable<User> getAllUser(){
         return userRepository.findAll();
     }
+
 
     public Optional<User> findUser(String username) {
         return userRepository.findByEmail(username);
