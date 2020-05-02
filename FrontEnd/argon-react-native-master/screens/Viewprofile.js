@@ -107,8 +107,9 @@ class ViewProfile extends React.Component {
           renderItem={(item) => this.renderItem(item)}
           keyExtractor={(item) => item.id.toString()}
         />
-        <Button
-          title="Go back"
+        <Button 
+          title="Back to Professional"
+          color="#000000"
           onPress={() => this.props.navigation.push('ProfScreen')}
         />
       </View>
