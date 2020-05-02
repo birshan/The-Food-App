@@ -1,6 +1,9 @@
 package com.foodapp.backend.api;
 
 import com.foodapp.backend.DTO.PredictionDTO;
+import com.foodapp.backend.DTO.PredictionResponse;
+import com.foodapp.backend.pojo.Food;
+import com.foodapp.backend.services.FoodService;
 import com.foodapp.backend.services.PredictionService;
 import com.foodapp.backend.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class PredictionController {
 
     @Autowired
     private PredictionService predictionService;
+
+    @Autowired
+    FoodService foodService;
 
 
     public PredictionController(StorageService storageService) {
@@ -45,8 +51,18 @@ public class PredictionController {
                 return ResponseEntity.status(500).body("Error Occured");
 
             } else {
-                return ResponseEntity.status(200).body(response);
+                Food foodInfo = foodService.findById(response.getPrediction());
+                PredictionResponse predictionResponse = new PredictionResponse();
+                predictionResponse.setFoodName(foodInfo.getName());
+                predictionResponse.setCalories(foodInfo.getCalories());
+                predictionResponse.setServingDescription(foodInfo.getServingDescription1());
+                predictionResponse.setServingWeight(foodInfo.getServingWeight1_g());
+                predictionResponse.setCarbWeight(foodInfo.getCarbohydrate_g());
+                predictionResponse.setFatWeight(foodInfo.getFat_g());
+                predictionResponse.setSugarsWeight(foodInfo.getSugars_g());
+                return ResponseEntity.status(200).body(foodInfo);
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
