@@ -96,7 +96,7 @@ class LogFoodSearch extends React.Component {
       .then((response) => {
         if (response.ok) {
           console.log(response);
-          alert("food to your meal list");
+          alert("Added food to your meal list");
         } else {
           console.log("Error occured");
           console.log(response);
