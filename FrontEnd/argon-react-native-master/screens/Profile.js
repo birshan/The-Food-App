@@ -110,16 +110,49 @@ class Profile extends React.Component {
       />
     );
   };
+
   renderItem = (data) => (
     <View style={styles.list}>
-      <Text bold size={18} color="#32325D">
-        {data.item.name}
-      </Text>
-      <Text>{data.item.email}</Text>
+      <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id, data.item.email)}>
+        <Text bold size={18} color="#32325D">
+          {data.item.name}
+        </Text>
+        <Text>{data.item.email}</Text>
+      </TouchableOpacity>
     </View>
   );
 
+  removeItemValue = async (id, email) => {
+    const url = "http://192.168.1.6:5000/upload_image/";
+    const options = {
+      headers: {
+        "Content-Type": "form-data",
+      },
+      body: url + id + "/" + email,
+    };
+    console.log(options);
+    const filteredData = this.state.dataSource.filter(item => item.id !== id);
+    this.setState({ dataSource: filteredData });
+    alert("Successfully deleted " + id)
+
+    await fetch(url, options)
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          alert("Removed food from your meal list");
+        } else {
+          console.log("Error occured");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    return;
+  }
+
   render() {
+    alert("To delete a food item hold on the item");
     if (this.state.loading) {
       return (
         <View style={styles.loader}>
@@ -212,14 +245,16 @@ class Profile extends React.Component {
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                       {this.state.userData.email}
                     </Text>
-                    <View style={styles.container}>
-                      <FlatList
-                        data={this.state.dataSource}
-                        ItemSeparatorComponent={this.FlatListItemSeparator}
-                        renderItem={(item) => this.renderItem(item)}
-                        keyExtractor={(item) => item.id.toString()}
-                      />
-                    </View>
+                    <Block>
+                      <View style={styles.container}>
+                        <FlatList
+                          data={this.state.dataSource}
+                          ItemSeparatorComponent={this.FlatListItemSeparator}
+                          renderItem={(item) => this.renderItem(item)}
+                          keyExtractor={(item) => item.id.toString()}
+                        />
+                      </View>
+                    </Block>
                   </Block>
 
                   {/* <Block>
