@@ -51,9 +51,9 @@ class Onboarding extends React.Component {
       loginProcess: true,
     });
     //for ease of development skips authorization
-    // this.props.navigation.navigate("App");
+    this.props.navigation.navigate("App");
 
-    let body = {
+    /*     let body = {
       username: authInfo.username,
       password: authInfo.password,
     };
@@ -75,8 +75,10 @@ class Onboarding extends React.Component {
         this.props.navigation.navigate("App");
       }
     } catch (error) {
+      alert("Error: Problem connecting the network");
       console.log(error);
     }
+ */
   };
 
   _signUp = () => {

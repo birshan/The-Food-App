@@ -54,7 +54,11 @@ class Profile extends React.Component {
     // }
 
     //this.setState({ text });
-    try {
+
+    /* 
+    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT 
+
+       try {
       let token = await AsyncStorage.getItem("userToken");
       console.log(token);
       let request = new FetchRequest("GET", "/user", token);
@@ -82,6 +86,7 @@ class Profile extends React.Component {
     } catch (error) {
       console.log(error);
     }
+ */
     console.log(this.state.mealData);
     const url = "https://jsonplaceholder.typicode.com/users";
     fetch(url)
