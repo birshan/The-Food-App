@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   FlatList,
   TouchableOpacity,
+  Button
 } from "react-native";
 //galio
 import { Block, Text, theme } from "galio-framework";
@@ -96,15 +97,19 @@ class ViewProfile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Text>Details Screen</Text>
-          <Text>Id: {JSON.stringify(id)}</Text>
-          <Text>Email: {JSON.stringify(email)}</Text>
+          <Text bold size={28} color="#32325D">Hello {email}</Text>
+          <Text>Id: {email}</Text>
+          <Text>Email: {email}</Text>
         </View>
         <FlatList
           data={this.state.dataSource}
           ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={(item) => this.renderItem(item)}
           keyExtractor={(item) => item.id.toString()}
+        />
+        <Button
+          title="Go back"
+          onPress={() => this.props.navigation.push('ProfScreen')}
         />
       </View>
     );

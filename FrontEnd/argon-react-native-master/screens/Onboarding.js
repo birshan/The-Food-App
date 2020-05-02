@@ -105,28 +105,11 @@ class Onboarding extends React.Component {
           <Text
             h1
             style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            
             color={argonTheme.COLORS.WHITE}
           >
-            Welcome To  
-          </Text>
-          <Text
-            h2
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            color={argonTheme.COLORS.WHITE}
-          >
-            Dieter  
-          </Text>
-          <Text
-            h4
-            style={{ marginBottom: theme.SIZES.BASE / 2 }}
-            style={{fontSize:15}}
-            color={argonTheme.COLORS.WHITE}
-          >
-           by Team Apex
+            Dieter
           </Text>
         </Block>
-        
         <Block flex space="between" style={styles.padded}>
           <Block flex space="around">
             <Block>
