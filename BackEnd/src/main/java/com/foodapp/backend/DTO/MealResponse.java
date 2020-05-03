@@ -3,13 +3,13 @@ package com.foodapp.backend.DTO;
 import java.time.LocalDate;
 
 public class MealResponse {
-    String foodName;
-    Double calories;
-    int weight;
-    Double fatWeight;
-    Double carbWeight;
-    Double sugarsWeight;
-    LocalDate date;
+    private String foodName;
+    private Double calories;
+    private int weight;
+    private Double fatWeight;
+    private Double carbWeight;
+    private Double sugarsWeight;
+    private LocalDate date;
 
     public MealResponse(String foodName, Double calories, int weight, Double fatWeight, Double carbWeight, Double sugarsWeight, LocalDate date) {
         this.foodName = foodName;

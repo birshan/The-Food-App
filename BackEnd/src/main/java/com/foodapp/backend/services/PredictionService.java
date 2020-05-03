@@ -33,8 +33,10 @@ public class PredictionService {
 
     public PredictionDTO getPrediction(MultipartFile file) throws IOException {
         String url = flaskURL+"/";
+        //adding header with content information
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        //including the image in the as form data
         MultiValueMap<String, String> fileMap = new LinkedMultiValueMap<>();
         ContentDisposition contentDisposition = ContentDisposition
                 .builder("form-data")
@@ -44,11 +46,12 @@ public class PredictionService {
         fileMap.add(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString());
         HttpEntity<byte[]> fileEntity = new HttpEntity<>(file.getBytes(), fileMap);
 
+        //adding the data to the body of the HTTP request
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", fileEntity);
-
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
         try{
+            //sending request to flask server and getting prediction of the food type
             ResponseEntity<PredictionDTO> response = restTemplate.exchange(
                     url,
                     HttpMethod.POST,
