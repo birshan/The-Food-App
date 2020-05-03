@@ -44,23 +44,11 @@ class Profile extends React.Component {
     };
   }
   async componentDidMount(text) {
-    // getUserId = async () => {
-    //   let userId = '';
-    //   try {
-    //     userId = await AsyncStorage.getItem('userId') || 'none';
-    //   } catch (error) {
-    //     // Error retrieving data
-    //     console.log(error.message);
-    //   }
-    //   return userId;
-    // }
-
     //this.setState({ text });
 
-    /* 
-    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT 
+    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
 
-       try {
+    try {
       let token = await AsyncStorage.getItem("userToken");
       console.log(token);
       let request = new FetchRequest("GET", "/user", token);
@@ -80,7 +68,6 @@ class Profile extends React.Component {
       let mealResponse = await mealRequest.getAllMeals();
       if (mealResponse.ok) {
         let data = await mealResponse.json();
-        console.log(data);
         this.setState({
           mealData: data,
         });
@@ -88,7 +75,6 @@ class Profile extends React.Component {
     } catch (error) {
       console.log(error);
     }
- */
     console.log(this.state.mealData);
     const url = "https://jsonplaceholder.typicode.com/users";
     fetch(url)
