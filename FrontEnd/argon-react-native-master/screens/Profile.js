@@ -21,6 +21,7 @@ import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 //import { NutritionSum } from "../screens/NutritionSum";
 import { FetchRequest } from "../functions/API/FetchRequest";
+import { serverURL } from "../constants/api";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -39,6 +40,7 @@ class Profile extends React.Component {
         email: "jessica@dieter.com",
       },
       mealData: [],
+      jwtToken: "",
     };
   }
   async componentDidMount(text) {
@@ -110,16 +112,43 @@ class Profile extends React.Component {
       />
     );
   };
+
   renderItem = (data) => (
     <View style={styles.list}>
-      <Text bold size={18} color="#32325D">
-        {data.item.name}
-      </Text>
-      <Text>{data.item.email}</Text>
+      <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id)}>
+        <Text bold size={18} color="#32325D">
+          {data.item.name}
+        </Text>
+        <Text>{data.item.email}</Text>
+      </TouchableOpacity>
     </View>
   );
 
+  removeItemValue = async (id) => {
+    const filteredData = this.state.dataSource.filter((item) => item.id !== id);
+    this.setState({ dataSource: filteredData });
+    alert("Successfully deleted " + id);
+
+    const url = serverURL + "/api/meal/" + id;
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let request = new FetchRequest("DELETE", "/api/meal", token);
+      let response = request.deleteMeal(id);
+      if (response.ok) {
+        console.log(response);
+        alert("Removed food from your meal list");
+      } else {
+        console.log("Error occured");
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
+
   render() {
+    alert("To delete a food item hold on the item");
     if (this.state.loading) {
       return (
         <View style={styles.loader}>
@@ -212,14 +241,16 @@ class Profile extends React.Component {
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                       {this.state.userData.email}
                     </Text>
-                    <View style={styles.container}>
-                      <FlatList
-                        data={this.state.dataSource}
-                        ItemSeparatorComponent={this.FlatListItemSeparator}
-                        renderItem={(item) => this.renderItem(item)}
-                        keyExtractor={(item) => item.id.toString()}
-                      />
-                    </View>
+                    <Block>
+                      <View style={styles.container}>
+                        <FlatList
+                          data={this.state.dataSource}
+                          ItemSeparatorComponent={this.FlatListItemSeparator}
+                          renderItem={(item) => this.renderItem(item)}
+                          keyExtractor={(item) => item.id.toString()}
+                        />
+                      </View>
+                    </Block>
                   </Block>
 
                   {/* <Block>

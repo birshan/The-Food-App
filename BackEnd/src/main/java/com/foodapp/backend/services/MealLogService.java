@@ -5,9 +5,11 @@ import com.foodapp.backend.pojo.Food;
 import com.foodapp.backend.pojo.MealLog;
 import com.foodapp.backend.pojo.User;
 import com.foodapp.backend.repository.MealLogRepository;
+import com.foodapp.backend.util.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ ID in the meallog entry
                     Double carb = (food.getCarbohydrate_g()/100) * weight;
                     Double sugars = (food.getSugars_g()/100) * weight;
                     usersMeals.add(new MealResponse(
+                            meals.getMeadId(),
                             food.getName(),
                             calories,
                             weight,
@@ -79,4 +82,15 @@ ID in the meallog entry
         }
     }
 
+    public void deleteMeal(Integer mealID) throws ResourceNotFoundException {
+        Optional<MealLog> optional = mealLogRepository.findById(mealID);
+        if (optional.isPresent()) {
+            MealLog meal = optional.get();
+            mealLogRepository.delete(meal);
+
+            System.out.println(meal+ " was deleted");
+        } else {
+            throw new ResourceNotFoundException("Meal with mealId: " +mealID + " was not found");
+        }
+    }
 }

@@ -34,4 +34,11 @@ export class FetchRequest {
     let response = await fetch(this.url, this.options);
     return response;
   }
+
+  async deleteMeal(id) {
+    this.url = this.url + "/" + id;
+    console.log(this.url, this.options);
+    let response = await fetch(this.url, this.options);
+    return response;
+  }
 }

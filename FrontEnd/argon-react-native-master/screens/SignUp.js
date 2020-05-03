@@ -7,6 +7,7 @@ import { Input, Icon } from "../components/";
 import styles from "../components/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { UserRequest } from "../functions/API/UserRequest";
+import { FormUtil } from "../functions/Util/FormUtil";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -73,6 +74,27 @@ export default class SignUp extends React.Component {
     //validation
     let pass = this.state.password;
     let cnfrmPass = this.state.cnfrmPass;
+    let email = this.state.email;
+    let firstName = this.state.firstName;
+    let lastName = this.state.lastName;
+    let role = this.state.role;
+
+    //check if fields are empty
+    let util = new FormUtil();
+    if (
+      util.isEmpty(pass) ||
+      util.isEmpty(email) ||
+      util.isEmpty(firstName) ||
+      util.isEmpty(lastName)
+    ) {
+      alert("Error: All fields must be filled!");
+      return;
+    }
+
+    this.setState((prevState) => ({
+      ...prevState,
+      loading: true,
+    }));
 
     if (pass != cnfrmPass) {
       alert("Error: Passwords do not match!");
@@ -80,16 +102,17 @@ export default class SignUp extends React.Component {
         ...prevState,
         password: "",
         cnfrmPass: "",
+        loading: false,
       }));
       return;
     }
 
     let body = {
-      email: this.state.email,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      roles: this.state.role,
-      password: this.state.password,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      roles: role,
+      password: pass,
     };
     let request = new UserRequest("POST", "/user", body);
     try {
@@ -100,10 +123,15 @@ export default class SignUp extends React.Component {
           this.setState((prevState) => ({
             ...prevState,
             email: "",
+            loading: false,
           }));
         } else if (response.status(500)) {
           alert("Network Error: Try again later");
         }
+        this.setState((prevState) => ({
+          ...prevState,
+          loading: false,
+        }));
       } else {
         console.log(response);
         alert("User created successfully, Proceed to Sign In");
@@ -113,43 +141,10 @@ export default class SignUp extends React.Component {
       alert("Error Occured during signup");
       console.log(error);
     }
-
-    /*     //API request
-    let url = "http://192.168.43.81:8080/user";
-    const options = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        roles: this.state.role,
-        password: this.state.password,
-      }),
-    };
-    console.log("Attempting to create new user");
-    try {
-      let response = await fetch(url, options);
-      if (response.ok) {
-        let data = await response.json();
-        console.log(data);
-        alert("User Created");
-        this.props.navigation.goBack();
-      } else {
-        //if there was an error
-        console.log("TODO: change to handle other error types");
-        let data = await response.json();
-        alert("Error " + response.status + ": " + data.message);
-        console.log(data);
-
-      }
-    } catch (error) {
-      console.log(error);
-    }
- */
+    this.setState((prevState) => ({
+      ...prevState,
+      loading: false,
+    }));
   };
 
   render() {
@@ -241,6 +236,7 @@ export default class SignUp extends React.Component {
           <Button
             style={localStyles.signupBtn}
             onPress={() => this.handleSignUp()}
+            loading={this.state.loading}
           >
             Sign Up
           </Button>

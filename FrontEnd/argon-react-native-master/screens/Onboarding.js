@@ -7,8 +7,8 @@ import {
   Dimensions,
   AsyncStorage,
 } from "react-native";
-import { Block, Button, Text, theme } from "galio-framework";
-import { Input, Icon } from "../components/";
+import { Block, Text, theme } from "galio-framework";
+import { Input, Icon, Button } from "../components/";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 import { UserRequest } from "../functions/API/UserRequest";
@@ -53,32 +53,34 @@ class Onboarding extends React.Component {
     //for ease of development skips authorization
     this.props.navigation.navigate("App");
 
-    /*     let body = {
-      username: authInfo.username,
-      password: authInfo.password,
-    };
-    let request = new UserRequest("POST", "/auth", body);
-    console.log("Sending Auth request");
-    try {
-      let response = await request.userLogin();
-      if (!response.ok) {
-        if (response.status == 403) {
-          alert("Error: Username and password did not match");
-        } else if (response.status(500)) {
-          alert("Error: Problem with the network");
-        }
-      } else {
-        let data = await response.json();
-        console.log(data);
-        await AsyncStorage.setItem("userToken", data.jwt);
-        alert("Welcome " + data.firstName);
-        this.props.navigation.navigate("App");
-      }
-    } catch (error) {
-      alert("Error: Problem connecting the network");
-      console.log(error);
-    }
- */
+    // let body = {
+    //   username: authInfo.username,
+    //   password: authInfo.password,
+    // };
+    // let request = new UserRequest("POST", "/auth", body);
+    // console.log("Sending Auth request");
+    // try {
+    //   let response = await request.userLogin();
+    //   if (!response.ok) {
+    //     if (response.status == 403) {
+    //       alert("Error: Username and password did not match");
+    //     } else if (response.status(500)) {
+    //       alert("Error: Problem with the network");
+    //     }
+    //   } else {
+    //     let data = await response.json();
+    //     console.log(data);
+    //     await AsyncStorage.setItem("userToken", data.jwt);
+    //     alert("Welcome " + data.firstName);
+    //     this.props.navigation.navigate("App");
+    //   }
+    // } catch (error) {
+    //   alert("Error: Problem connecting the network");
+    //   console.log(error);
+    // }
+    // this.setState({
+    //   loginProcess: false,
+    // });
   };
 
   _signUp = () => {
@@ -125,7 +127,7 @@ class Onboarding extends React.Component {
           >
             by Team Apex
           </Text>
-    </Block>
+        </Block>
         <Block flex space="between" style={styles.padded}>
           <Block flex space="around">
             <Block>
@@ -167,9 +169,10 @@ class Onboarding extends React.Component {
               <Block center>
                 <Button
                   style={styles.button}
-                  color={argonTheme.COLORS.SECONDARY}
                   onPress={() => this._signInAsync(this.state.authInfo)}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
+                  loading={this.state.loginProcess}
+                  color={"success"}
                 >
                   Login
                 </Button>
@@ -178,7 +181,7 @@ class Onboarding extends React.Component {
             <Block center>
               <Button
                 style={styles.button}
-                color={argonTheme.COLORS.SECONDARY}
+                color={"secondary"}
                 /* change to function that sends api request */
                 onPress={() => this._signUp()}
                 textStyle={{ color: argonTheme.COLORS.BLACK }}
