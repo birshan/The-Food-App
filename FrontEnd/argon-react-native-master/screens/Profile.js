@@ -21,6 +21,7 @@ import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 //import { NutritionSum } from "../screens/NutritionSum";
 import { FetchRequest } from "../functions/API/FetchRequest";
+import { serverURL } from "../constants/api";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -39,6 +40,7 @@ class Profile extends React.Component {
         email: "jessica@dieter.com",
       },
       mealData: [],
+      jwtToken: "",
     };
   }
   async componentDidMount(text) {
@@ -113,7 +115,7 @@ class Profile extends React.Component {
 
   renderItem = (data) => (
     <View style={styles.list}>
-      <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id, data.item.email)}>
+      <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id)}>
         <Text bold size={18} color="#32325D">
           {data.item.name}
         </Text>
@@ -122,34 +124,28 @@ class Profile extends React.Component {
     </View>
   );
 
-  removeItemValue = async (id, email) => {
-    const url = "http://192.168.1.6:5000/upload_image/";
-    const options = {
-      headers: {
-        "Content-Type": "form-data",
-      },
-      body: url + id + "/" + email,
-    };
-    console.log(options);
-    const filteredData = this.state.dataSource.filter(item => item.id !== id);
+  removeItemValue = async (id) => {
+    const filteredData = this.state.dataSource.filter((item) => item.id !== id);
     this.setState({ dataSource: filteredData });
-    alert("Successfully deleted " + id)
+    alert("Successfully deleted " + id);
 
-    await fetch(url, options)
-      .then((response) => {
-        if (response.ok) {
-          console.log(response);
-          alert("Removed food from your meal list");
-        } else {
-          console.log("Error occured");
-          console.log(response);
-        }
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+    const url = serverURL + "/api/meal/" + id;
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let request = new FetchRequest("DELETE", "/api/meal", token);
+      let response = request.deleteMeal(id);
+      if (response.ok) {
+        console.log(response);
+        alert("Removed food from your meal list");
+      } else {
+        console.log("Error occured");
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     return;
-  }
+  };
 
   render() {
     alert("To delete a food item hold on the item");

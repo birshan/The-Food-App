@@ -3,13 +3,25 @@ package com.foodapp.backend.DTO;
 import java.time.LocalDate;
 
 public class MealResponse {
-    String foodName;
-    Double calories;
-    int weight;
-    Double fatWeight;
-    Double carbWeight;
-    Double sugarsWeight;
-    LocalDate date;
+    private Integer mealID;
+    private String foodName;
+    private Double calories;
+    private int weight;
+    private Double fatWeight;
+    private Double carbWeight;
+    private Double sugarsWeight;
+    private LocalDate date;
+
+    public MealResponse(Integer mealID, String foodName, Double calories, int weight, Double fatWeight, Double carbWeight, Double sugarsWeight, LocalDate date) {
+        this.mealID = mealID;
+        this.foodName = foodName;
+        this.calories = calories;
+        this.weight = weight;
+        this.fatWeight = fatWeight;
+        this.carbWeight = carbWeight;
+        this.sugarsWeight = sugarsWeight;
+        this.date = date;
+    }
 
     public MealResponse(String foodName, Double calories, int weight, Double fatWeight, Double carbWeight, Double sugarsWeight, LocalDate date) {
         this.foodName = foodName;
@@ -19,6 +31,14 @@ public class MealResponse {
         this.carbWeight = carbWeight;
         this.sugarsWeight = sugarsWeight;
         this.date = date;
+    }
+
+    public Integer getMealID() {
+        return mealID;
+    }
+
+    public void setMealID(Integer mealID) {
+        this.mealID = mealID;
     }
 
     public MealResponse() {
