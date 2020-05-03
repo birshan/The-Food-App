@@ -60,9 +60,9 @@ public class PredictionController {
                 predictionResponse.setCarbWeight(foodInfo.getCarbohydrate_g());
                 predictionResponse.setFatWeight(foodInfo.getFat_g());
                 predictionResponse.setSugarsWeight(foodInfo.getSugars_g());
-                return ResponseEntity.status(200).body(foodInfo);
+                return ResponseEntity.status(200).body(predictionResponse);
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
