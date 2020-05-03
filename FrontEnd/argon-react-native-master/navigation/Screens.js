@@ -32,7 +32,7 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-0;
+import CreateMealLog from "../screens/CreateMealLog";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -259,7 +259,16 @@ const ScanimgStack = createStackNavigator(
       }),
     },
   },
-  {
+  /*   {
+    MealLog: {
+      screen: CreateMealLog,
+      navigationOptions: ({ navigation }) => ({
+        headerTransparent: false,
+        title: "Create Meal Log",
+      }),
+    },
+  },
+ */ {
     cardStyle: { backgroundColor: "#FFFFFF" },
     transitionConfig,
   }
@@ -286,6 +295,27 @@ const SingOutStack = createStackNavigator(
     cardStyle: { backgroundColor: "#FFFFFF" },
     transitionConfig,
   }
+);
+
+//TODO: Remove once styling is created
+const MealLogStack = createStackNavigator(
+  {
+    MealLog: {
+      screen: CreateMealLog,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            transparent
+            title="Meal Log"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: false,
+      }),
+    },
+  },
+  { cardStyle: { backgroundColor: "#FFFFFF" }, transitionConfig }
 );
 
 class Hidden extends React.Component {
@@ -397,7 +427,14 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    // Articles: {
+    MealLog: {
+      screen: MealLogStack,
+      navigationOptions: (navOpt) => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="MealLog" title="Meals" />
+        ),
+      }),
+    }, // Articles: {
     //   screen: ArticlesStack,
     //   navigationOptions: (navOpt) => ({
     //     drawerLabel: ({ focused }) => (
@@ -408,6 +445,7 @@ const AppStack = createDrawerNavigator(
   },
   Menu
 );
+
 const SigninStack = createStackNavigator(
   {
     SingIn: {
