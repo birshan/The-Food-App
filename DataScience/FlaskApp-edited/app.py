@@ -34,13 +34,11 @@ def upload_image():
         # checking for file
         if 'file' not in request.files:
             print('no file')
-            # return redirect('/')
             return jsonify(filename="Unidentified", prediction="none")
 
         file = request.files['file']
         if file.filename == '':
             print('no selected file')
-            # return redirect('/')
             return jsonify(filename="Unidentified", prediction="none")
 
         if file and allowed_file(file.filename):
@@ -48,13 +46,9 @@ def upload_image():
 
             obj = Prediction(filename, file)
             prediction = obj.make_pred()
-            # if rice is predicted:
-            # prediction = 'rice'
 
-            # return render_template('index.html', filename=filename, file=file, prediction=prediction)
             return jsonify(filename=filename, prediction=prediction)
 
-    # return render_template('index.html')
     return jsonify(filename="Unidentified", prediction="none")
 
 
