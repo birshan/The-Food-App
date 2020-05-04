@@ -148,11 +148,9 @@ x_train = np.array(images)
 x_test = np.array(images_test)
 y_train = np.array(labels)
 y_test = np.array(labels_test)
-
 # converts to matrices
 y_train = keras.utils.to_categorical(y_train, 6)
 y_test = keras.utils.to_categorical(y_test, 6)
-
 # normalises the image data
 x_train = vgg16.preprocess_input(x_train)
 x_test = vgg16.preprocess_input(x_test)
