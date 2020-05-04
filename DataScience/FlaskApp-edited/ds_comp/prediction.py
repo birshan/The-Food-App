@@ -36,8 +36,8 @@ class Prediction:
         images = np.expand_dims(image_array, axis=0)
         images = vgg16.preprocess_input(images)
         # extracts the features of the new image
-        feature_extraction_model = vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-        features = feature_extraction_model.predict(images)
+        feature_extraction = vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+        features = feature_extraction.predict(images)
 
         # Using the extracted features the model predicts what the image is
         results = model.predict(features)
