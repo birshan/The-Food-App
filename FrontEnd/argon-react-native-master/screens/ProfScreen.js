@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  AsyncStorage,
 } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import { Block, Text, theme } from "galio-framework";
 import { Images, argonTheme } from "../constants";
 const { width, height } = Dimensions.get("screen");
+import { FetchRequest } from "../functions/API/FetchRequest";
 import _ from "lodash";
 
 class ProfScreen extends React.Component {
@@ -27,37 +29,37 @@ class ProfScreen extends React.Component {
       error: null,
       searchTerm: "",
       value: "",
+      clientData: [],
     };
   }
 
-  componentDidMount() {
-    /*
-    //TODO: GET ALL USERS TO THE LIST IS NOT IMPLEMENTED HERE
-    let mealRequest = new FetchRequest("GET", "/api/meal", token);
-      let mealResponse = await mealRequest.getAllMeals();
-      if (mealResponse.ok) {
-        let data = await mealResponse.json();
+  async componentDidMount() {
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let usersRequest = new FetchRequest("GET", "/pro", token);
+      let response = await usersRequest.request();
+      if (response.ok) {
+        let data = await response.json();
         console.log(data);
         this.setState({
-          clientData: data,
+          filteredData: data,
         });
       }
     } catch (error) {
       console.log(error);
     }
-    */
-
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          loading: false,
-          data: responseJson,
-          filteredData: responseJson,
-        });
-      })
-      .catch((error) => console.log(error)); //to catch the errors if any
   }
+  //   fetch("https://jsonplaceholder.typicode.com/users")
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({
+  //         loading: false,
+  //         data: responseJson,
+  //         filteredData: responseJson,
+  //       });
+  //     })
+  //     .catch((error) => console.log(error)); //to catch the errors if any
+  // }
 
   renderSeparator = () => {
     return (
@@ -74,7 +76,6 @@ class ProfScreen extends React.Component {
 
   searchFilterFunction = (text) => {
     const search = text.toLowerCase();
-
     this.setState({
       value: search,
       filteredData: this.state.data.filter((item) =>
@@ -116,9 +117,7 @@ class ProfScreen extends React.Component {
       return (
         <Block flex>
           <Block>
-            <Text style={{ textAlign: "center", fontSize: 25 }}>
-              Welcome
-            </Text>
+            <Text style={{ textAlign: "center", fontSize: 25 }}>Welcome</Text>
           </Block>
           <ImageBackground
             source={Images.ProfileBackground}
@@ -129,18 +128,21 @@ class ProfScreen extends React.Component {
               <Block flex>
                 <View style={styles.container}>
                   <FlatList
-                    keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item.userID.toString()}
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
                       <TouchableOpacity
                         onPress={() =>
                           this.onPress(
-                            item.id.toString(),
+                            item.userID.toString(),
                             item.email.toString()
                           )
                         }
                       >
-                        <ListItem title={item.name} subtitle={item.email} />
+                        <ListItem
+                          title={item.firstName + " " + item.lastName}
+                          subtitle={item.email}
+                        />
                       </TouchableOpacity>
                       //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
                     )}

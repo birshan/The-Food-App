@@ -50,4 +50,9 @@ export class FetchRequest {
     }
     return;
   }
+
+  async request() {
+    let response = await fetch(this.url, this.options);
+    return response;
+  }
 }

@@ -44,7 +44,6 @@ class Profile extends React.Component {
     };
   }
   async componentDidMount() {
-
     //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
 
     try {
@@ -97,56 +96,59 @@ class Profile extends React.Component {
     );
   };
 
+  // renderItem = (data) => (
+  //   <View style={styles.list}>
+  //     <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id)}>
+  //       <Text bold size={18} color="#2963F6">
+  //         {data.item.name}
+  //       </Text>
+  //       <Text>{data.item.email}</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
+  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
   renderItem = (data) => (
     <View style={styles.list}>
-      <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id)}>
+      <TouchableOpacity
+        style={styles.listItem}
+        onLongPress={() => this.removeItemValue(data.item.mealID)}
+      >
         <Text bold size={18} color="#2963F6">
-          {data.item.name}
+          Food: {data.item.foodName}
         </Text>
-        <Text>{data.item.email}</Text>
+        <Text>Date: {data.item.date}</Text>
+        <Text>Calories: {data.item.calories} kcal</Text>
       </TouchableOpacity>
     </View>
   );
-  /*
-  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-    renderItem = (data) => (
-      <View style={styles.list}>
-        <TouchableOpacity onLongPress={() => this.removeItemValue(mealData.item.mealId)}>
-          <Text bold size={18} color="#2963F6">
-            {mealData.item.foodName}
-          </Text>
-          <Text>{mealData.item.date}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    */
 
-  removeItemValue = async (id) => {
-    const filteredData = this.state.dataSource.filter((item) => item.id !== id);
-    this.setState({ dataSource: filteredData });
+  // removeItemValue = async (id) => {
+  //   const filteredData = this.state.dataSource.filter((item) => item.id !== id);
+  //   this.setState({ dataSource: filteredData });
 
-    const url = serverURL + "/api/meal/" + id;
-    try {
-      const token = await AsyncStorage.getItem("userToken");
-      let request = new FetchRequest("DELETE", "/api/meal", token);
-      let response = request.deleteMeal(id);
-      if (response.ok) {
-        console.log(response);
-        alert("Removed food from your meal list");
-      } else {
-        console.log("Error occured");
-        console.log(response);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return;
-  };
+  //   const url = serverURL + "/api/meal/" + id;
+  //   try {
+  //     const token = await AsyncStorage.getItem("userToken");
+  //     let request = new FetchRequest("DELETE", "/api/meal", token);
+  //     let response = request.deleteMeal(id);
+  //     if (response.ok) {
+  //       console.log(response);
+  //       alert("Removed food from your meal list");
+  //     } else {
+  //       console.log("Error occured");
+  //       console.log(response);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   return;
+  // };
 
-  /*
   //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
   removeItemValue = async (mealId) => {
-    const filteredData = this.state.mealData.filter((item) => item.mealId !== mealId);
+    const filteredData = this.state.mealData.filter(
+      (item) => item.mealId !== mealId
+    );
     this.setState({ mealData: filteredData });
 
     const url = serverURL + "/api/meal/" + mealId;
@@ -166,7 +168,7 @@ class Profile extends React.Component {
     }
     return;
   };
-*/
+
   render() {
     if (this.state.loading) {
       return (
@@ -199,7 +201,7 @@ class Profile extends React.Component {
                       {this.state.userData.email}
                     </Text>
                     <Block>
-                      <View style={styles.container}>
+                      {/* <View style={styles.container}>
                         <FlatList
                           data={this.state.dataSource}
                           ItemSeparatorComponent={this.FlatListItemSeparator}
@@ -207,23 +209,21 @@ class Profile extends React.Component {
                           keyExtractor={(item) => item.id.toString()}
                         />
                       </View>
-                      {/*
-                      //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+                      //TODO: COMMENTED OUT FOR EASY DEVELOPMENT */}
                       <View style={styles.container}>
                         <FlatList
                           data={this.state.mealData}
                           ItemSeparatorComponent={this.FlatListItemSeparator}
                           renderItem={(item) => this.renderItem(item)}
-                          keyExtractor={(item) => item.mealId.toString()}
+                          keyExtractor={(item) => item.mealID.toString()}
                         />
-                      </View> */}
+                      </View>
                     </Block>
                   </Block>
 
                   {/* <Block>
                     <Button title="Go to Nutrition Summary" onPress={() => navigate('Nutrition')}/>
                   </Block> */}
-
                 </Block>
               </Block>
             </ScrollView>
@@ -297,7 +297,9 @@ const styles = StyleSheet.create({
     height: thumbMeasure,
   },
   container: {
-    flex: 1,
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   list: {
     paddingVertical: 4,

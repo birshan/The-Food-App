@@ -61,6 +61,7 @@ ID in the meallog entry
             return usersMeals;
 
         } else {
+            System.out.println("Error finding meals");
             return null;
         }
     }
