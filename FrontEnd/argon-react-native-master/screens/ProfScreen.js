@@ -21,7 +21,6 @@ class ProfScreen extends React.Component {
 
     this.state = {
       loading: false,
-      userName: " Dr",
       //foods which are appearing on the search screen temp
       data: [],
       filteredData: [],
@@ -31,19 +30,23 @@ class ProfScreen extends React.Component {
     };
   }
 
-  //     getUserName = async () => {
-  //     let userName = '';
-  //     try {
-  //       userName = await AsyncStorage.getItem('userName') || 'none';
-  //     } catch (error) {
-  //       // Error retrieving data
-  //       console.log(error.message);
-  //     }
-  //     this.setState({userName: userName});
-  //     return this.state.userName;
-  //   }
-
   componentDidMount() {
+    /*
+    //TODO: GET ALL USERS TO THE LIST IS NOT IMPLEMENTED HERE
+    let mealRequest = new FetchRequest("GET", "/api/meal", token);
+      let mealResponse = await mealRequest.getAllMeals();
+      if (mealResponse.ok) {
+        let data = await mealResponse.json();
+        console.log(data);
+        this.setState({
+          clientData: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    */
+
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((responseJson) => {
@@ -114,7 +117,7 @@ class ProfScreen extends React.Component {
         <Block flex>
           <Block>
             <Text style={{ textAlign: "center", fontSize: 25 }}>
-              Welcome{this.state.userName}
+              Welcome
             </Text>
           </Block>
           <ImageBackground

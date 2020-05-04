@@ -43,19 +43,7 @@ class Profile extends React.Component {
       jwtToken: "",
     };
   }
-  async componentDidMount(text) {
-    // getUserId = async () => {
-    //   let userId = '';
-    //   try {
-    //     userId = await AsyncStorage.getItem('userId') || 'none';
-    //   } catch (error) {
-    //     // Error retrieving data
-    //     console.log(error.message);
-    //   }
-    //   return userId;
-    // }
-
-    //this.setState({ text });
+  async componentDidMount() {
 
     /* 
     //TODO: COMMENTED OUT FOR EASY DEVELOPMENT 
@@ -116,13 +104,26 @@ class Profile extends React.Component {
   renderItem = (data) => (
     <View style={styles.list}>
       <TouchableOpacity onLongPress={() => this.removeItemValue(data.item.id)}>
-        <Text bold size={18} color="#32325D">
+        <Text bold size={18} color="#2963F6">
           {data.item.name}
         </Text>
         <Text>{data.item.email}</Text>
       </TouchableOpacity>
     </View>
   );
+  /*
+  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+    renderItem = (data) => (
+      <View style={styles.list}>
+        <TouchableOpacity onLongPress={() => this.removeItemValue(mealData.item.mealId)}>
+          <Text bold size={18} color="#2963F6">
+            {mealData.item.foodName}
+          </Text>
+          <Text>{mealData.item.date}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+    */
 
   removeItemValue = async (id) => {
     const filteredData = this.state.dataSource.filter((item) => item.id !== id);
@@ -147,6 +148,30 @@ class Profile extends React.Component {
     return;
   };
 
+  /*
+  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+  removeItemValue = async (mealId) => {
+    const filteredData = this.state.mealData.filter((item) => item.mealId !== mealId);
+    this.setState({ mealData: filteredData });
+
+    const url = serverURL + "/api/meal/" + mealId;
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let request = new FetchRequest("DELETE", "/api/meal", token);
+      let response = request.deleteMeal(mealId);
+      if (response.ok) {
+        console.log(response);
+        alert("Removed food from your meal list");
+      } else {
+        console.log("Error occured");
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
+*/
   render() {
     alert("To delete a food item hold on the item");
     if (this.state.loading) {
@@ -169,68 +194,6 @@ class Profile extends React.Component {
               style={{ width, marginTop: "25%" }}
             >
               <Block flex style={styles.profileCard}>
-                {/* <Block middle style={styles.avatarContainer}>
-                  <Image
-                    source={{ uri: Images.ProfilePicture }}
-                    style={styles.avatar}
-                  />
-                </Block>
-                <Block style={styles.info}>
-                  <Block
-                    middle
-                    row
-                    space="evenly"
-                    style={{ marginTop: 20, paddingBottom: 24 }}
-                  >
-                    <Button
-                      small
-                      style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                    >
-                      CONNECT
-                    </Button>
-                    <Button
-                      small
-                      style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                    >
-                      MESSAGE
-                    </Button>
-                  </Block>
-                  <Block row space="between">
-                    <Block middle>
-                      <Text
-                        bold
-                        size={12}
-                        color="#525F7F"
-                        style={{ marginBottom: 4 }}
-                      >
-                        2K
-                      </Text>
-                      <Text size={12}>Orders</Text>
-                    </Block>
-                    <Block middle>
-                      <Text
-                        bold
-                        color="#525F7F"
-                        size={12}
-                        style={{ marginBottom: 4 }}
-                      >
-                        10
-                      </Text>
-                      <Text size={12}>Photos</Text>
-                    </Block>
-                    <Block middle>
-                      <Text
-                        bold
-                        color="#525F7F"
-                        size={12}
-                        style={{ marginBottom: 4 }}
-                      >
-                        89
-                      </Text>
-                      <Text size={12}>Comments</Text>
-                    </Block>
-                  </Block>
-                </Block> */}
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
@@ -250,189 +213,28 @@ class Profile extends React.Component {
                           keyExtractor={(item) => item.id.toString()}
                         />
                       </View>
+                      {/*
+                      //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+                      <View style={styles.container}>
+                        <FlatList
+                          data={this.state.mealData}
+                          ItemSeparatorComponent={this.FlatListItemSeparator}
+                          renderItem={(item) => this.renderItem(item)}
+                          keyExtractor={(item) => item.mealId.toString()}
+                        />
+                      </View> */}
                     </Block>
                   </Block>
 
                   {/* <Block>
-                    <Button title="Go to Nutrition Summary" onPress={() => navigate('Profile')}/>
+                    <Button title="Go to Nutrition Summary" onPress={() => navigate('Nutrition')}/>
                   </Block> */}
 
-                  {/* <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                    <Block style={styles.divider} />
-                  </Block>
-                  <Block middle>
-                    <Text
-                      size={16}
-                      color="#525F7F"
-                      style={{ textAlign: "center" }}
-                    >
-                      An artist of considerable range, Jessica name taken by
-                      Melbourne …
-                    </Text>
-                    <Button
-                      color="transparent"
-                      textStyle={{
-                        color: "#233DD2",
-                        fontWeight: "500",
-                        fontSize: 16
-                      }}
-                    >
-                      Show more
-                    </Button>
-                  </Block>
-                  <Block
-                    row
-                    style={{ paddingVertical: 14, alignItems: "baseline" }}
-                  >
-                    <Text bold size={16} color="#525F7F">
-                      Album
-                    </Text>
-                  </Block>
-                  <Block
-                    row
-                    style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-                  >
-                    <Button
-                      small
-                      color="transparent"
-                      textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                    >
-                      View all
-                    </Button>
-                  </Block>
-                  <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                    <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      {Images.Viewed.map((img, imgIndex) => (
-                        <Image
-                          source={{ uri: img }}
-                          key={`viewed-${img}`}
-                          resizeMode="cover"
-                          style={styles.thumb}
-                        />
-                      ))}
-                    </Block>
-                  </Block> */}
                 </Block>
               </Block>
             </ScrollView>
           </ImageBackground>
         </Block>
-        {/* <ScrollView showsVerticalScrollIndicator={false} 
-                    contentContainerStyle={{ flex: 1, width, height, zIndex: 9000, backgroundColor: 'red' }}>
-        <Block flex style={styles.profileCard}>
-          <Block middle style={styles.avatarContainer}>
-            <Image
-              source={{ uri: Images.ProfilePicture }}
-              style={styles.avatar}
-            />
-          </Block>
-          <Block style={styles.info}>
-            <Block
-              middle
-              row
-              space="evenly"
-              style={{ marginTop: 20, paddingBottom: 24 }}
-            >
-              <Button small style={{ backgroundColor: argonTheme.COLORS.INFO }}>
-                CONNECT
-              </Button>
-              <Button
-                small
-                style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-              >
-                MESSAGE
-              </Button>
-            </Block>
-
-            <Block row space="between">
-              <Block middle>
-                <Text
-                  bold
-                  size={12}
-                  color="#525F7F"
-                  style={{ marginBottom: 4 }}
-                >
-                  2K
-                </Text>
-                <Text size={12}>Orders</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  10
-                </Text>
-                <Text size={12}>Photos</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  89
-                </Text>
-                <Text size={12}>Comments</Text>
-              </Block>
-            </Block>
-          </Block>
-          <Block flex>
-              <Block middle style={styles.nameInfo}>
-                <Text bold size={28} color="#32325D">
-                  Jessica Jones, 27
-                </Text>
-                <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                  San Francisco, USA
-                </Text>
-              </Block>
-              <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                <Block style={styles.divider} />
-              </Block>
-              <Block middle>
-                <Text size={16} color="#525F7F" style={{ textAlign: "center" }}>
-                  An artist of considerable range, Jessica name taken by
-                  Melbourne …
-                </Text>
-                <Button
-                  color="transparent"
-                  textStyle={{
-                    color: "#233DD2",
-                    fontWeight: "500",
-                    fontSize: 16
-                  }}
-                >
-                  Show more
-                </Button>
-              </Block>
-              <Block
-                row
-                style={{ paddingVertical: 14, alignItems: "baseline" }}
-              >
-                <Text bold size={16} color="#525F7F">
-                  Album
-                </Text>
-              </Block>
-              <Block
-                row
-                style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-              >
-                <Button
-                  small
-                  color="transparent"
-                  textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                >
-                  View all
-                </Button>
-              </Block>
-              <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                <Block row space="between" style={{ flexWrap: "wrap" }}>
-                  {Images.Viewed.map((img, imgIndex) => (
-                    <Image
-                      source={{ uri: img }}
-                      key={`viewed-${img}`}
-                      resizeMode="cover"
-                      style={styles.thumb}
-                    />
-                  ))}
-                </Block>
-              </Block>
-          </Block>
-        </Block>
-                  </ScrollView>*/}
       </Block>
     );
   }
