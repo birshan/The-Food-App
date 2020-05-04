@@ -170,6 +170,7 @@ class Profile extends React.Component {
   };
 
   render() {
+    alert("To delete a food item long press on the item");
     if (this.state.loading) {
       return (
         <View style={styles.loader}>
