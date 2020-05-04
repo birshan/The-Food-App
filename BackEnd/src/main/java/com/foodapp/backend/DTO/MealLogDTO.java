@@ -21,4 +21,11 @@ public class MealLogDTO {
         return weight;
     }
 
+    @Override
+    public String toString() {
+        return "MealLogDTO{" +
+                "foodName='" + foodName + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }

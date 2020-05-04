@@ -44,13 +44,24 @@ class Profile extends React.Component {
     };
   }
   async componentDidMount(text) {
+    // getUserId = async () => {
+    //   let userId = '';
+    //   try {
+    //     userId = await AsyncStorage.getItem('userId') || 'none';
+    //   } catch (error) {
+    //     // Error retrieving data
+    //     console.log(error.message);
+    //   }
+    //   return userId;
+    // }
+
     //this.setState({ text });
 
     //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
 
     try {
       let token = await AsyncStorage.getItem("userToken");
-      console.log(token);
+      // console.log(token);
       let request = new FetchRequest("GET", "/user", token);
       let response = await request.getUserInfo();
       if (!response.ok) {
@@ -59,7 +70,6 @@ class Profile extends React.Component {
         alert("Error occured getting user data");
       } else {
         let data = await response.json();
-        console.log(data);
         this.setState({
           userData: data,
         });
@@ -113,7 +123,6 @@ class Profile extends React.Component {
   removeItemValue = async (id) => {
     const filteredData = this.state.dataSource.filter((item) => item.id !== id);
     this.setState({ dataSource: filteredData });
-    alert("Successfully deleted " + id);
 
     const url = serverURL + "/api/meal/" + id;
     try {
@@ -134,7 +143,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    alert("To delete a food item hold on the item");
     if (this.state.loading) {
       return (
         <View style={styles.loader}>

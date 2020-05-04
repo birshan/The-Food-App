@@ -1,12 +1,17 @@
 import React from "react";
 import { Camera } from "expo-camera";
-import { View, Text, Platform } from "react-native";
+import {
+  View,
+  Text,
+  Platform,
+  AsyncStorage,
+  ActivityIndicator,
+} from "react-native";
 import * as Permissions from "expo-permissions";
 
 import styles from "./styles";
 import Toolbar from "./toolbar.component";
 import Gallery from "./gallery.component";
-import { resetWarningCache } from "prop-types";
 
 export default class CameraPage extends React.Component {
   camera = null;
@@ -17,6 +22,8 @@ export default class CameraPage extends React.Component {
     hasCameraPermission: null,
     cameraType: Camera.Constants.Type.back,
     flashMode: Camera.Constants.FlashMode.off,
+    jwt: "",
+    loading: false,
   };
 
   setFlashMode = (flashMode) => this.setState({ flashMode });
@@ -28,10 +35,6 @@ export default class CameraPage extends React.Component {
   };
 
   handleShortCapture = async () => {
-    // const photoData = await this.camera.takePictureAsync();
-    // console.log(photoData);
-    // let response = this.serverUpload(photoData);
-    // console.log(response);
     console.log("Camera pressed");
     if (this.camera) {
       this.camera
@@ -39,7 +42,11 @@ export default class CameraPage extends React.Component {
           skipProcessing: true,
         })
         .then((data) => {
-          this.serverUpload(data);
+          this.setState((prevState) => ({
+            ...prevState,
+            loading: true,
+          }));
+          this.serverUpload(data, this.state.jwt);
         });
     } else {
       console.log("Camera unavailable");
@@ -50,11 +57,12 @@ export default class CameraPage extends React.Component {
     });
   };
 
-  serverUpload = async (photo) => {
-    let url = "http://192.168.1.10:8080/upload_image";
+  serverUpload = async (photo, jwt) => {
+    let url = "http://192.168.1.4:8080/upload_image";
     let options = {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
       },
       method: "POST",
       mode: "cors",
@@ -63,17 +71,19 @@ export default class CameraPage extends React.Component {
     console.log(options);
 
     await fetch(url, options)
-      .then((response) => {
-        if (response.ok) {
-          console.log(response);
-          alert("Image Uploaded");
-        } else {
-          console.log("error occured");
-          console.log(response);
-        }
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.pushInfo(
+          data.foodName,
+          data.servingDescription,
+          data.servingWeight
+        );
+        // alert(data);
       })
       .catch((error) => {
         console.log("error", error);
+        alert("Error: Problem with gettng prediction");
       });
     return;
   };
@@ -87,6 +97,19 @@ export default class CameraPage extends React.Component {
     });
     return data;
   };
+
+  pushInfo(foodName, servingDescription, servingWeight) {
+    console.log(foodName);
+    this.setState((prevState) => ({
+      ...prevState,
+      loading: false,
+    }));
+    this.props.navigation.push("MealLog", {
+      foodName: foodName,
+      servingDescription: servingDescription,
+      servingWeight: servingWeight,
+    });
+  }
   //   handleLongCapture = async () => {
   //     const videoData = await this.camera.recordAsync();
   //     this.setState({
@@ -98,6 +121,15 @@ export default class CameraPage extends React.Component {
   async componentDidMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
     const audio = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
+    try {
+      const jwt = await AsyncStorage.getItem("userToken");
+      this.setState({
+        jwt: jwt,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     const hasCameraPermission =
       camera.status === "granted" && audio.status === "granted";
 
@@ -119,31 +151,39 @@ export default class CameraPage extends React.Component {
       return <Text>Access to camera has been denied.</Text>;
     }
 
-    return (
-      <React.Fragment>
-        <View>
-          <Camera
-            type={cameraType}
-            flashMode={flashMode}
-            style={styles.preview}
-            ref={(camera) => (this.camera = camera)}
-          />
+    if (this.state.loading) {
+      return (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color="#0c9" />
         </View>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <View>
+            <Camera
+              type={cameraType}
+              flashMode={flashMode}
+              style={styles.preview}
+              ref={(camera) => (this.camera = camera)}
+            />
+          </View>
 
-        {captures.length > 0 && <Gallery captures={captures} />}
+          {captures.length > 0 && <Gallery captures={captures} />}
 
-        <Toolbar
-          capturing={capturing}
-          flashMode={flashMode}
-          cameraType={cameraType}
-          setFlashMode={this.setFlashMode}
-          setCameraType={this.setCameraType}
-          onCaptureIn={this.handleCaptureIn}
-          onCaptureOut={this.handleCaptureOut}
-          //   onLongCapture={this.handleLongCapture}
-          onShortCapture={this.handleShortCapture}
-        />
-      </React.Fragment>
-    );
+          <Toolbar
+            capturing={capturing}
+            flashMode={flashMode}
+            cameraType={cameraType}
+            setFlashMode={this.setFlashMode}
+            setCameraType={this.setCameraType}
+            onCaptureIn={this.handleCaptureIn}
+            onCaptureOut={this.handleCaptureOut}
+            //   onLongCapture={this.handleLongCapture}
+            onShortCapture={this.handleShortCapture}
+          />
+        </React.Fragment>
+      );
+    }
   }
 }

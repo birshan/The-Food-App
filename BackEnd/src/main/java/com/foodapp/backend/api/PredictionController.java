@@ -37,21 +37,23 @@ public class PredictionController {
         if(file.getName().equalsIgnoreCase("file")){
             System.out.println(file.getName());
         }
-        try {
-            storageService.store(file);
-            System.out.println("file was saved");
-        } catch (IOException e) {
-            System.out.println("Error Occurred");
-            e.printStackTrace();
-            return (ResponseEntity<?>) ResponseEntity.badRequest();
-        }
+//        try {
+//            storageService.store(file);
+//            System.out.println("file was saved");
+//        } catch (IOException e) {
+//            System.out.println("Error Occurred");
+//            e.printStackTrace();
+//            return (ResponseEntity<?>) ResponseEntity.badRequest();
+//        }
         try {
             PredictionDTO response = predictionService.getPrediction(file);
             if(response == null || response.getPrediction().equals("")) {
                 return ResponseEntity.status(500).body("Error Occured");
 
             } else {
+
                 Food foodInfo = foodService.findById(response.getPrediction());
+//                Food foodInfo = foodService.findById(response.getPrediction());
                 PredictionResponse predictionResponse = new PredictionResponse();
                 predictionResponse.setFoodName(foodInfo.getName());
                 predictionResponse.setCalories(foodInfo.getCalories());

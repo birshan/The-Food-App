@@ -18,7 +18,8 @@ import Profile from "../screens/Profile";
 // import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
-import Scanimg from "../screens/Camera";
+import CameraPage from "../components/camera.page";
+// import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
 import SignOut from "../screens/SignOut";
@@ -253,13 +254,13 @@ const ProfScreenStack = createStackNavigator(
 const ScanimgStack = createStackNavigator(
   {
     Scanimg: {
-      screen: Scanimg,
+      screen: CameraPage,
       navigationOptions: ({ navigation }) => ({
         headerTransparent: true,
       }),
     },
   },
-  /*   {
+  {
     MealLog: {
       screen: CreateMealLog,
       navigationOptions: ({ navigation }) => ({
@@ -268,7 +269,7 @@ const ScanimgStack = createStackNavigator(
       }),
     },
   },
- */ {
+  {
     cardStyle: { backgroundColor: "#FFFFFF" },
     transitionConfig,
   }

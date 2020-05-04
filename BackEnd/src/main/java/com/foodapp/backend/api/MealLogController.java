@@ -29,6 +29,7 @@ public class MealLogController {
     @PostMapping
     public ResponseEntity<?> addMeal(Principal principal, @RequestBody MealLogDTO mealLogDTO) {
         try {
+            System.out.println(mealLogDTO);
             mealLogService.addMeal(mealLogDTO.getFoodName(), mealLogDTO.getWeight(), principal.getName());
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new ErrorResponse("Error Occurred in Server"));
