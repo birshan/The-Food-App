@@ -77,6 +77,16 @@ class NutritionSum extends React.Component {
       <Text style={(styles.lightText, { color: "blue", textAlign: "right" })}>
         {data.item.calories} kcal
       </Text>
+      <Text
+        style={(styles.lightText, { color: "blue", textAlign: "right" })}
+      >
+        Fat Weight {data.item.fatWeight}
+      </Text>
+      <Text
+        style={(styles.lightText, { color: "blue", textAlign: "right" })}
+      >
+        Carbohydrate Weight {data.item.carbWeight}
+      </Text>
     </View>
   );
   render() {
