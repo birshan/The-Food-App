@@ -16,10 +16,10 @@ feature_extractor = vgg16.VGG16(weights='imagenet', include_top=False, input_sha
 x_train = feature_extractor.predict(x_train)
 x_test = feature_extractor.predict(x_test)
 model.add(Flatten(input_shape=x_train.shape[1:]))
-model.add(Dense(128, activation='relu'))
+model.add(Dense(512, activation='relu'))
 model.add(Dropout(0.5))
 model.add(BatchNormalization())
-model.add(Dense(256, activation='relu'))
+model.add(Dense(1024, activation='relu'))
 model.add(Dropout(0.5))
 model.add(BatchNormalization())
 model.add(Dense(6, activation='softmax'))
@@ -35,7 +35,7 @@ model.compile(
 model.fit(
     x_train,
     y_train,
-    batch_size=32,
+    batch_size=64,
     epochs=15,
     validation_data=(x_test, y_test),
     shuffle=True
