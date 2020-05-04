@@ -29,6 +29,7 @@ class ProfScreen extends React.Component {
       error: null,
       searchTerm: "",
       value: "",
+      clientData: [],
     };
   }
 
@@ -41,7 +42,7 @@ class ProfScreen extends React.Component {
         let data = await response.json();
         console.log(data);
         this.setState({
-          clientData: data,
+          filteredData: data,
         });
       }
     } catch (error) {
@@ -75,7 +76,6 @@ class ProfScreen extends React.Component {
 
   searchFilterFunction = (text) => {
     const search = text.toLowerCase();
-
     this.setState({
       value: search,
       filteredData: this.state.data.filter((item) =>
@@ -128,18 +128,21 @@ class ProfScreen extends React.Component {
               <Block flex>
                 <View style={styles.container}>
                   <FlatList
-                    keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item.userID.toString()}
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
                       <TouchableOpacity
                         onPress={() =>
                           this.onPress(
-                            item.id.toString(),
+                            item.userID.toString(),
                             item.email.toString()
                           )
                         }
                       >
-                        <ListItem title={item.name} subtitle={item.email} />
+                        <ListItem
+                          title={item.firstName + " " + item.lastName}
+                          subtitle={item.email}
+                        />
                       </TouchableOpacity>
                       //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
                     )}
