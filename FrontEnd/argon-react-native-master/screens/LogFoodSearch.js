@@ -7,7 +7,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import { Block, Text, theme } from "galio-framework";
@@ -22,8 +23,14 @@ class LogFoodSearch extends React.Component {
 
     this.state = {
       loading: false,
+      userData: {
+        firstName: "Jessica",
+        lastName: "Jones",
+        email: "jessica@dieter.com",
+      },
       //foods which are appearing on the search screen temp
       data: [],
+      mealData: [],
       filteredData: [],
       error: null,
       searchTerm: "",
@@ -31,7 +38,41 @@ class LogFoodSearch extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    /*
+        //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+         try {
+          let token = await AsyncStorage.getItem("userToken");
+          console.log(token);
+          let request = new FetchRequest("GET", "/user", token);
+          let response = await request.getUserInfo();
+          if (!response.ok) {
+            //handle errors
+            console.log(response);
+            alert("Error occured getting user data");
+          } else {
+            let data = await response.json();
+            console.log(data);
+            this.setState({
+              userData: data,
+            });
+          }
+    
+        
+        let mealRequest = new FetchRequest("GET", "/api/meal", token);
+          let mealResponse = await mealRequest.getAllMeals();
+          if (mealResponse.ok) {
+            let data = await mealResponse.json();
+            console.log(data);
+            this.setState({
+              mealData: data,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        */
+
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(response => response.json())
       .then((responseJson) => {
@@ -69,6 +110,20 @@ class LogFoodSearch extends React.Component {
     });
   };
 
+  /*
+  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+  searchFilterFunction = text => {
+    const search = text.toLowerCase();
+
+    this.setState({
+      value: search,
+      filteredData: this.state.mealData.filter(
+        item =>
+          (item.foodName.toString().toLowerCase().includes(search))
+      )
+    });
+  };
+*/
   renderHeader = () => {
     return (
       <SearchBar
@@ -81,7 +136,7 @@ class LogFoodSearch extends React.Component {
     );
   };
 
-  onPress = async (id,email) => {
+  onPress = async (id, email) => {
     const url = "http://192.168.1.6:5000/upload_image/";
     const options = {
       headers: {
@@ -108,6 +163,36 @@ class LogFoodSearch extends React.Component {
     return;
   }
 
+  /*
+  //TODO: ADDING MEAL TO USERS MEAL LOG API REQUEST NOT IMPLEMENTED HERE
+  onPress = async (id,foodName) => {
+    const url = "http://192.168.1.6:5000/upload_image/";
+    const options = {
+      headers: {
+        "Content-Type": "form-data",
+      },
+      method: "POST",
+      body: url + id + "/" + email,
+    };
+    console.log(options);
+
+    await fetch(url, options)
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          alert("Added food to your meal list");
+        } else {
+          console.log("Error occured");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    return;
+  }
+   */
+
   render() {
     if (this.state.loading) {
       return (
@@ -118,35 +203,53 @@ class LogFoodSearch extends React.Component {
     }
     else {
       return (
-         <Block flex>
+        <Block flex>
           <ImageBackground
             source={Images.ProfileBackground}
             style={styles.bgContainer}
             imageStyle={styles.Background}
           >
-          <ScrollView>
-          <Block flex>
-            <View style={styles.container}>
-              <FlatList
-                keyExtractor={item => item.id.toString()}
-                data={this.state.filteredData}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => this.onPress(item.id.toString() , item.email.toString())}>
-                    <ListItem
-                      title={item.name}
-                      subtitle={item.email}
-                    />
-                  </TouchableOpacity>
-                  //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
-                )}
-                extraData={this.state}
-                ItemSeparatorComponent={this.renderSeparator}
-                ListHeaderComponent={this.renderHeader}
-              />
-              
-            </View>
-          </Block>
-          </ScrollView>
+            <ScrollView>
+              <Block flex>
+                <View style={styles.container}>
+                  <FlatList
+                    keyExtractor={item => item.id.toString()}
+                    data={this.state.filteredData}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity onPress={() => this.onPress(item.id.toString(), item.email.toString())}>
+                        <ListItem
+                          title={item.name}
+                          subtitle={item.email}
+                        />
+                      </TouchableOpacity>
+                      //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
+                    )}
+                    extraData={this.state}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    ListHeaderComponent={this.renderHeader}
+                  />
+
+                  {/*
+                  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+                  <FlatList
+                    keyExtractor={item => item.mealId.toString()}
+                    data={this.state.filteredData}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity onPress={() => this.onPress(item.id.toString(), item.foodName.toString())}>
+                        <ListItem
+                          title={item.foodName}
+                        />
+                      </TouchableOpacity>
+                      //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
+                    )}
+                    extraData={this.state}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    ListHeaderComponent={this.renderHeader}
+                  /> */}
+
+                </View>
+              </Block>
+            </ScrollView>
           </ImageBackground>
         </Block>
       );
@@ -157,7 +260,7 @@ class LogFoodSearch extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+
   },
   bgContainer: {
     width: width,
