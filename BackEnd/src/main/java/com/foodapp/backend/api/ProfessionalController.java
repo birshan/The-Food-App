@@ -5,7 +5,6 @@ import com.foodapp.backend.DTO.UserInfo;
 import com.foodapp.backend.pojo.User;
 import com.foodapp.backend.services.MealLogService;
 import com.foodapp.backend.services.UserService;
-import com.sun.media.jfxmediaimpl.HostUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

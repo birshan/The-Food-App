@@ -15,6 +15,8 @@ import { Block, Text, theme } from "galio-framework";
 import { Images, argonTheme } from "../constants";
 const { width, height } = Dimensions.get("screen");
 import _ from "lodash";
+import { FetchRequest } from "../functions/API/FetchRequest";
+import { serverURL } from "../constants/api";
 
 class LogFoodSearch extends React.Component {
 
@@ -24,9 +26,9 @@ class LogFoodSearch extends React.Component {
     this.state = {
       loading: false,
       userData: {
-        firstName: "Jessica",
-        lastName: "Jones",
-        email: "jessica@dieter.com",
+        firstName: "",
+        lastName: "",
+        email: "",
       },
       //foods which are appearing on the search screen temp
       data: [],
@@ -39,50 +41,33 @@ class LogFoodSearch extends React.Component {
   }
 
   async componentDidMount() {
-    /*
-        //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-         try {
-          let token = await AsyncStorage.getItem("userToken");
-          console.log(token);
-          let request = new FetchRequest("GET", "/user", token);
-          let response = await request.getUserInfo();
-          if (!response.ok) {
-            //handle errors
-            console.log(response);
-            alert("Error occured getting user data");
-          } else {
-            let data = await response.json();
-            console.log(data);
-            this.setState({
-              userData: data,
-            });
-          }
-    
-        
-        let mealRequest = new FetchRequest("GET", "/api/meal", token);
-          let mealResponse = await mealRequest.getAllMeals();
-          if (mealResponse.ok) {
-            let data = await mealResponse.json();
-            console.log(data);
-            this.setState({
-              mealData: data,
-            });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-        */
 
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(response => response.json())
-      .then((responseJson) => {
+    try {
+      let token = await AsyncStorage.getItem("userToken");
+      let mealRequest = new FetchRequest("GET", "/api/meal", token);
+      let mealResponse = await mealRequest.getAllMeals();
+      if (mealResponse.ok) {
+        let data = await mealResponse.json();
         this.setState({
+          data: data,
+          filteredData: data,
           loading: false,
-          data: responseJson,
-          filteredData: responseJson
-        })
-      })
-      .catch(error => console.log(error)) //to catch the errors if any
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then(response => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       loading: false,
+    //       data: responseJson,
+    //       filteredData: responseJson
+    //     })
+    //   })
+    //   .catch(error => console.log(error)) //to catch the errors if any
   }
 
   renderSeparator = () => {
@@ -98,6 +83,8 @@ class LogFoodSearch extends React.Component {
     );
   };
 
+
+
   searchFilterFunction = text => {
     const search = text.toLowerCase();
 
@@ -105,25 +92,11 @@ class LogFoodSearch extends React.Component {
       value: search,
       filteredData: this.state.data.filter(
         item =>
-          (item.name.toString().toLowerCase().includes(search))
-      )
-    });
-  };
-
-  /*
-  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-  searchFilterFunction = text => {
-    const search = text.toLowerCase();
-
-    this.setState({
-      value: search,
-      filteredData: this.state.mealData.filter(
-        item =>
           (item.foodName.toString().toLowerCase().includes(search))
       )
     });
   };
-*/
+
   renderHeader = () => {
     return (
       <SearchBar
@@ -136,30 +109,22 @@ class LogFoodSearch extends React.Component {
     );
   };
 
-  onPress = async (id, email) => {
-    const url = "http://192.168.1.6:5000/upload_image/";
-    const options = {
-      headers: {
-        "Content-Type": "form-data",
-      },
-      method: "POST",
-      body: url + id + "/" + email,
-    };
-    console.log(options);
-
-    await fetch(url, options)
-      .then((response) => {
-        if (response.ok) {
-          console.log(response);
-          alert("Added food to your meal list");
-        } else {
-          console.log("Error occured");
-          console.log(response);
-        }
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+  onPress = async (id, foodName) => {
+    const url = serverURL + "/api/meal/" + foodName;
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let request = new FetchRequest("SAVE", "/api/meal", token);
+      let response = request.saveMeal(foodName,100);
+      if (response.ok) {
+        console.log(response);
+        alert("Added to your meal list");
+      } else {
+        console.log("Error occured");
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     return;
   }
 
@@ -213,29 +178,10 @@ class LogFoodSearch extends React.Component {
               <Block flex>
                 <View style={styles.container}>
                   <FlatList
-                    keyExtractor={item => item.id.toString()}
+                    keyExtractor={item => item.mealID.toString()}
                     data={this.state.filteredData}
                     renderItem={({ item }) => (
-                      <TouchableOpacity onPress={() => this.onPress(item.id.toString(), item.email.toString())}>
-                        <ListItem
-                          title={item.name}
-                          subtitle={item.email}
-                        />
-                      </TouchableOpacity>
-                      //<Text style={styles.lightText, { fontSize: 20 }}>{item.name} {item.email}</Text>
-                    )}
-                    extraData={this.state}
-                    ItemSeparatorComponent={this.renderSeparator}
-                    ListHeaderComponent={this.renderHeader}
-                  />
-
-                  {/*
-                  //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-                  <FlatList
-                    keyExtractor={item => item.mealId.toString()}
-                    data={this.state.filteredData}
-                    renderItem={({ item }) => (
-                      <TouchableOpacity onPress={() => this.onPress(item.id.toString(), item.foodName.toString())}>
+                      <TouchableOpacity onPress={() => this.onPress(item.mealID.toString(), item.foodName.toString())}>
                         <ListItem
                           title={item.foodName}
                         />
@@ -245,8 +191,7 @@ class LogFoodSearch extends React.Component {
                     extraData={this.state}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
-                  /> */}
-
+                  />
                 </View>
               </Block>
             </ScrollView>

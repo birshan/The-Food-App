@@ -145,17 +145,17 @@ class Profile extends React.Component {
   // };
 
   //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-  removeItemValue = async (mealId) => {
+  removeItemValue = async (mealID) => {
     const filteredData = this.state.mealData.filter(
-      (item) => item.mealId !== mealId
+      (item) => item.mealID !== mealID
     );
     this.setState({ mealData: filteredData });
 
-    const url = serverURL + "/api/meal/" + mealId;
+    const url = serverURL + "/api/meal/" + mealID;
     try {
       const token = await AsyncStorage.getItem("userToken");
       let request = new FetchRequest("DELETE", "/api/meal", token);
-      let response = request.deleteMeal(mealId);
+      let response = request.deleteMeal(mealID);
       if (response.ok) {
         console.log(response);
         alert("Removed food from your meal list");
