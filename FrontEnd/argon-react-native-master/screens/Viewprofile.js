@@ -5,11 +5,13 @@ import {
   ActivityIndicator,
   FlatList,
   TouchableOpacity,
-  Button
+  Button,
+  AsyncStorage
 } from "react-native";
 //galio
 import { Block, Text, theme } from "galio-framework";
 import Header from "../components/Header";
+import { FetchRequest } from "../functions/API/FetchRequest";
 
 class ViewProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,57 +26,35 @@ class ViewProfile extends React.Component {
     this.state = {
       loading: true,
       dataSource: [],
-      mealData: [],
+      jwt: "",
     };
   }
   async componentDidMount() {
-    /*
-   //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-   
-      const { params } = this.props.navigation.state;
-      const { id } = params ? params.id : null;
-      const { email } = params ? params.email : null;
-  
-      try {
-     let token = await AsyncStorage.getItem("userToken");
-     console.log(token);
-     let request = new FetchRequest("GET", "/user", token);
-     let response = await request.getUserInfo();
-     if (!response.ok) {
-       //handle errors
-       console.log(response);
-       alert("Error occured getting user data");
-     } else {
-       let data = await response.json();
-       console.log(data);
-       this.setState({
-         userData: data,
-       });
-     }
-     let mealRequest = new FetchRequest("GET", "/api/meal", email);
-     let mealResponse = await mealRequest.getAllMeals();
-     if (mealResponse.ok) {
-       let data = await mealResponse.json();
-       console.log(data);
-       this.setState({
-         mealData: data,
-       });
-     }
-   } catch (error) {
-     console.log(error);
-   }
-  */
-
-    const url = "https://jsonplaceholder.typicode.com/users";
-    fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
+    try {
+      let token = await AsyncStorage.getItem("userToken");
+      let mealRequest = new FetchRequest("GET", "/api/meal", token);
+      let mealResponse = await mealRequest.getAllMeals();
+      if (mealResponse.ok) {
+        let data = await mealResponse.json();
         this.setState({
+          dataSource: data,
           loading: false,
-          dataSource: responseJson,
         });
-      })
-      .catch((error) => console.log(error)); //to catch the errors if any
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // const url = "https://jsonplaceholder.typicode.com/users";
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       loading: false,
+    //       dataSource: responseJson,
+    //     });
+    //   })
+    //   .catch((error) => console.log(error)); //to catch the errors if any
   }
   FlatListItemSeparator = () => {
     return (
@@ -131,10 +111,10 @@ class ViewProfile extends React.Component {
           <Text>Email: {email}</Text>
         </View>
         <FlatList
-          data={this.state.mealData}
+          data={this.state.dataSource}
           ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={(item) => this.renderItem(item)}
-          keyExtractor={(item) => item.mealId.toString()}
+          keyExtractor={(item) => item.mealID.toString()}
         />
         <Button
           title="Back to Professional"

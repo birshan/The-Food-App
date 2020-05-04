@@ -42,7 +42,8 @@ class ProfScreen extends React.Component {
         let data = await response.json();
         console.log(data);
         this.setState({
-          filteredData: data,
+          data: data,
+          filteredData: data
         });
       }
     } catch (error) {
@@ -105,6 +106,7 @@ class ProfScreen extends React.Component {
   }
 
   render() {
+    alert("To delete a food item long press on the item");
     if (this.state.loading) {
       return (
         <View
