@@ -428,14 +428,7 @@ const AppStack = createDrawerNavigator(
         ),
       }),
     },
-    MealLog: {
-      screen: MealLogStack,
-      navigationOptions: (navOpt) => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="MealLog" title="Meals" />
-        ),
-      }),
-    }, // Articles: {
+    // Articles: {
     //   screen: ArticlesStack,
     //   navigationOptions: (navOpt) => ({
     //     drawerLabel: ({ focused }) => (
