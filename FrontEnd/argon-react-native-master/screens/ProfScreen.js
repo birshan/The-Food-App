@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  AsyncStorage,
 } from "react-native";
 import { ListItem, SearchBar } from "react-native-elements";
 import { Block, Text, theme } from "galio-framework";
 import { Images, argonTheme } from "../constants";
 const { width, height } = Dimensions.get("screen");
+import { FetchRequest } from "../functions/API/FetchRequest";
 import _ from "lodash";
 
 class ProfScreen extends React.Component {
@@ -21,7 +23,6 @@ class ProfScreen extends React.Component {
 
     this.state = {
       loading: false,
-      userName: " Dr",
       //foods which are appearing on the search screen temp
       data: [],
       filteredData: [],
@@ -31,30 +32,33 @@ class ProfScreen extends React.Component {
     };
   }
 
-  //     getUserName = async () => {
-  //     let userName = '';
-  //     try {
-  //       userName = await AsyncStorage.getItem('userName') || 'none';
-  //     } catch (error) {
-  //       // Error retrieving data
-  //       console.log(error.message);
-  //     }
-  //     this.setState({userName: userName});
-  //     return this.state.userName;
-  //   }
-
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((responseJson) => {
+  async componentDidMount() {
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      let usersRequest = new FetchRequest("GET", "/pro", token);
+      let response = await usersRequest.request();
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
         this.setState({
-          loading: false,
-          data: responseJson,
-          filteredData: responseJson,
+          clientData: data,
         });
-      })
-      .catch((error) => console.log(error)); //to catch the errors if any
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+  //   fetch("https://jsonplaceholder.typicode.com/users")
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({
+  //         loading: false,
+  //         data: responseJson,
+  //         filteredData: responseJson,
+  //       });
+  //     })
+  //     .catch((error) => console.log(error)); //to catch the errors if any
+  // }
 
   renderSeparator = () => {
     return (
@@ -113,9 +117,7 @@ class ProfScreen extends React.Component {
       return (
         <Block flex>
           <Block>
-            <Text style={{ textAlign: "center", fontSize: 25 }}>
-              Welcome{this.state.userName}
-            </Text>
+            <Text style={{ textAlign: "center", fontSize: 25 }}>Welcome</Text>
           </Block>
           <ImageBackground
             source={Images.ProfileBackground}

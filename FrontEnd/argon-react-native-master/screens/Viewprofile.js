@@ -24,13 +24,46 @@ class ViewProfile extends React.Component {
     this.state = {
       loading: true,
       dataSource: [],
+      mealData: [],
     };
   }
-  componentDidMount() {
-    /* Get the param from professional screen */
-    // const { params } = this.props.navigation.state;
-    // const { id } = params ? params.id : null;
-    // const { email } = params ? params.email : null;
+  async componentDidMount() {
+    /*
+   //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
+   
+      const { params } = this.props.navigation.state;
+      const { id } = params ? params.id : null;
+      const { email } = params ? params.email : null;
+  
+      try {
+     let token = await AsyncStorage.getItem("userToken");
+     console.log(token);
+     let request = new FetchRequest("GET", "/user", token);
+     let response = await request.getUserInfo();
+     if (!response.ok) {
+       //handle errors
+       console.log(response);
+       alert("Error occured getting user data");
+     } else {
+       let data = await response.json();
+       console.log(data);
+       this.setState({
+         userData: data,
+       });
+     }
+     let mealRequest = new FetchRequest("GET", "/api/meal", email);
+     let mealResponse = await mealRequest.getAllMeals();
+     if (mealResponse.ok) {
+       let data = await mealResponse.json();
+       console.log(data);
+       this.setState({
+         mealData: data,
+       });
+     }
+   } catch (error) {
+     console.log(error);
+   }
+  */
 
     const url = "https://jsonplaceholder.typicode.com/users";
     fetch(url)
@@ -55,28 +88,25 @@ class ViewProfile extends React.Component {
     );
   };
   renderItem = (data) => (
-    /*<View>
-            <Text style={styles.lightText, { fontSize: 30,color:'#7d0e6a'}}>{data.item.name}</Text>
-            <View>
-                <Text style={styles.lightText, { color: '#9404d1', textAlign:'right'}}>{data.item.email}</Text>
-                <Text style={styles.lightText, { color: '#9404d1', textAlign:'right'}}>{data.item.phone}</Text>
-            </View>
-        </View>*/
-
     <TouchableOpacity style={styles.list}>
       <Text style={(styles.lightText, { fontSize: 30, color: "#7d0e6a" })}>
-        {data.item.name}
+        {data.item.foodName}
       </Text>
       <View>
         <Text
           style={(styles.lightText, { color: "#9404d1", textAlign: "right" })}
         >
-          {data.item.email}
+          Fat Weight {data.item.fatWeight}
         </Text>
         <Text
           style={(styles.lightText, { color: "#9404d1", textAlign: "right" })}
         >
-          {data.item.phone}
+          Carbohydrate Weight {data.item.carbWeight}
+        </Text>
+        <Text
+          style={(styles.lightText, { color: "#9404d1", textAlign: "right" })}
+        >
+          Date {data.item.date}
         </Text>
       </View>
     </TouchableOpacity>
@@ -97,17 +127,16 @@ class ViewProfile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Text bold size={28} color="#32325D">Hello {email}</Text>
-          <Text>Id: {email}</Text>
+          <Text bold size={28} color="#32325D">Hello</Text>
           <Text>Email: {email}</Text>
         </View>
         <FlatList
-          data={this.state.dataSource}
+          data={this.state.mealData}
           ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={(item) => this.renderItem(item)}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.mealId.toString()}
         />
-        <Button 
+        <Button
           title="Back to Professional"
           color="#000000"
           onPress={() => this.props.navigation.push('ProfScreen')}
