@@ -57,12 +57,11 @@ class Profile extends React.Component {
 
     //this.setState({ text });
 
-    /* 
-    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT 
+    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
 
-       try {
+    try {
       let token = await AsyncStorage.getItem("userToken");
-      console.log(token);
+      // console.log(token);
       let request = new FetchRequest("GET", "/user", token);
       let response = await request.getUserInfo();
       if (!response.ok) {
@@ -71,7 +70,6 @@ class Profile extends React.Component {
         alert("Error occured getting user data");
       } else {
         let data = await response.json();
-        console.log(data);
         this.setState({
           userData: data,
         });
@@ -80,7 +78,6 @@ class Profile extends React.Component {
       let mealResponse = await mealRequest.getAllMeals();
       if (mealResponse.ok) {
         let data = await mealResponse.json();
-        console.log(data);
         this.setState({
           mealData: data,
         });
@@ -88,7 +85,6 @@ class Profile extends React.Component {
     } catch (error) {
       console.log(error);
     }
- */
     console.log(this.state.mealData);
     const url = "https://jsonplaceholder.typicode.com/users";
     fetch(url)
@@ -127,7 +123,6 @@ class Profile extends React.Component {
   removeItemValue = async (id) => {
     const filteredData = this.state.dataSource.filter((item) => item.id !== id);
     this.setState({ dataSource: filteredData });
-    alert("Successfully deleted " + id);
 
     const url = serverURL + "/api/meal/" + id;
     try {
@@ -148,7 +143,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    alert("To delete a food item hold on the item");
     if (this.state.loading) {
       return (
         <View style={styles.loader}>

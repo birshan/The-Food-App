@@ -67,6 +67,9 @@ class Onboarding extends React.Component {
     //     } else if (response.status(500)) {
     //       alert("Error: Problem with the network");
     //     }
+    //     this.setState({
+    //       loginProcess: false,
+    //     });
     //   } else {
     //     let data = await response.json();
     //     console.log(data);
@@ -77,10 +80,10 @@ class Onboarding extends React.Component {
     // } catch (error) {
     //   alert("Error: Problem connecting the network");
     //   console.log(error);
+    //   this.setState({
+    //     loginProcess: false,
+    //   });
     // }
-    // this.setState({
-    //   loginProcess: false,
-    // });
   };
 
   _signUp = () => {

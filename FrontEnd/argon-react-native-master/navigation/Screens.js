@@ -18,7 +18,8 @@ import Profile from "../screens/Profile";
 // import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
-import Scanimg from "../screens/Camera";
+import CameraPage from "../components/camera.page";
+// import Scanimg from "../screens/Camera";
 import LogFoodSearch from "../screens/LogFoodSearch";
 import NutritionSum from "../screens/NutritionSum";
 import SignOut from "../screens/SignOut";
@@ -32,7 +33,7 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-0;
+import CreateMealLog from "../screens/CreateMealLog";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -253,9 +254,18 @@ const ProfScreenStack = createStackNavigator(
 const ScanimgStack = createStackNavigator(
   {
     Scanimg: {
-      screen: Scanimg,
+      screen: CameraPage,
       navigationOptions: ({ navigation }) => ({
         headerTransparent: true,
+      }),
+    },
+  },
+  {
+    MealLog: {
+      screen: CreateMealLog,
+      navigationOptions: ({ navigation }) => ({
+        headerTransparent: false,
+        title: "Create Meal Log",
       }),
     },
   },
@@ -286,6 +296,27 @@ const SingOutStack = createStackNavigator(
     cardStyle: { backgroundColor: "#FFFFFF" },
     transitionConfig,
   }
+);
+
+//TODO: Remove once styling is created
+const MealLogStack = createStackNavigator(
+  {
+    MealLog: {
+      screen: CreateMealLog,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header
+            transparent
+            title="Meal Log"
+            iconColor={"#333"}
+            navigation={navigation}
+          />
+        ),
+        headerTransparent: false,
+      }),
+    },
+  },
+  { cardStyle: { backgroundColor: "#FFFFFF" }, transitionConfig }
 );
 
 class Hidden extends React.Component {
@@ -408,6 +439,7 @@ const AppStack = createDrawerNavigator(
   },
   Menu
 );
+
 const SigninStack = createStackNavigator(
   {
     SingIn: {
