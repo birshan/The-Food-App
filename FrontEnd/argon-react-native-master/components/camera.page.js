@@ -35,21 +35,26 @@ export default class CameraPage extends React.Component {
   };
 
   handleShortCapture = async () => {
-    console.log("Camera pressed");
-    if (this.camera) {
-      this.camera
-        .takePictureAsync({
-          skipProcessing: true,
-        })
-        .then((data) => {
-          this.setState((prevState) => ({
-            ...prevState,
-            loading: true,
-          }));
-          this.serverUpload(data, this.state.jwt);
-        });
-    } else {
-      console.log("Camera unavailable");
+    try {
+      console.log("Camera pressed");
+      if (this.camera) {
+        this.camera
+          .takePictureAsync({
+            skipProcessing: true,
+          })
+          .then((data) => {
+            this.setState((prevState) => ({
+              ...prevState,
+              loading: true,
+            }));
+            this.serverUpload(data, this.state.jwt);
+          });
+      } else {
+        console.log("Camera unavailable");
+      }
+    } catch (error) {
+      alert("Error with Camera");
+      console.log(error);
     }
     this.setState({
       capturing: false,

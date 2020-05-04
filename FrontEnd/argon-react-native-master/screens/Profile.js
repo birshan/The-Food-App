@@ -44,8 +44,6 @@ class Profile extends React.Component {
     };
   }
   async componentDidMount() {
-    //TODO: COMMENTED OUT FOR EASY DEVELOPMENT
-
     try {
       let token = await AsyncStorage.getItem("userToken");
       // console.log(token);
@@ -67,22 +65,23 @@ class Profile extends React.Component {
         let data = await mealResponse.json();
         this.setState({
           mealData: data,
+          loading: false,
         });
       }
     } catch (error) {
       console.log(error);
     }
-    console.log(this.state.mealData);
-    const url = "https://jsonplaceholder.typicode.com/users";
-    fetch(url)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          loading: false,
-          dataSource: responseJson,
-        });
-      })
-      .catch((error) => console.log(error)); //to catch the errors if any
+    // console.log(this.state.mealData);
+    // const url = "https://jsonplaceholder.typicode.com/users";
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       loading: false,
+    //       dataSource: responseJson,
+    //     });
+    //   })
+    //   .catch((error) => console.log(error)); //to catch the errors if any
   }
   FlatListItemSeparator = () => {
     return (
